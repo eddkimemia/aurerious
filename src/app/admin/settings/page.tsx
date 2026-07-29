@@ -123,3 +123,9 @@ export default function AdminSettingsPage() {
               {saving ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Save className="h-4 w-4 mr-2" />}
               Save Settings
             </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}

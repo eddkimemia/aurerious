@@ -25,8 +25,7 @@ export default function AdminPayoutsPage() {
   const fetchPayouts = () => {
     setLoading(true)
     fetch("/api/admin/payouts")
-      .then((r) => r.json())
-      .then((d) => { setRequests(d.payouts || []); setLoading(false) })
+      .then(async (r) => { const d = await r.json(); if (!r.ok) throw new Error(d.error); setRequests(d.payouts || []); setLoading(false) })
       .catch(() => setLoading(false))
   }
 

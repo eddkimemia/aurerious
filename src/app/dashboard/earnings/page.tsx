@@ -41,12 +41,12 @@ export default function EarningsPage() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ amount: parseFloat(amount), phone }),
-    }).then((r) => r.json()).then((d) => {
+    }).then(async (r) => { const d = await r.json(); if (!r.ok) throw new Error(d.error); return d }).then((d) => {
       if (d.message) alert(d.message)
       setAmount("")
       setPhone("")
       fetchEarnings()
-    }).catch(() => alert("Payout request failed"))
+    }).catch((e) => alert(e.message || "Payout request failed"))
   }
 
   const statusBadge = (status: string) => {

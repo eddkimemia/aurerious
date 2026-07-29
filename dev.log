@@ -51,3 +51,18 @@ Dashboard overview error: TypeError: (0 , __TURBOPACK__imported__module__$5b$pro
    9 |       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   10 |     }
  GET /api/dashboard/overview 500 in 619ms (next.js: 135ms, application-code: 484ms)
+✓ Compiled in 1197ms
+ GET /admin/payouts 200 in 1321ms (next.js: 851ms, application-code: 470ms)
+ GET /dashboard 200 in 256ms (next.js: 44ms, application-code: 212ms)
+ GET /dashboard 200 in 251ms (next.js: 35ms, application-code: 216ms)
+ GET /dashboard 200 in 359ms (next.js: 82ms, application-code: 276ms)
+ GET /dashboard 200 in 168ms (next.js: 18ms, application-code: 150ms)
+ GET /admin/payouts 200 in 419ms (next.js: 19ms, application-code: 400ms)
+ GET /admin/payouts 200 in 975ms (next.js: 21ms, application-code: 954ms)
+ GET /dashboard 200 in 854ms (next.js: 17ms, application-code: 837ms)
+ GET /dashboard 200 in 726ms (next.js: 138ms, application-code: 587ms)
+ GET /admin/payouts 200 in 738ms (next.js: 21ms, application-code: 717ms)
+ GET /admin/payouts 200 in 436ms (next.js: 64ms, application-code: 372ms)
+ GET /admin/payouts 200 in 442ms (next.js: 247ms, application-code: 194ms)
+ GET /admin/payouts 200 in 688ms (next.js: 157ms, application-code: 531ms)
+ GET /dashboard 200 in 300ms (next.js: 161ms, application-code: 140ms)
