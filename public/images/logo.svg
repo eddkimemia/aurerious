@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <rect width="200" height="60" rx="8" fill="#0F2847"/>
+  <!-- A letter mark -->
+  <text x="38" y="42" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-weight="bold" fill="#D4AF37" text-anchor="middle">A</text>
+  <!-- Gold star accent -->
+  <polygon points="58,15 61,23 70,23 63,28 66,37 58,31 50,37 53,28 46,23 55,23" fill="#D4AF37"/>
+  <!-- Small decorative diamonds -->
+  <polygon points="20,30 23,33 20,36 17,33" fill="#D4AF37" opacity="0.5"/>
+  <polygon points="78,30 81,33 78,36 75,33" fill="#D4AF37" opacity="0.5"/>
+  <!-- Text -->
+  <text x="98" y="35" font-family="Georgia, 'Times New Roman', serif" font-size="18" font-weight="bold" fill="#D4AF37" letter-spacing="4">AUREUS</text>
+  <text x="98" y="50" font-family="Arial, sans-serif" font-size="10" fill="#FBF9F6" letter-spacing="6" opacity="0.8">NETWORK</text>
+  <!-- Divider line -->
+  <line x1="90" y1="28" x2="90" y2="48" stroke="#D4AF37" stroke-width="1" opacity="0.4"/>
+</svg>

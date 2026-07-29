@@ -1,0 +1,53 @@
+▲ Next.js 16.2.12 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://172.22.224.1:3000
+- Environments: .env
+✓ Ready in 3.3s
+
+○ Compiling /dashboard ...
+ GET /admin/payouts 200 in 8.6s (next.js: 4.4s, application-code: 4.2s)
+ GET /dashboard 200 in 10.9s (next.js: 8.2s, application-code: 2.7s)
+Dashboard overview error: TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src\app\api\dashboard\overview\route.ts:7:31)
+   5 | export async function GET() {
+   6 |   try {
+>  7 |     const session = await auth()
+     |                               ^
+   8 |     if (!session?.user?.id) {
+   9 |       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  10 |     }
+ GET /api/dashboard/overview 500 in 2.2s (next.js: 1356ms, application-code: 863ms)
+[browser] Uncaught TypeError: Cannot read properties of undefined (reading 'totalEarnings')
+    at DashboardOverview (src/app/dashboard/page.tsx:52:42)
+  50 |
+  51 |   const { user, stats, earningsBreakdown, referralLink, recentCommissions } = data
+> 52 |   const formattedEarnings = `KES ${stats.totalEarnings.toLocaleString()}`
+     |                                          ^
+  53 |   const formattedPending = `KES ${stats.pendingCommissions.toLocaleString()}`
+  54 |
+  55 |   const statCards = [
+⨯ TypeError: {imported module ./src/lib/auth.ts}.auth is not a function
+    at requireAdmin (src\lib\auth-helpers.ts:14:29)
+    at GET (src\app\api\admin\payouts\route.ts:6:39)
+  12 |
+  13 | export async function requireAdmin() {
+> 14 |   const session = await auth()
+     |                             ^
+  15 |   if (!session?.user) {
+  16 |     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  17 |   }
+ GET /api/admin/payouts 500 in 402ms (next.js: 152ms, application-code: 250ms)
+✓ Compiled in 745ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /admin/payouts 200 in 224ms (next.js: 89ms, application-code: 134ms)
+ GET /dashboard 200 in 1085ms (next.js: 286ms, application-code: 799ms)
+Dashboard overview error: TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$auth$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__.auth) is not a function
+    at GET (src\app\api\dashboard\overview\route.ts:7:31)
+   5 | export async function GET() {
+   6 |   try {
+>  7 |     const session = await auth()
+     |                               ^
+   8 |     if (!session?.user?.id) {
+   9 |       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  10 |     }
+ GET /api/dashboard/overview 500 in 619ms (next.js: 135ms, application-code: 484ms)

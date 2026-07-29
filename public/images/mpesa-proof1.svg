@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+  <defs>
+    <linearGradient id="header" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0F2847"/>
+      <stop offset="100%" stop-color="#1a3a5c"/>
+    </linearGradient>
+    <linearGradient id="success" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#b8962e"/>
+    </linearGradient>
+  </defs>
+  <!-- Phone frame -->
+  <rect x="20" y="10" width="360" height="480" rx="30" ry="30" fill="#0F2847"/>
+  <rect x="28" y="18" width="344" height="464" rx="24" ry="24" fill="#FBF9F6"/>
+  <!-- Status bar -->
+  <rect x="28" y="18" width="344" height="40" rx="24" ry="24" fill="url(#header)"/>
+  <rect x="28" y="34" width="344" height="24" fill="url(#header)"/>
+  <!-- Time -->
+  <text x="60" y="45" font-family="Arial, sans-serif" font-size="13" fill="#FBF9F6" font-weight="bold">12:00</text>
+  <!-- Battery icon -->
+  <rect x="310" y="34" width="22" height="11" rx="2" fill="none" stroke="#FBF9F6" stroke-width="1.5"/>
+  <rect x="332" y="37" width="3" height="5" rx="1" fill="#FBF9F6"/>
+  <rect x="312" y="36" width="14" height="7" rx="1" fill="#4CAF50"/>
+  <!-- M-Pesa logo area -->
+  <rect x="100" y="65" width="200" height="70" rx="8" fill="#0F2847" opacity="0.9"/>
+  <text x="200" y="100" font-family="Georgia, serif" font-size="22" fill="#D4AF37" text-anchor="middle" font-weight="bold">M-PESA</text>
+  <text x="200" y="120" font-family="Arial, sans-serif" font-size="10" fill="#FBF9F6" text-anchor="middle" letter-spacing="3">CONFIRMATION</text>
+  <!-- Checkmark circle -->
+  <circle cx="200" cy="170" r="28" fill="url(#success)"/>
+  <path d="M185 170 L195 180 L215 160" fill="none" stroke="#0F2847" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Amount received -->
+  <text x="200" y="220" font-family="Arial, sans-serif" font-size="14" fill="#0F2847" text-anchor="middle" opacity="0.6">Amount Received</text>
+  <text x="200" y="260" font-family="Georgia, serif" font-size="36" fill="#0F2847" text-anchor="middle" font-weight="bold">KES 350.00</text>
+  <!-- Divider -->
+  <line x1="60" y1="280" x2="340" y2="280" stroke="#D4AF37" stroke-width="1" opacity="0.5"/>
+  <!-- Details -->
+  <text x="60" y="305" font-family="Arial, sans-serif" font-size="12" fill="#0F2847" opacity="0.5">From</text>
+  <text x="60" y="325" font-family="Arial, sans-serif" font-size="14" fill="#0F2847" font-weight="bold">Aureus Network</text>
+  <text x="60" y="350" font-family="Arial, sans-serif" font-size="12" fill="#0F2847" opacity="0.5">Transaction ID</text>
+  <text x="60" y="370" font-family="Arial, sans-serif" font-size="13" fill="#0F2847">TRX7A3B92F1</text>
+  <text x="60" y="395" font-family="Arial, sans-serif" font-size="12" fill="#0F2847" opacity="0.5">Date &amp; Time</text>
+  <text x="60" y="415" font-family="Arial, sans-serif" font-size="13" fill="#0F2847">28 Jul 2026, 12:00 PM</text>
+  <!-- Gold accent bar -->
+  <rect x="60" y="435" width="280" height="3" rx="1.5" fill="#D4AF37" opacity="0.6"/>
+  <!-- Balance -->
+  <text x="60" y="455" font-family="Arial, sans-serif" font-size="12" fill="#0F2847" opacity="0.5">New Balance</text>
+  <text x="60" y="472" font-family="Georgia, serif" font-size="16" fill="#0F2847" font-weight="bold">KES 1,250.00</text>
+</svg>

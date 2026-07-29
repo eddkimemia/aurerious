@@ -1,0 +1,127 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String?
+  email        String?  @unique
+  phone        String   @unique
+  password     String?
+  role         String   @default("member")
+  referralCode String   @unique @default(cuid())
+  referredBy   String?
+  mpesaNumber  String?
+  status       String   @default("active")
+  emailVerified DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  referrals     Referral[]    @relation("Referrer")
+  referees      Referral[]    @relation("Referee")
+  commissions   Commission[]
+  transactions  Transaction[]
+  payoutMethods PayoutMethod[]
+  payouts       Payout[]
+}
+
+model Referral {
+  id         String   @id @default(cuid())
+  referrerId String
+  refereeId  String   @unique
+  status     String   @default("pending")
+  level      Int      @default(1)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  referrer    User         @relation("Referrer", fields: [referrerId], references: [id])
+  referee     User         @relation("Referee", fields: [refereeId], references: [id])
+  commissions Commission[]
+}
+
+model Commission {
+  id          String   @id @default(cuid())
+  userId      String
+  referralId  String?
+  amount      Float
+  type        String
+  status      String   @default("pending")
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id])
+  referral Referral? @relation(fields: [referralId], references: [id])
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String
+  amount      Float
+  status      String   @default("pending")
+  reference   String?
+  description String?
+  metadata    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model PayoutMethod {
+  id         String   @id @default(cuid())
+  userId     String
+  type       String   @default("mpesa")
+  phone      String
+  isDefault  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Payout {
+  id          String   @id @default(cuid())
+  userId      String
+  amount      Float
+  status      String   @default("pending")
+  method      String   @default("mpesa")
+  phone       String
+  reference   String?
+  description String?
+  approvedBy  String?
+  approvedAt  DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Setting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+}
+
+model MpesaTransaction {
+  id            String   @id @default(cuid())
+  userId        String?
+  phone         String
+  amount        Float
+  reference     String   @unique
+  resultCode    String?
+  resultDesc    String?
+  merchantRequestId String?
+  checkoutRequestId String?
+  status        String   @default("pending")
+  type          String
+  metadata      String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
