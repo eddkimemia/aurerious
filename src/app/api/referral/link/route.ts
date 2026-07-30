@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
+import { generateReferralCode } from "@/lib/utils"
 
 export async function GET() {
   try {
@@ -26,8 +27,12 @@ export async function GET() {
       return NextResponse.json({ error: "User not found" }, { status: 404 })
     }
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXTAUTH_URL || "http://localhost:3000"}`
-    const referralLink = `${baseUrl}/ref?code=${user.referralCode}`
+    if (!user.referralCode) {
+      return NextResponse.json({ error: "No referral code assigned" }, { status: 400 })
+    }
+
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
+    const referralLink = `${baseUrl}/ref/${user.referralCode}`
 
     const signups = user.referrals.filter((r) => r.status === "completed").length
 
@@ -39,6 +44,7 @@ export async function GET() {
         signups,
         earnings: 0,
       },
+      referrals: user.referrals,
     })
   } catch (error) {
     console.error("Referral link error:", error)
@@ -53,7 +59,10 @@ export async function POST() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    const newCode = `REF${Date.now().toString(36).toUpperCase()}`
+    let newCode = generateReferralCode()
+    while (await db.user.findUnique({ where: { referralCode: newCode } })) {
+      newCode = generateReferralCode()
+    }
 
     await db.user.update({
       where: { id: session.user.id },

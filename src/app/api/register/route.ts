@@ -1,15 +1,19 @@
-// requires: npm install bcryptjs @types/bcryptjs
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
 import bcrypt from "bcryptjs"
-import { processReferralCommission } from "@/lib/commission-engine"
+import { generateReferralCode } from "@/lib/utils"
+import { stkPush } from "@/services/mpesa"
 
 const PHONE_REGEX = /^07\d{8}$/
+
+function formatMpesaPhone(phone: string): string {
+  return "254" + phone.slice(1)
+}
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, email, phone, password, referralCode } = body
+    const { name, email, phone, password, referralCode: incomingReferralCode } = body
 
     if (!phone || !password) {
       return NextResponse.json(
@@ -49,9 +53,9 @@ export async function POST(request: NextRequest) {
     }
 
     let referrer: Awaited<ReturnType<typeof db.user.findUnique>> | null = null
-    if (referralCode) {
+    if (incomingReferralCode) {
       referrer = await db.user.findUnique({
-        where: { referralCode },
+        where: { referralCode: incomingReferralCode },
       })
       if (!referrer) {
         return NextResponse.json(
@@ -63,13 +67,21 @@ export async function POST(request: NextRequest) {
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
+    let referralCode = generateReferralCode()
+    while (await db.user.findUnique({ where: { referralCode } })) {
+      referralCode = generateReferralCode()
+    }
+
     const user = await db.user.create({
       data: {
         name: name || null,
         email: email || null,
         phone,
         password: hashedPassword,
+        referralCode,
         referredBy: referrer?.id || null,
+        status: "pending",
+        mpesaNumber: phone,
       },
     })
 
@@ -82,28 +94,43 @@ export async function POST(request: NextRequest) {
           level: 1,
         },
       })
-
-      await processReferralCommission(user.id)
     }
+
+    const mpesaPhone = formatMpesaPhone(phone)
+    const reference = `AUR${Date.now()}${Math.random().toString(36).substring(2, 7).toUpperCase()}`
+
+    const stkResult = await stkPush(mpesaPhone, 10, reference)
+
+    if (!stkResult.success) {
+      return NextResponse.json(
+        { error: stkResult.error || "Payment initiation failed" },
+        { status: 500 }
+      )
+    }
+
+    await db.mpesaTransaction.create({
+      data: {
+        userId: user.id,
+        phone: mpesaPhone,
+        amount: 10,
+        reference,
+        checkoutRequestId: stkResult.checkoutRequestId,
+        merchantRequestId: `MR${Date.now()}`,
+        status: "pending",
+        type: "registration",
+      },
+    })
 
     return NextResponse.json(
       {
-        message: "Registration successful",
-        user: {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          phone: user.phone,
-          referralCode: user.referralCode,
-        },
+        message: "Check your phone for the M-Pesa payment prompt",
+        checkoutRequestId: stkResult.checkoutRequestId,
+        userId: user.id,
       },
       { status: 201 }
     )
   } catch (error) {
     console.error("Registration error:", error)
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

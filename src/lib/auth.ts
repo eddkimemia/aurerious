@@ -1,4 +1,4 @@
-import NextAuth, { type NextAuthOptions } from "next-auth"
+import { getServerSession, type NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcryptjs"
 import { db } from "@/lib/db"
@@ -61,6 +61,9 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid credentials")
         }
 
+        if (user.status === "pending") {
+          throw new Error("PENDING_PAYMENT")
+        }
         if (user.status !== "active") {
           throw new Error("Account is suspended")
         }
@@ -105,5 +108,4 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 }
 
-const result = NextAuth(authOptions)
-export const { auth, signIn, signOut } = result
+export const auth = () => getServerSession(authOptions)

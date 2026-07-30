@@ -1,15 +1,16 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import {
-  LayoutDashboard, Users, ArrowLeftRight, Banknote, Settings, LogOut, Menu, ShieldCheck,
+  LayoutDashboard, Users, ArrowLeftRight, Banknote, Settings, LogOut, Menu, ShieldCheck, Loader2,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
+import { getSession, signOut } from "next-auth/react"
 
 const sidebarLinks = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
@@ -21,7 +22,41 @@ const sidebarLinks = [
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
+  const router = useRouter()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [authorized, setAuthorized] = useState(false)
+  const [userName, setUserName] = useState("Admin")
+
+  const isLoginPage = pathname === "/admin/login"
+
+  useEffect(() => {
+    getSession().then((session) => {
+      if (session?.user?.role === "admin") {
+        setAuthorized(true)
+        setUserName(session.user.name || session.user.email || "Admin")
+      } else if (session?.user) {
+        router.push("/dashboard")
+      } else if (!isLoginPage) {
+        router.push("/admin/login")
+      } else {
+        setAuthorized(true)
+      }
+    })
+  }, [pathname, router, isLoginPage])
+
+  if (!authorized && !isLoginPage) {
+    return (
+      <div className="min-h-screen bg-lux-cream flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-lux-gold" />
+      </div>
+    )
+  }
+
+  if (isLoginPage) {
+    return <>{children}</>
+  }
+
+  const initials = userName.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase() || "AU"
 
   const NavContent = () => (
     <div className="flex flex-col h-full">
@@ -64,13 +99,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </nav>
 
       <div className="px-3 py-4 border-t border-lux-gold/10">
-        <Link
-          href="/login"
-          className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-white/40 hover:text-red-400 hover:bg-red-500/10 transition-all"
+        <button
+          onClick={() => signOut({ callbackUrl: "/admin/login" })}
+          className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-white/40 hover:text-red-400 hover:bg-red-500/10 transition-all w-full text-left"
         >
           <LogOut className="h-5 w-5 flex-shrink-0" />
           <span>Logout</span>
-        </Link>
+        </button>
       </div>
     </div>
   )
@@ -101,16 +136,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 Admin
               </Badge>
               <div className="text-right hidden sm:block">
-                <p className="text-sm font-semibold text-lux-text">Admin User</p>
-                <p className="text-xs text-lux-text-light">Super Admin</p>
+                <p className="text-sm font-semibold text-lux-text">{userName}</p>
+                <p className="text-xs text-lux-text-light">Administrator</p>
               </div>
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-lux-navy text-white text-sm font-bold ring-2 ring-lux-gold/20">
-                AU
+                {initials}
               </div>
-              <Button variant="ghost" size="sm" className="text-lux-text-light hover:text-red-500 hidden sm:inline-flex">
-                <LogOut className="h-4 w-4 mr-1" />
+              <button onClick={() => signOut({ callbackUrl: "/admin/login" })} className="hidden sm:inline-flex items-center gap-1 text-sm text-lux-text-light hover:text-red-500 transition-colors">
+                <LogOut className="h-4 w-4" />
                 Logout
-              </Button>
+              </button>
             </div>
           </div>
         </header>

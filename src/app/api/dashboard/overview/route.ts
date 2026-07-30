@@ -38,6 +38,10 @@ export async function GET() {
       teamSize += secondLevel
     }
 
+    if (!user.referralCode) {
+      return NextResponse.json({ error: "No referral code assigned" }, { status: 400 })
+    }
+
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
     const referralLink = `${baseUrl}/ref/${user.referralCode}`
 

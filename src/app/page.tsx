@@ -68,7 +68,7 @@ export default function HomePage() {
                     </Button>
                   </Link>
                   <Link href="/how-it-works">
-                    <Button variant="outline" size="lg" className="border-2 border-lux-gold/30 text-lux-gold-dark hover:bg-lux-gold-pale font-heading font-semibold text-lg px-8 h-14 rounded-full transition-all hover:border-lux-gold/50">
+                    <Button variant="outline" size="lg" className="border-2 border-lux-navy bg-lux-navy text-white hover:bg-transparent hover:text-lux-navy font-heading font-semibold text-lg px-8 h-14 rounded-full transition-all hover:border-lux-navy">
                       How It Works
                     </Button>
                   </Link>
@@ -473,7 +473,7 @@ export default function HomePage() {
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button size="lg" variant="outline" className="border-2 border-white/30 text-white hover:bg-white/10 font-heading font-semibold text-lg px-10 h-16 rounded-full transition-all hover:border-white/50">
+                <Button size="lg" variant="outline" className="border-2 border-white bg-white text-lux-navy hover:bg-transparent hover:text-white font-heading font-semibold text-lg px-10 h-16 rounded-full transition-all hover:border-white/70">
                   Talk to Us
                 </Button>
               </Link>

@@ -3,10 +3,52 @@ const CONSUMER_SECRET = process.env.MPESA_CONSUMER_SECRET || ""
 const PASSKEY = process.env.MPESA_PASSKEY || ""
 const BUSINESS_SHORTCODE = process.env.MPESA_BUSINESS_SHORTCODE || "174379"
 const CALLBACK_URL = process.env.MPESA_CALLBACK_URL || "https://example.com/api/mpesa/callback"
+const ENVIRONMENT = process.env.MPESA_ENVIRONMENT || "sandbox"
+
+const BASE_URL = ENVIRONMENT === "production"
+  ? "https://api.safaricom.co.ke"
+  : "https://sandbox.safaricom.co.ke"
+
+function isConfigured(): boolean {
+  return !!(CONSUMER_KEY && CONSUMER_SECRET && PASSKEY)
+}
+
+function getTimestamp(): string {
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = String(now.getMonth() + 1).padStart(2, "0")
+  const day = String(now.getDate()).padStart(2, "0")
+  const hours = String(now.getHours()).padStart(2, "0")
+  const minutes = String(now.getMinutes()).padStart(2, "0")
+  const seconds = String(now.getSeconds()).padStart(2, "0")
+  return `${year}${month}${day}${hours}${minutes}${seconds}`
+}
+
+function getPassword(timestamp: string): string {
+  const raw = `${BUSINESS_SHORTCODE}${PASSKEY}${timestamp}`
+  return Buffer.from(raw).toString("base64")
+}
 
 export async function getAccessToken(): Promise<string> {
-  console.log("[M-Pesa] Getting access token...")
-  return "mock-access-token-simulated"
+  if (!isConfigured()) {
+    console.log("[M-Pesa] Using mock access token (credentials not configured)")
+    return "mock-access-token-simulated"
+  }
+
+  const url = `${BASE_URL}/oauth/v1/generate?grant_type=client_credentials`
+  const auth = Buffer.from(`${CONSUMER_KEY}:${CONSUMER_SECRET}`).toString("base64")
+
+  const res = await fetch(url, {
+    method: "GET",
+    headers: { Authorization: `Basic ${auth}` },
+  })
+
+  if (!res.ok) {
+    throw new Error(`Failed to get access token: ${res.status} ${res.statusText}`)
+  }
+
+  const data = await res.json()
+  return data.access_token
 }
 
 export async function stkPush(
@@ -19,14 +61,58 @@ export async function stkPush(
   responseDescription?: string
   error?: string
 }> {
-  console.log("[M-Pesa] STK Push initiated:", { phone, amount, accountRef })
+  if (!isConfigured()) {
+    console.log("[M-Pesa] Mock STK Push:", { phone, amount, accountRef })
+    const checkoutRequestId = `wsr_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`
+    return {
+      success: true,
+      checkoutRequestId,
+      responseDescription: "Success. Request accepted for processing",
+    }
+  }
 
-  const checkoutRequestId = `wsr_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`
+  const timestamp = getTimestamp()
+  const password = getPassword(timestamp)
+
+  const body = {
+    BusinessShortCode: BUSINESS_SHORTCODE,
+    Password: password,
+    Timestamp: timestamp,
+    TransactionType: "CustomerPayBillOnline",
+    Amount: Math.round(amount),
+    PartyA: phone,
+    PartyB: BUSINESS_SHORTCODE,
+    PhoneNumber: phone,
+    CallBackURL: CALLBACK_URL,
+    AccountReference: accountRef,
+    TransactionDesc: `Payment of KES ${amount}`,
+  }
+
+  const token = await getAccessToken()
+  const url = `${BASE_URL}/mpesa/stkpush/v1/processrequest`
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+
+  const data = await res.json()
+
+  if (data.ResponseCode === "0") {
+    return {
+      success: true,
+      checkoutRequestId: data.CheckoutRequestID,
+      responseDescription: data.ResponseDescription || "Success",
+    }
+  }
 
   return {
-    success: true,
-    checkoutRequestId,
-    responseDescription: "Success. Request accepted for processing",
+    success: false,
+    error: data.errorMessage || data.ResponseDescription || "STK push failed",
   }
 }
 
@@ -37,12 +123,43 @@ export async function queryStatus(
   resultCode?: string
   resultDesc?: string
 }> {
-  console.log("[M-Pesa] Querying status:", { checkoutRequestId })
+  if (!isConfigured()) {
+    console.log("[M-Pesa] Mock query status:", { checkoutRequestId })
+    return {
+      success: true,
+      resultCode: "0",
+      resultDesc: "The service request is processed successfully.",
+    }
+  }
+
+  const timestamp = getTimestamp()
+  const password = getPassword(timestamp)
+
+  const body = {
+    BusinessShortCode: BUSINESS_SHORTCODE,
+    Password: password,
+    Timestamp: timestamp,
+    CheckoutRequestID: checkoutRequestId,
+  }
+
+  const token = await getAccessToken()
+  const url = `${BASE_URL}/mpesa/stkpushquery/v1/query`
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+
+  const data = await res.json()
 
   return {
-    success: true,
-    resultCode: "0",
-    resultDesc: "The service request is processed successfully.",
+    success: data.ResultCode === "0",
+    resultCode: data.ResultCode,
+    resultDesc: data.ResultDesc || data.errorMessage,
   }
 }
 
