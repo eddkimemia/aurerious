@@ -7,12 +7,15 @@ export async function GET() {
   if (forbidden) return forbidden
 
   try {
-    const [totalUsers, activeUsers, pendingPayoutsAgg, revenueAgg, recentUsers, weekSignups] = await Promise.all([
+    const [totalUsers, activeUsers, pendingUsers, suspendedUsers, pendingPayoutsAgg, pendingPaymentsAgg, revenueAgg, recentUsers, weekSignups] = await Promise.all([
       db.user.count(),
       db.user.count({ where: { status: "active" } }),
+      db.user.count({ where: { status: "pending" } }),
+      db.user.count({ where: { status: "suspended" } }),
       db.payout.aggregate({ where: { status: "pending" }, _sum: { amount: true } }),
+      db.mpesaTransaction.count({ where: { status: "pending", type: "registration" } }),
       db.transaction.aggregate({ _sum: { amount: true } }),
-      db.user.findMany({ orderBy: { createdAt: "desc" }, take: 5, select: { id: true, name: true, phone: true, createdAt: true, referredBy: true } }),
+      db.user.findMany({ orderBy: { createdAt: "desc" }, take: 5, select: { id: true, name: true, phone: true, status: true, createdAt: true, referredBy: true } }),
       db.user.findMany({ where: { createdAt: { gte: new Date(Date.now() - 7 * 86400000) } }, select: { createdAt: true } }),
     ])
 
@@ -41,7 +44,7 @@ export async function GET() {
           const referrer = await db.user.findUnique({ where: { id: u.referredBy }, select: { name: true, phone: true } })
           referredByName = referrer?.name || referrer?.phone || null
         }
-        return { id: u.id, name: u.name || u.phone, phone: u.phone, date: u.createdAt.toISOString().split("T")[0], referredBy: referredByName }
+        return { id: u.id, name: u.name || u.phone, phone: u.phone, status: u.status, date: u.createdAt.toISOString().split("T")[0], referredBy: referredByName }
       }),
     )
 
@@ -49,9 +52,12 @@ export async function GET() {
       stats: {
         totalUsers,
         activeUsers,
+        pendingUsers,
+        suspendedUsers,
         activeRate: totalUsers > 0 ? Math.round((activeUsers / totalUsers) * 1000) / 10 : 0,
         pendingPayouts: pendingPayoutsAgg._sum.amount || 0,
         pendingPayoutsCount,
+        pendingPayments: pendingPaymentsAgg,
         totalRevenue: totalRevenue,
         revenuePerUser: totalUsers > 0 ? Math.round(totalRevenue / totalUsers) : 0,
       },

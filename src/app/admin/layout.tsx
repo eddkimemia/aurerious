@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import {
-  LayoutDashboard, Users, ArrowLeftRight, Banknote, Settings, LogOut, Menu, ShieldCheck, Loader2,
+  LayoutDashboard, Users, ArrowLeftRight, Banknote, Wallet, Settings, LogOut, Menu, ShieldCheck, Loader2,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -16,6 +16,7 @@ const sidebarLinks = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/users", label: "Users", icon: Users },
   { href: "/admin/transactions", label: "Transactions", icon: ArrowLeftRight },
+  { href: "/admin/payments", label: "Payments", icon: Wallet },
   { href: "/admin/payouts", label: "Payouts", icon: Banknote },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ]

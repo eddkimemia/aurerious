@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Users, UserCheck, Clock, DollarSign, TrendingUp, Loader2 } from "lucide-react"
+import { Users, UserCheck, Clock, DollarSign, TrendingUp, Loader2, Ban, Hourglass } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -9,9 +9,20 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recha
 import { cn } from "@/lib/utils"
 
 interface AdminData {
-  stats: { totalUsers: number; activeUsers: number; activeRate: number; pendingPayouts: number; pendingPayoutsCount: number; totalRevenue: number; revenuePerUser: number }
+  stats: {
+    totalUsers: number
+    activeUsers: number
+    pendingUsers: number
+    suspendedUsers: number
+    activeRate: number
+    pendingPayouts: number
+    pendingPayoutsCount: number
+    pendingPayments: number
+    totalRevenue: number
+    revenuePerUser: number
+  }
   chartData: { day: string; signups: number }[]
-  recentSignups: { id: string; name: string; phone: string; date: string; referredBy: string | null }[]
+  recentSignups: { id: string; name: string; phone: string; status: string; date: string; referredBy: string | null }[]
 }
 
 export default function AdminDashboard() {
@@ -35,10 +46,13 @@ export default function AdminDashboard() {
   const { stats, chartData, recentSignups } = data
 
   const statCards = [
-    { label: "Total Users", value: String(stats.totalUsers), icon: Users, change: `${stats.activeRate}% active rate`, color: "text-lux-gold", bg: "bg-lux-gold/10" },
-    { label: "Active", value: String(stats.activeUsers), icon: UserCheck, change: `${stats.activeRate}% active rate`, color: "text-green-600", bg: "bg-green-100" },
-    { label: "Pending Payouts", value: `KES ${stats.pendingPayouts.toLocaleString()}`, icon: Clock, change: `${stats.pendingPayoutsCount} requests`, color: "text-lux-gold-dark", bg: "bg-lux-gold/10" },
-    { label: "Revenue", value: `KES ${stats.totalRevenue.toLocaleString()}`, icon: DollarSign, change: `KES ${stats.revenuePerUser.toLocaleString()} per user`, color: "text-lux-navy", bg: "bg-lux-navy/10" },
+    { label: "Total Users", value: String(stats.totalUsers), icon: Users, change: `${stats.activeRate}% active`, color: "text-lux-gold", bg: "bg-lux-gold/10" },
+    { label: "Active", value: String(stats.activeUsers), icon: UserCheck, change: `${stats.activeUsers} members`, color: "text-green-600", bg: "bg-green-100" },
+    { label: "Pending", value: String(stats.pendingUsers), icon: Hourglass, change: "awaiting payment", color: "text-amber-600", bg: "bg-amber-100" },
+    { label: "Suspended", value: String(stats.suspendedUsers), icon: Ban, change: `${stats.suspendedUsers} users`, color: "text-red-600", bg: "bg-red-100" },
+    { label: "Pending Payments", value: String(stats.pendingPayments), icon: DollarSign, change: "pending M-Pesa", color: "text-lux-gold-dark", bg: "bg-lux-gold/10" },
+    { label: "Pending Payouts", value: `KES ${stats.pendingPayouts.toLocaleString()}`, icon: Clock, change: `${stats.pendingPayoutsCount} requests`, color: "text-lux-navy", bg: "bg-lux-navy/10" },
+    { label: "Revenue", value: `KES ${stats.totalRevenue.toLocaleString()}`, icon: TrendingUp, change: `KES ${stats.revenuePerUser.toLocaleString()}/user`, color: "text-green-700", bg: "bg-green-100" },
   ]
 
   return (
@@ -48,20 +62,22 @@ export default function AdminDashboard() {
         <p className="text-lux-text-light mt-1">Platform overview and recent activity.</p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-3">
         {statCards.map((s) => {
           const Icon = s.icon
           return (
             <Card key={s.label} className="border-lux-gold/10 shadow-sm card-lift">
-              <CardContent className="p-5">
-                <div className="flex items-center justify-between mb-3">
-                  <div className={cn("flex h-10 w-10 items-center justify-center rounded-xl", s.bg)}>
-                    <Icon className={cn("h-5 w-5", s.color)} />
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div className={cn("flex h-8 w-8 items-center justify-center rounded-lg", s.bg)}>
+                    <Icon className={cn("h-4 w-4", s.color)} />
                   </div>
-                  <span className={cn("text-xs font-medium", s.color)}>{s.change}</span>
                 </div>
-                <p className="text-2xl font-heading font-bold text-lux-text">{s.value}</p>
-                <p className="text-xs text-lux-text-light mt-1">{s.label}</p>
+                <p className="text-xl font-heading font-bold text-lux-text">{s.value}</p>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-xs text-lux-text-light">{s.label}</p>
+                  <span className={cn("text-[10px] font-medium", s.color)}>{s.change}</span>
+                </div>
               </CardContent>
             </Card>
           )
@@ -100,7 +116,7 @@ export default function AdminDashboard() {
                 <TableRow className="bg-lux-navy/5">
                   <TableHead className="text-lux-text font-semibold">Name</TableHead>
                   <TableHead className="text-lux-text font-semibold">Phone</TableHead>
-                  <TableHead className="text-lux-text font-semibold">Date</TableHead>
+                  <TableHead className="text-lux-text font-semibold">Status</TableHead>
                   <TableHead className="text-lux-text font-semibold">Referred By</TableHead>
                 </TableRow>
               </TableHeader>
@@ -112,7 +128,15 @@ export default function AdminDashboard() {
                     <TableRow key={s.id} className="table-row-hover">
                       <TableCell className="text-sm font-medium text-lux-text">{s.name}</TableCell>
                       <TableCell className="text-xs text-lux-text">{s.phone}</TableCell>
-                      <TableCell className="text-xs text-lux-text">{s.date}</TableCell>
+                      <TableCell>
+                        <Badge variant="outline" className={cn("font-medium capitalize text-xs",
+                          s.status === "active" ? "bg-green-100 text-green-700 border-green-200" :
+                          s.status === "pending" ? "bg-amber-100 text-amber-700 border-amber-200" :
+                          "bg-red-100 text-red-700 border-red-200"
+                        )}>
+                          {s.status}
+                        </Badge>
+                      </TableCell>
                       <TableCell className="text-xs text-lux-text">{s.referredBy || "Direct"}</TableCell>
                     </TableRow>
                   ))
