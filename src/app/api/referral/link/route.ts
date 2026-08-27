@@ -3,7 +3,7 @@ import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { generateReferralCode } from "@/lib/utils"
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     const session = await auth()
     if (!session?.user?.id) {
@@ -31,7 +31,11 @@ export async function GET() {
       return NextResponse.json({ error: "No referral code assigned" }, { status: 400 })
     }
 
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
+    const baseUrl =
+      process.env.NEXT_PUBLIC_APP_URL ||
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
+      (request.headers.get("x-forwarded-host") ? `https://${request.headers.get("x-forwarded-host")}` : null) ||
+      "https://zuriweb.vercel.app"
     const referralLink = `${baseUrl}/ref/${user.referralCode}`
 
     const signups = user.referrals.filter((r) => r.status === "completed").length
