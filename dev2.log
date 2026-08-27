@@ -1,0 +1,13 @@
+
+> nextjs_tailwind_shadcn_ts@0.2.0 dev
+> next dev --webpack -p 3000 2>&1 | tee dev.log
+
+▲ Next.js 16.2.12 (webpack)
+- Local:         http://localhost:3000
+- Network:       http://172.31.208.1:3000
+- Environments: .env
+✓ Ready in 3.0s
+
+○ Compiling /api/register ...
+ POST /api/register 201 in 18.3s (next.js: 13.0s, application-code: 5.3s)
+ POST /api/register 201 in 1176ms (next.js: 12ms, application-code: 1163ms)
