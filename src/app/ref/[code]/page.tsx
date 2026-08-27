@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRight, Copy, Check, DollarSign, CreditCard, Infinity, Shield, RefreshCw, Users, Sparkles } from "lucide-react"
+import { ArrowRight, Copy, Check, DollarSign, CreditCard, Infinity, Shield, RefreshCw, Users, Sparkles, Gift } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -62,6 +62,7 @@ export default function RefLanding({ params }: { params: Promise<{ code: string 
   }
 
   const benefits = [
+    { icon: Gift, text: "Get KES 500 airtime bonus instantly" },
     { icon: DollarSign, text: "Earn KES 350 for every person you refer" },
     { icon: CreditCard, text: "One-time fee of KES 1,000 — no hidden costs" },
     { icon: Infinity, text: "No monthly charges. Keep everything you earn." },
@@ -113,6 +114,17 @@ export default function RefLanding({ params }: { params: Promise<{ code: string 
             <p className="text-lux-text-light mt-3 leading-relaxed max-w-sm">
               Join Kenya&apos;s fastest-growing referral network. Share your link, refer friends, and earn real cash commissions instantly.
             </p>
+          </div>
+
+          <div className="w-full bg-gradient-to-r from-lux-gold to-lux-gold-dark rounded-xl p-4 mb-6 flex items-center gap-3 shadow-md border border-lux-gold/20">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
+              <Gift className="h-5 w-5 text-white" />
+            </div>
+            <div className="text-left">
+              <p className="font-heading font-bold text-white text-sm">KES 500 Signup Bonus Included</p>
+              <p className="text-xs text-white/90">Get KES 500 airtime bonus instantly after payment</p>
+            </div>
+            <Sparkles className="h-5 w-5 text-white ml-auto animate-pulse" />
           </div>
 
           <div className="space-y-3 mb-8">

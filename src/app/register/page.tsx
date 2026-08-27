@@ -3,7 +3,7 @@
 import { useState, FormEvent, useEffect, useRef, Suspense } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { Eye, EyeOff, UserPlus, Smartphone, Info, AlertCircle, CheckCircle2, Loader2, Phone, ArrowRight } from "lucide-react"
+import { Eye, EyeOff, UserPlus, Smartphone, Info, AlertCircle, CheckCircle2, Loader2, Phone, ArrowRight, CreditCard } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -13,14 +13,15 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 function RegisterForm() {
   const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
-  const [showMpesaInfo, setShowMpesaInfo] = useState(false)
+  const [showPaystackInfo, setShowPaystackInfo] = useState(false)
   const [form, setForm] = useState({ name: "", email: "", phone: "", password: "", referral: "" })
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
   const [loading, setLoading] = useState(false)
   const [refParam, setRefParam] = useState("")
   const [step, setStep] = useState<"form" | "payment" | "success">("form")
-  const [checkoutRequestId, setCheckoutRequestId] = useState("")
+  const [reference, setReference] = useState("")
+  const [authorizationUrl, setAuthorizationUrl] = useState("")
   const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
@@ -78,8 +79,16 @@ function RegisterForm() {
         setError(data.error || "Registration failed")
         return
       }
-      setCheckoutRequestId(data.checkoutRequestId)
+      setReference(data.reference)
+      setAuthorizationUrl(data.authorizationUrl)
       setStep("payment")
+      // Redirect to Paystack checkout (if not mock, user will complete payment there)
+      if (data.authorizationUrl) {
+        // For mock URLs, we keep polling; for real Paystack, redirect
+        if (!data.authorizationUrl.includes("paystack.mock")) {
+          window.location.href = data.authorizationUrl
+        }
+      }
     } catch {
       setError("Network error. Please try again.")
     } finally {
@@ -88,16 +97,16 @@ function RegisterForm() {
   }
 
   useEffect(() => {
-    if (step !== "payment" || !checkoutRequestId) return
+    if (step !== "payment" || !reference) return
 
     pollingRef.current = setInterval(async () => {
       try {
-        const res = await fetch(`/api/mpesa/status?checkoutRequestId=${checkoutRequestId}`)
+        const res = await fetch(`/api/paystack/verify?reference=${reference}`)
         const data = await res.json()
         if (data.status === "completed") {
           if (pollingRef.current) clearInterval(pollingRef.current)
           setStep("success")
-          setTimeout(() => router.push("/login"), 2000)
+          setTimeout(() => router.push("/login?verified=true"), 2000)
         } else if (data.status === "failed") {
           if (pollingRef.current) clearInterval(pollingRef.current)
           setError("Payment failed. Please try again.")
@@ -111,7 +120,7 @@ function RegisterForm() {
     return () => {
       if (pollingRef.current) clearInterval(pollingRef.current)
     }
-  }, [step, checkoutRequestId, router])
+  }, [step, reference, router])
 
   if (step === "payment") {
     return (
@@ -124,24 +133,30 @@ function RegisterForm() {
         <Card className="w-full max-w-lg border-lux-gold/20 shadow-2xl glass">
           <CardContent className="p-8 sm:p-10 text-center">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-lux-gold/10 mb-6">
-              <Smartphone className="h-8 w-8 text-lux-gold" />
+              <CreditCard className="h-8 w-8 text-lux-gold" />
             </div>
-            <CardTitle className="font-heading text-2xl text-lux-navy mb-2">Check Your Phone</CardTitle>
+            <CardTitle className="font-heading text-2xl text-lux-navy mb-2">Complete Payment</CardTitle>
             <CardDescription className="text-lux-text-light text-base leading-relaxed">
-              An M-Pesa payment prompt has been sent to <strong className="text-lux-navy">{form.phone}</strong>.
-              Enter your M-Pesa PIN to complete the KES 1,000 membership payment.
+              You will be redirected to <strong className="text-lux-navy">Paystack</strong> secure checkout to complete the KES 1,000 membership payment for <strong className="text-lux-navy">{form.phone}</strong>.
             </CardDescription>
 
             <div className="mt-8 space-y-4">
-              <div className="flex items-center gap-3 rounded-xl bg-lux-gold-pale/60 border border-lux-gold/10 px-4 py-3">
-                <Loader2 className="h-5 w-5 text-lux-gold animate-spin flex-shrink-0" />
-                <span className="text-sm text-lux-text">Waiting for payment confirmation...</span>
-              </div>
+              {authorizationUrl && !authorizationUrl.includes("paystack.mock") ? (
+                <Button onClick={() => (window.location.href = authorizationUrl)} className="w-full bg-lux-gold hover:bg-lux-gold-dark text-white font-heading font-bold h-11 rounded-lg shadow-lg">
+                  <CreditCard className="h-4 w-4 mr-2" />
+                  Pay KES 1,000 via Paystack
+                </Button>
+              ) : (
+                <div className="flex items-center gap-3 rounded-xl bg-lux-gold-pale/60 border border-lux-gold/10 px-4 py-3">
+                  <Loader2 className="h-5 w-5 text-lux-gold animate-spin flex-shrink-0" />
+                  <span className="text-sm text-lux-text">Waiting for payment confirmation...</span>
+                </div>
+              )}
 
               <p className="text-xs text-lux-text-light leading-relaxed">
-                Didn&apos;t receive the prompt? Make sure your phone is on and has sufficient M-Pesa balance.
-                The prompt should arrive within 30 seconds.
+                Secure payment via Paystack. Supports M-Pesa, Card, and Bank. You will be redirected back after payment.
               </p>
+              <p className="text-xs text-lux-text-light">Reference: <span className="font-mono text-lux-navy">{reference}</span></p>
             </div>
           </CardContent>
         </Card>
@@ -257,19 +272,19 @@ function RegisterForm() {
 
             <div className="rounded-xl bg-lux-gold-pale border border-lux-gold/20 p-4">
               <div className="flex items-start gap-3">
-                <Smartphone className="h-5 w-5 text-lux-gold mt-0.5 flex-shrink-0" />
+                <CreditCard className="h-5 w-5 text-lux-gold mt-0.5 flex-shrink-0" />
                 <div className="flex-1 min-w-0">
                   <p className="font-heading font-semibold text-sm text-lux-navy">One-Time Membership Fee</p>
                   <p className="text-sm text-lux-text-light mt-1">
-                    Pay <strong className="text-lux-navy">KES 1,000</strong> via M-Pesa to activate your account and start earning. Get <strong className="text-lux-gold">KES 500 airtime bonus</strong> instantly.
+                    Pay <strong className="text-lux-navy">KES 1,000</strong> via Paystack to activate your account and start earning. Get <strong className="text-lux-gold">KES 500 airtime bonus</strong> instantly.
                   </p>
                 </div>
               </div>
             </div>
 
             <Button type="submit" disabled={loading} className="w-full bg-lux-gold hover:bg-lux-gold-dark text-white font-heading font-bold h-11 rounded-lg shadow-lg shadow-lux-gold/25 hover:shadow-xl transition-all btn-shine">
-              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Phone className="h-4 w-4" />}
-              {loading ? "Initiating Payment..." : "Pay KES 1,000 via M-Pesa"}
+              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <CreditCard className="h-4 w-4" />}
+              {loading ? "Initiating Payment..." : "Pay KES 1,000 via Paystack"}
             </Button>
           </form>
 
@@ -282,10 +297,10 @@ function RegisterForm() {
         </CardContent>
       </Card>
 
-      <Dialog open={showMpesaInfo} onOpenChange={setShowMpesaInfo}>
+      <Dialog open={showPaystackInfo} onOpenChange={setShowPaystackInfo}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="font-heading text-xl text-lux-navy">M-Pesa Payment</DialogTitle>
+            <DialogTitle className="font-heading text-xl text-lux-navy">Paystack Payment</DialogTitle>
             <DialogDescription>
               Complete your registration by paying the one-time membership fee
             </DialogDescription>
@@ -297,7 +312,7 @@ function RegisterForm() {
               <p className="text-xs text-lux-gold font-semibold mt-2">+ KES 500 signup bonus after payment!</p>
             </div>
             <p className="text-sm text-lux-text text-center">
-              An M-Pesa payment prompt will be sent to your phone after you submit the form.
+              You will be redirected to Paystack secure checkout after submitting the form.
             </p>
           </div>
         </DialogContent>

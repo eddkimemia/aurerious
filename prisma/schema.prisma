@@ -125,3 +125,21 @@ model MpesaTransaction {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
+
+model PaystackTransaction {
+  id               String   @id @default(cuid())
+  userId           String?
+  email            String?
+  phone            String
+  amount           Float
+  reference        String   @unique
+  accessCode       String?
+  authorizationUrl String?
+  status           String   @default("pending")
+  gatewayResponse  String?
+  paidAt           DateTime?
+  channel          String?
+  metadata         String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}

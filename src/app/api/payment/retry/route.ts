@@ -1,13 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
-import { stkPush } from "@/services/mpesa"
-
-function formatMpesaPhone(phone: string): string {
-  const cleaned = phone.replace(/[\s\-]/g, "")
-  if (cleaned.startsWith("07")) return "254" + cleaned.slice(1)
-  if (cleaned.startsWith("254")) return cleaned
-  return "254" + cleaned
-}
+import { initializeTransaction } from "@/services/paystack"
 
 export async function POST(request: NextRequest) {
   try {
@@ -50,36 +43,51 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const mpesaPhone = formatMpesaPhone(user.mpesaNumber || user.phone)
+    // Fetch user email for Paystack
+    const fullUser = await db.user.findUnique({
+      where: { id: user.id },
+      select: { email: true, phone: true },
+    })
+    const email = fullUser?.email || `${fullUser?.phone}@zuriagency.local`
+    const phone = fullUser?.phone || user.phone
     const reference = `ZUR${Date.now()}${Math.random().toString(36).substring(2, 7).toUpperCase()}`
+    const callbackUrl = process.env.PAYSTACK_CALLBACK_URL || `${process.env.NEXT_PUBLIC_APP_URL || "https://zuriweb.vercel.app"}/api/paystack/callback`
 
-    const stkResult = await stkPush(mpesaPhone, 1000, reference)
+    const paystackResult = await initializeTransaction({
+      email: email!,
+      amount: 1000,
+      reference,
+      callbackUrl,
+      phone,
+      metadata: { userId: user.id, phone },
+    })
 
-    if (!stkResult.success) {
+    if (!paystackResult.success) {
       return NextResponse.json(
-        { error: stkResult.error || "Payment initiation failed" },
+        { error: paystackResult.error || "Payment initialization failed" },
         { status: 500 }
       )
     }
 
-    await db.mpesaTransaction.create({
+    await db.paystackTransaction.create({
       data: {
         userId: user.id,
-        phone: mpesaPhone,
+        email: email!,
+        phone,
         amount: 1000,
         reference,
-        checkoutRequestId: stkResult.checkoutRequestId,
-        merchantRequestId: `MR${Date.now()}`,
+        accessCode: paystackResult.accessCode,
+        authorizationUrl: paystackResult.authorizationUrl,
         status: "pending",
-        type: "registration",
       },
     })
 
     return NextResponse.json(
       {
-        message: "Check your phone for the M-Pesa payment prompt",
-        checkoutRequestId: stkResult.checkoutRequestId,
-        phone: mpesaPhone,
+        message: "Redirect to Paystack for payment",
+        authorizationUrl: paystackResult.authorizationUrl,
+        reference,
+        accessCode: paystackResult.accessCode,
       },
       { status: 201 }
     )

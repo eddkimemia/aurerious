@@ -3,7 +3,7 @@
 import { useState, FormEvent, useEffect, useRef } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { Eye, EyeOff, LogIn, AlertCircle, Loader2, Smartphone, CheckCircle2, Phone } from "lucide-react"
+import { Eye, EyeOff, LogIn, AlertCircle, Loader2, Smartphone, CheckCircle2, Phone, CreditCard } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -19,7 +19,8 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const [needsPayment, setNeedsPayment] = useState(false)
   const [paymentState, setPaymentState] = useState<"idle" | "initiating" | "polling" | "success">("idle")
-  const [payCheckoutRequestId, setPayCheckoutRequestId] = useState("")
+  const [payReference, setPayReference] = useState("")
+  const [payAuthorizationUrl, setPayAuthorizationUrl] = useState("")
   const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const passwordRef = useRef("")
 
@@ -30,11 +31,11 @@ export default function LoginPage() {
   }, [])
 
   useEffect(() => {
-    if (paymentState !== "polling" || !payCheckoutRequestId) return
+    if (paymentState !== "polling" || !payReference) return
 
     pollingRef.current = setInterval(async () => {
       try {
-        const res = await fetch(`/api/mpesa/status?checkoutRequestId=${payCheckoutRequestId}`)
+        const res = await fetch(`/api/paystack/verify?reference=${payReference}`)
         const data = await res.json()
         if (data.status === "completed") {
           if (pollingRef.current) clearInterval(pollingRef.current)
@@ -70,7 +71,7 @@ export default function LoginPage() {
     return () => {
       if (pollingRef.current) clearInterval(pollingRef.current)
     }
-  }, [paymentState, payCheckoutRequestId, login, router])
+  }, [paymentState, payReference, login, router])
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -134,7 +135,11 @@ export default function LoginPage() {
         setPaymentState("idle")
         return
       }
-      setPayCheckoutRequestId(data.checkoutRequestId)
+      setPayReference(data.reference)
+      setPayAuthorizationUrl(data.authorizationUrl)
+      if (data.authorizationUrl && !data.authorizationUrl.includes("paystack.mock")) {
+        window.location.href = data.authorizationUrl
+      }
       setPaymentState("polling")
     } catch {
       setError("Network error. Please try again.")
@@ -153,18 +158,26 @@ export default function LoginPage() {
         <Card className="w-full max-w-lg border-lux-gold/20 shadow-2xl glass">
           <CardContent className="p-8 sm:p-10 text-center">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-lux-gold/10 mb-6">
-              <Smartphone className="h-8 w-8 text-lux-gold" />
+              <CreditCard className="h-8 w-8 text-lux-gold" />
             </div>
-            <CardTitle className="font-heading text-2xl text-lux-navy mb-2">Check Your Phone</CardTitle>
+            <CardTitle className="font-heading text-2xl text-lux-navy mb-2">Complete Payment</CardTitle>
             <CardDescription className="text-lux-text-light text-base leading-relaxed">
-              An M-Pesa payment prompt has been sent. Enter your M-Pesa PIN to complete the KES 1,000 membership payment.
+              Redirecting to Paystack secure checkout. Complete the KES 1,000 membership payment.
             </CardDescription>
 
             <div className="mt-8 space-y-4">
-              <div className="flex items-center gap-3 rounded-xl bg-lux-gold-pale/60 border border-lux-gold/10 px-4 py-3">
-                <Loader2 className="h-5 w-5 text-lux-gold animate-spin flex-shrink-0" />
-                <span className="text-sm text-lux-text">Waiting for payment confirmation...</span>
-              </div>
+              {payAuthorizationUrl && !payAuthorizationUrl.includes("paystack.mock") ? (
+                <Button onClick={() => (window.location.href = payAuthorizationUrl)} className="w-full bg-lux-gold hover:bg-lux-gold-dark text-white font-heading font-bold h-11 rounded-lg shadow-lg">
+                  <CreditCard className="h-4 w-4 mr-2" />
+                  Pay via Paystack
+                </Button>
+              ) : (
+                <div className="flex items-center gap-3 rounded-xl bg-lux-gold-pale/60 border border-lux-gold/10 px-4 py-3">
+                  <Loader2 className="h-5 w-5 text-lux-gold animate-spin flex-shrink-0" />
+                  <span className="text-sm text-lux-text">Waiting for payment confirmation...</span>
+                </div>
+              )}
+              {payReference && <p className="text-xs text-lux-text-light font-mono">{payReference}</p>}
             </div>
           </CardContent>
         </Card>
@@ -282,9 +295,9 @@ export default function LoginPage() {
                 {paymentState === "initiating" ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
                 ) : (
-                  <Phone className="h-4 w-4" />
+                  <CreditCard className="h-4 w-4" />
                 )}
-                {paymentState === "initiating" ? "Initiating Payment..." : "Pay KES 1,000 via M-Pesa"}
+                {paymentState === "initiating" ? "Initiating Payment..." : "Pay KES 1,000 via Paystack"}
               </Button>
             </div>
           )}
