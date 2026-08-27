@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { DollarSign, Clock, CheckCircle, ArrowUpRight, Filter, Calendar, Loader2 } from "lucide-react"
+import { DollarSign, Clock, CheckCircle, ArrowUpRight, Filter, Calendar, Loader2, Gift, Lock } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -15,6 +15,10 @@ interface EarningsData {
   totalEarned: number
   pending: number
   paidOut: number
+  locked: number
+  signupBonus: { amount: number; status: string; type: string } | null
+  referralCount: number
+  requiredForBonus: number
   thisPeriod: number
   period: string
   recentCommissions: { id: string; amount: number; type: string; status: string; description: string; createdAt: string }[]
@@ -53,10 +57,12 @@ export default function EarningsPage() {
     const styles: Record<string, string> = {
       paid: "bg-green-100 text-green-700 border-green-200",
       pending: "bg-lux-gold/15 text-lux-gold-dark border-lux-gold/20",
+      locked: "bg-orange-100 text-orange-700 border-orange-200",
       failed: "bg-red-100 text-red-700 border-red-200",
       completed: "bg-green-100 text-green-700 border-green-200",
     }
-    return <Badge variant="outline" className={cn("font-medium capitalize", styles[status] || "bg-gray-100 text-gray-600")}>{status}</Badge>
+    const label = status === "locked" ? "locked" : status
+    return <Badge variant="outline" className={cn("font-medium capitalize", styles[status] || "bg-gray-100 text-gray-600")}>{label}</Badge>
   }
 
   if (loading) {
@@ -65,7 +71,7 @@ export default function EarningsPage() {
 
   const summaryCards = [
     { label: "Total Earned", value: `KES ${(data?.totalEarned || 0).toLocaleString()}`, icon: DollarSign, change: `+KES ${(data?.thisPeriod || 0).toLocaleString()} this ${data?.period || "period"}`, color: "text-lux-gold", bg: "bg-lux-gold/10" },
-    { label: "Pending", value: `KES ${(data?.pending || 0).toLocaleString()}`, icon: Clock, change: "Awaiting confirmation", color: "text-lux-gold-dark", bg: "bg-lux-gold/10" },
+    { label: "Withdrawable", value: `KES ${(data?.pending || 0).toLocaleString()}`, icon: Clock, change: data?.locked ? `KES ${data.locked.toLocaleString()} locked` : "Available for payout", color: "text-lux-gold-dark", bg: "bg-lux-gold/10" },
     { label: "Paid Out", value: `KES ${(data?.paidOut || 0).toLocaleString()}`, icon: CheckCircle, change: `Last payout: ${data?.recentCommissions?.find(c => c.status === "paid") ? new Date(data.recentCommissions.find(c => c.status === "paid")!.createdAt).toLocaleDateString() : "N/A"}`, color: "text-green-600", bg: "bg-green-100" },
   ]
 
@@ -97,6 +103,45 @@ export default function EarningsPage() {
           )
         })}
       </div>
+
+      {data?.signupBonus && (
+        <Card className={`border-2 shadow-sm ${data.signupBonus.status === "locked" ? "border-orange-200 bg-orange-50/50" : "border-green-200 bg-green-50/50"}`}>
+          <CardContent className="p-5">
+            <div className="flex items-start gap-4">
+              <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${data.signupBonus.status === "locked" ? "bg-orange-100" : "bg-green-100"}`}>
+                {data.signupBonus.status === "locked" ? <Lock className="h-6 w-6 text-orange-600" /> : <Gift className="h-6 w-6 text-green-600" />}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="font-heading font-bold text-lux-navy">KES 500 Signup Airtime Bonus</h3>
+                  {statusBadge(data.signupBonus.status)}
+                </div>
+                {data.signupBonus.status === "locked" ? (
+                  <>
+                    <p className="text-sm text-lux-text-light mt-1">Refer {data.requiredForBonus} more {data.requiredForBonus === 1 ? "person" : "people"} to unlock your bonus for withdrawal.</p>
+                    <div className="mt-3">
+                      <div className="flex items-center justify-between text-xs text-lux-text-light mb-1">
+                        <span>{data.referralCount} / 5 referrals</span>
+                        <span>{Math.round((data.referralCount / 5) * 100)}%</span>
+                      </div>
+                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-lux-gold transition-all" style={{ width: `${Math.min(100, (data.referralCount / 5) * 100)}%` }} />
+                      </div>
+                    </div>
+                    <p className="text-xs text-orange-700 mt-2 font-medium">Bonus is locked until you achieve 5 successful referrals. Keep sharing your link!</p>
+                  </>
+                ) : (
+                  <p className="text-sm text-green-700 mt-1 font-medium">🎉 Bonus unlocked! KES 500 is now available for withdrawal. It’s included in your withdrawable balance.</p>
+                )}
+              </div>
+              <div className="text-right">
+                <p className="font-heading font-bold text-xl text-lux-navy">KES {data.signupBonus.amount.toLocaleString()}</p>
+                <p className="text-xs text-lux-text-light">{data.signupBonus.status === "locked" ? "Locked" : "Available"}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       <div className="grid lg:grid-cols-3 gap-6">
         <Card className="lg:col-span-2 border-lux-gold/10 shadow-sm">

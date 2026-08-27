@@ -11,7 +11,7 @@ import { FadeIn, FadeInScale, AnimatedCounter } from "@/components/landing/share
 const sections = [
   { icon: BarChart3, title: "How It Works", desc: "Three simple steps to start earning referral income Kenya today. Join, share your link, and earn M-Pesa commissions directly.", href: "/how-it-works", color: "bg-lux-navy" },
   { icon: DollarSign, title: "Earnings", desc: "See our transparent commission structure and use our earnings calculator to see how much you can make money online Kenya.", href: "/earnings", color: "bg-lux-gold-dark" },
-  { icon: Star, title: "Testimonials", desc: "Real stories from real Kenyans earning passive income Kenya every day through the Aureus Network platform.", href: "/testimonials", color: "bg-lux-navy-light" },
+  { icon: Star, title: "Testimonials", desc: "Real stories from real Kenyans earning passive income Kenya every day through the Zuri Agency platform.", href: "/testimonials", color: "bg-lux-navy-light" },
   { icon: Award, title: "Why Choose Us", desc: "Everything you need to build a reliable side hustle Kenya income stream. Built by Kenyans, for Kenyans.", href: "/features", color: "bg-lux-gold-dark" },
   { icon: MessageCircle, title: "FAQ", desc: "Answers to the most common questions about earning M-Pesa commissions and building your referral income.", href: "/faq", color: "bg-lux-navy" },
   { icon: Globe, title: "Contact Us", desc: "Have questions about how to earn money online Kenya? We are here to help you get started today.", href: "/contact", color: "bg-lux-navy-light" },
@@ -54,7 +54,7 @@ export default function HomePage() {
 
               <FadeIn delay={250}>
                 <p className="mt-4 text-base text-lux-text-light leading-relaxed max-w-xl mx-auto lg:mx-0">
-                 Struggling to make ends meet? Aureus Network helps you earn real referral income by simply sharing with people you know. No products to sell, no special skills, and no complicated work. Whether you're a student, parent, or professional, you can turn your network into a steady stream of M-Pesa commissions and build a reliable side hustle from anywhere in Kenya.
+                 Struggling to make ends meet? Zuri Agency helps you earn real referral income by simply sharing with people you know. No products to sell, no special skills, and no complicated work. Whether you're a student, parent, or professional, you can turn your network into a steady stream of M-Pesa commissions and build a reliable side hustle from anywhere in Kenya.
                 </p>
               </FadeIn>
 
@@ -73,6 +73,10 @@ export default function HomePage() {
                     </Button>
                   </Link>
                 </div>
+                <p className="mt-4 text-sm font-semibold text-lux-gold-dark flex items-center gap-2 justify-center lg:justify-start">
+                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-lux-gold-pale text-xs">🎁</span>
+                  Get KES 500 airtime bonus instantly
+                </p>
               </FadeIn>
 
               <FadeIn delay={400}>
@@ -95,7 +99,7 @@ export default function HomePage() {
 
             <FadeIn delay={200} className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img src="/images/heror.jpg" alt="Aureus Network - Premium Referral Platform" className="w-full h-auto object-cover" />
+                <img src="/images/heror.jpg" alt="Zuri Agency - Premium Referral Platform" className="w-full h-auto object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-lux-navy-dark/30 via-transparent to-transparent" />
               </div>
               <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 glass rounded-xl shadow-xl p-4 animate-float">
@@ -134,11 +138,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Aureus Network */}
+      {/* Why Zuri Agency */}
       <section className="py-20 lg:py-28 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
-            <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-sm font-medium bg-lux-gold-pale text-lux-gold-dark border border-lux-gold/20">Why Aureus Network</span>
+            <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-sm font-medium bg-lux-gold-pale text-lux-gold-dark border border-lux-gold/20">Why Zuri Agency</span>
             <h2 className="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-lux-navy heading-underline">Kenyans Are Earning Real Money Every Day</h2>
           </FadeIn>
 
@@ -146,12 +150,12 @@ export default function HomePage() {
             <div className="space-y-6">
               <FadeIn>
                 <p className="text-lux-text leading-relaxed text-base lg:text-lg">
-                  Kenyans are struggling with rising costs like never before. The price of unga, cooking oil, transport, and rent keeps going up while salaries stay the same. The average family needs an extra <strong className="text-lux-gold-dark">KES 5,000 to KES 10,000 per month</strong> just to keep up with basic living expenses. But finding a legitimate side hustle Kenya option that actually pays — without requiring a degree, startup capital, or endless hours — feels impossible. That is exactly why Aureus Network was built.
+                  Kenyans are struggling with rising costs like never before. The price of unga, cooking oil, transport, and rent keeps going up while salaries stay the same. The average family needs an extra <strong className="text-lux-gold-dark">KES 5,000 to KES 10,000 per month</strong> just to keep up with basic living expenses. But finding a legitimate side hustle Kenya option that actually pays — without requiring a degree, startup capital, or endless hours — feels impossible. That is exactly why Zuri Agency was built.
                 </p>
               </FadeIn>
               <FadeIn delay={100}>
                 <p className="text-lux-text leading-relaxed text-base lg:text-lg">
-                  Aureus Network was created by Kenyans, for Kenyans, to solve one simple problem: how to earn money online Kenya without getting scammed, without selling products to your friends and family, and without needing any special skills or experience. Our platform connects people through a simple referral system that rewards you for sharing an opportunity that actually works. With a <strong className="text-lux-gold-dark">one-time membership of just KES 1,000</strong>, you gain immediate access to your personal referral dashboard, training materials, and a supportive community of thousands of active members already earning every day.
+                  Zuri Agency was created by Kenyans, for Kenyans, to solve one simple problem: how to earn money online Kenya without getting scammed, without selling products to your friends and family, and without needing any special skills or experience. Our platform connects people through a simple referral system that rewards you for sharing an opportunity that actually works. With a <strong className="text-lux-gold-dark">one-time membership of just KES 1,000</strong>, you gain immediate access to your personal referral dashboard, training materials, and a supportive community of thousands of active members already earning every day.
                 </p>
               </FadeIn>
               <FadeIn delay={200}>
@@ -193,14 +197,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* What Makes Aureus Different */}
+      {/* What Makes Zuri Agency Different */}
       <section className="py-20 lg:py-28 bg-lux-cream border-t border-lux-gold/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
             <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-sm font-medium bg-lux-gold-pale text-lux-gold-dark border border-lux-gold/20">What Makes Us Different</span>
-            <h2 className="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-lux-navy heading-underline">Why Thousands Choose Aureus Network</h2>
+            <h2 className="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-lux-navy heading-underline">Why Thousands Choose Zuri Agency</h2>
             <p className="mt-6 text-lg text-lux-text-light max-w-3xl mx-auto leading-relaxed">
-              There are many ways to make money online Kenya, but none combine simplicity, transparency, and real earning potential like Aureus Network does.
+              There are many ways to make money online Kenya, but none combine simplicity, transparency, and real earning potential like Zuri Agency does.
             </p>
           </FadeIn>
 
@@ -219,12 +223,12 @@ export default function HomePage() {
               {
                 icon: Users,
                 title: "Community, Not Competition",
-                desc: "When you join Aureus Network, you join a family. Our active WhatsApp community shares tips, celebrates wins, and supports each other. Top earners share their strategies freely because they know that helping you succeed makes the entire network stronger. You are never alone on this journey.",
+                desc: "When you join Zuri Agency, you join a family. Our active WhatsApp community shares tips, celebrates wins, and supports each other. Top earners share their strategies freely because they know that helping you succeed makes the entire network stronger. You are never alone on this journey.",
               },
               {
                 icon: Zap,
                 title: "Zero Complexity, Zero Hassle",
-                desc: "No products to stock, no inventory to manage, no customer service to handle, no delivery logistics, no refunds to process. You simply share your referral link and earn commissions. It is the purest form of referral income Kenya available today. If you can send a WhatsApp message, you can earn money with Aureus Network.",
+                desc: "No products to stock, no inventory to manage, no customer service to handle, no delivery logistics, no refunds to process. You simply share your referral link and earn commissions. It is the purest form of referral income Kenya available today. If you can send a WhatsApp message, you can earn money with Zuri Agency.",
               },
               {
                 icon: Wallet,
@@ -234,7 +238,7 @@ export default function HomePage() {
               {
                 icon: Clock,
                 title: "Earn on Your Schedule, Your Terms",
-                desc: "Are you a night owl? Early bird? Weekend warrior? It does not matter. Aureus Network works around your schedule. Share your link during your lunch break, while commuting, or while watching TV in the evening. There is no boss, no clock-in, no minimum hours. You earn based on your effort, not your time.",
+                desc: "Are you a night owl? Early bird? Weekend warrior? It does not matter. Zuri Agency works around your schedule. Share your link during your lunch break, while commuting, or while watching TV in the evening. There is no boss, no clock-in, no minimum hours. You earn based on your effort, not your time.",
               },
             ].map((item, i) => (
               <FadeIn key={item.title} delay={i * 80}>
@@ -313,7 +317,7 @@ export default function HomePage() {
       <section className="py-20 lg:py-28 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-16">
-            <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-sm font-medium bg-lux-gold-pale text-lux-gold-dark border border-lux-gold/20">Explore Aureus Network</span>
+            <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-sm font-medium bg-lux-gold-pale text-lux-gold-dark border border-lux-gold/20">Explore Zuri Agency</span>
             <h2 className="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-lux-navy heading-underline">Everything You Need to Know</h2>
             <p className="mt-6 text-lg text-lux-text-light max-w-2xl mx-auto leading-relaxed">
               Whether you are looking for a reliable side hustle Kenya, want to earn M-Pesa commissions from home, or are ready to build serious referral income Kenya — we have got you covered.
@@ -404,13 +408,13 @@ export default function HomePage() {
                 earn: "KES 5,200/mo",
               },
               {
-                quote: "As a student, I needed a way to earn without interfering with my classes. Aureus Network lets me share my link during breaks. I made KES 3,500 in my first two weeks.",
+                quote: "As a student, I needed a way to earn without interfering with my classes. Zuri Agency lets me share my link during breaks. I made KES 3,500 in my first two weeks.",
                 name: "Kevin M.",
                 location: "Kisumu",
                 earn: "KES 3,500/mo",
               },
               {
-                quote: "I have tried so many online money-making things but they were all scams. Aureus is different. The M-Pesa payments are instant and the support team is always available. Finally, a real side hustle that works.",
+                quote: "I have tried so many online money-making things but they were all scams. Zuri Agency is different. The M-Pesa payments are instant and the support team is always available. Finally, a real side hustle that works.",
                 name: "Faith N.",
                 location: "Mombasa",
                 earn: "KES 7,000+/mo",

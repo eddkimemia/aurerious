@@ -95,7 +95,7 @@ export default function LoginPage() {
 
       if (result?.error) {
         if (result.error === "PENDING_PAYMENT") {
-          setError("You haven't completed your registration payment. Please pay the KES 10 membership fee to activate your account.")
+          setError("You haven't completed your registration payment. Please pay the KES 1,000 membership fee to activate your account.")
           setNeedsPayment(true)
           return
         }
@@ -157,7 +157,7 @@ export default function LoginPage() {
             </div>
             <CardTitle className="font-heading text-2xl text-lux-navy mb-2">Check Your Phone</CardTitle>
             <CardDescription className="text-lux-text-light text-base leading-relaxed">
-              An M-Pesa payment prompt has been sent. Enter your M-Pesa PIN to complete the KES 10 membership payment.
+              An M-Pesa payment prompt has been sent. Enter your M-Pesa PIN to complete the KES 1,000 membership payment.
             </CardDescription>
 
             <div className="mt-8 space-y-4">
@@ -207,7 +207,7 @@ export default function LoginPage() {
           <span className="font-heading font-bold text-white text-xl">A</span>
         </div>
         <span className="font-heading font-bold text-2xl text-lux-navy">
-          Aureus<span className="text-lux-gold">Network</span>
+          Zuri<span className="text-lux-gold">Agency</span>
         </span>
       </div>
 
@@ -215,7 +215,7 @@ export default function LoginPage() {
         <CardHeader className="text-center pb-2">
           <CardTitle className="font-heading text-2xl text-lux-navy">Welcome Back</CardTitle>
           <CardDescription className="text-lux-text-light">
-            Sign in to your Aureus Network account
+            Sign in to your Zuri Agency account
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-5 pt-4">
@@ -284,7 +284,7 @@ export default function LoginPage() {
                 ) : (
                   <Phone className="h-4 w-4" />
                 )}
-                {paymentState === "initiating" ? "Initiating Payment..." : "Pay KES 10 via M-Pesa"}
+                {paymentState === "initiating" ? "Initiating Payment..." : "Pay KES 1,000 via M-Pesa"}
               </Button>
             </div>
           )}

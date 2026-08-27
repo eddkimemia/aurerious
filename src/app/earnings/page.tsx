@@ -16,7 +16,7 @@ const breakdownData = [
 ]
 
 const earningRoles = [
-  { title: "Direct Referrer", amount: "KES 350", desc: "You earn 35% commission on every person you directly refer to Aureus Network. When you share your referral link and someone joins using it, KES 350 is instantly paid to your M-Pesa account. No delays, no minimum thresholds, no hidden conditions.", color: "text-lux-navy", bg: "bg-lux-navy/10", icon: Users },
+  { title: "Direct Referrer", amount: "KES 350", desc: "You earn 35% commission on every person you directly refer to Zuri Agency. When you share your referral link and someone joins using it, KES 350 is instantly paid to your M-Pesa account. No delays, no minimum thresholds, no hidden conditions.", color: "text-lux-navy", bg: "bg-lux-navy/10", icon: Users },
   { title: "Upline", amount: "KES 150", desc: "You earn 15% override commission on every referral made by someone in your team. If you refer Grace, and Grace refers Peter, you earn KES 150 from Peter's membership too. This is how passive, recurring income is built over time.", color: "text-lux-gold-dark", bg: "bg-lux-gold-pale", icon: TrendingUp },
 ]
 
@@ -44,15 +44,15 @@ const comparisonRows = [
 const faqData = [
   {
     q: "When do I get paid?",
-    a: "Instantly. The moment someone uses your referral link to join Aureus Network, KES 350 is sent directly to your registered M-Pesa number. There is no waiting period, no monthly payout cycle, and no minimum balance requirement. Your upline commission of KES 150 is also triggered instantly. Both payments happen simultaneously within seconds of the new member completing their registration. This instant payout model is one of the reasons our members trust Aureus Network — you see the results of your effort immediately, not at the end of the month.",
+    a: "Instantly. The moment someone uses your referral link to join Zuri Agency, KES 350 is sent directly to your registered M-Pesa number. There is no waiting period, no monthly payout cycle, and no minimum balance requirement. Your upline commission of KES 150 is also triggered instantly. Both payments happen simultaneously within seconds of the new member completing their registration. This instant payout model is one of the reasons our members trust Zuri Agency — you see the results of your effort immediately, not at the end of the month.",
   },
   {
     q: "Is there a limit to how much I can earn?",
-    a: "There is absolutely no earning cap at Aureus Network. You can earn KES 350 per direct referral and KES 150 per team referral, and there is no upper limit on how many people you can refer or how many team members you can have. Some of our top earners are making over KES 70,000 per month because their teams continue to grow and generate override commissions even while they sleep. Whether you refer 5 people or 5,000 people, the commission structure remains the same. Your earning potential is directly tied to your effort and your team's growth — nothing else.",
+    a: "There is absolutely no earning cap at Zuri Agency. You can earn KES 350 per direct referral and KES 150 per team referral, and there is no upper limit on how many people you can refer or how many team members you can have. Some of our top earners are making over KES 70,000 per month because their teams continue to grow and generate override commissions even while they sleep. Whether you refer 5 people or 5,000 people, the commission structure remains the same. Your earning potential is directly tied to your effort and your team's growth — nothing else.",
   },
   {
     q: "Can my earnings grow over time without referring more people myself?",
-    a: "Yes, and this is where the real power of the Aureus Network model reveals itself. Once you refer someone, they become part of your team. When they refer others, you earn KES 150 per referral without doing any additional work. This creates a passive income stream that grows as your team expands. For example, if you refer 10 people, and each of them refers just 5 people, you earn KES 350 x 10 = KES 3,500 from your direct referrals plus KES 150 x 50 = KES 7,500 from your team referrals, totalling KES 11,000. Your earnings compound as your team builds their own teams.",
+    a: "Yes, and this is where the real power of the Zuri Agency model reveals itself. Once you refer someone, they become part of your team. When they refer others, you earn KES 150 per referral without doing any additional work. This creates a passive income stream that grows as your team expands. For example, if you refer 10 people, and each of them refers just 5 people, you earn KES 350 x 10 = KES 3,500 from your direct referrals plus KES 150 x 50 = KES 7,500 from your team referrals, totalling KES 11,000. Your earnings compound as your team builds their own teams.",
   },
   {
     q: "How do I withdraw my earnings?",
@@ -62,8 +62,8 @@ const faqData = [
 
 const earningsTiers = [
   { name: "Part-Time", referrals: "5 - 10/mo", monthly: "KES 1,750 - KES 3,500", annual: "KES 21,000 - KES 42,000", desc: "Perfect for students, employees, or anyone looking to supplement their income. Share your link with friends and family during your free time. Just 5-10 referrals per month can cover your daily transport, lunch, or even your rent in some areas.", icon: Clock, color: "from-blue-400 to-blue-600" },
-  { name: "Full-Time", referrals: "20 - 50/mo", monthly: "KES 7,000 - KES 17,500", annual: "KES 84,000 - KES 210,000", desc: "Treat Aureus Network like a part-time job and watch your earnings rival traditional employment. At this level, you are actively sharing your link on social media, WhatsApp groups, and within your community. Many of our full-time earners have replaced their day jobs.", icon: Target, color: "from-lux-gold to-lux-gold-dark" },
-  { name: "Team Leader", referrals: "50+/mo", monthly: "KES 17,500+", annual: "KES 210,000+", desc: "At this tier, your team is generating substantial override commissions. Your focus shifts from individual referrals to team building, training, and leadership. Your monthly earnings can easily exceed KES 70,000 when your team scales. This is where Aureus Network becomes life-changing income.", icon: BarChart3, color: "from-lux-navy to-blue-800" },
+  { name: "Full-Time", referrals: "20 - 50/mo", monthly: "KES 7,000 - KES 17,500", annual: "KES 84,000 - KES 210,000", desc: "Treat Zuri Agency like a part-time job and watch your earnings rival traditional employment. At this level, you are actively sharing your link on social media, WhatsApp groups, and within your community. Many of our full-time earners have replaced their day jobs.", icon: Target, color: "from-lux-gold to-lux-gold-dark" },
+  { name: "Team Leader", referrals: "50+/mo", monthly: "KES 17,500+", annual: "KES 210,000+", desc: "At this tier, your team is generating substantial override commissions. Your focus shifts from individual referrals to team building, training, and leadership. Your monthly earnings can easily exceed KES 70,000 when your team scales. This is where Zuri Agency becomes life-changing income.", icon: BarChart3, color: "from-lux-navy to-blue-800" },
 ]
 
 const CustomTooltip = ({ active, payload }: any) => {
@@ -106,7 +106,7 @@ export default function EarningsPage() {
           />
           <FadeIn delay={200}>
             <p className="mt-8 text-lg text-lux-text-light max-w-3xl mx-auto leading-relaxed">
-              At Aureus Network, we believe in radical transparency. Unlike other platforms that hide their commission structures in fine print, we show you exactly where every single shilling goes. When someone pays KES 1,000 to join, KES 500 is yours to earn — that is a 50% payout ratio, among the highest in the referral industry worldwide. KES 350 goes directly to you as the person who referred them, and KES 150 goes to the person who referred you. The remaining KES 500 covers platform operations, M-Pesa transaction fees, customer support, and continuous development. No hidden fees, no surprise deductions, no fine print.
+              At Zuri Agency, we believe in radical transparency. Unlike other platforms that hide their commission structures in fine print, we show you exactly where every single shilling goes. When someone pays KES 1,000 to join, KES 500 is yours to earn — that is a 50% payout ratio, among the highest in the referral industry worldwide. KES 350 goes directly to you as the person who referred them, and KES 150 goes to the person who referred you. The remaining KES 500 covers platform operations, M-Pesa transaction fees, customer support, and continuous development. No hidden fees, no surprise deductions, no fine print.
             </p>
           </FadeIn>
         </div>
@@ -191,7 +191,7 @@ export default function EarningsPage() {
               <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-sm font-medium bg-lux-gold-pale text-lux-gold-dark border border-lux-gold/20">Commission Calculator</span>
               <h2 className="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-lux-navy heading-underline">How Your Earnings Add Up</h2>
               <p className="mt-6 text-lg text-lux-text-light max-w-3xl mx-auto leading-relaxed">
-                Understanding the math behind your commissions is the first step to building a sustainable income with Aureus Network. Here is exactly how every referral translates into real money in your pocket.
+                Understanding the math behind your commissions is the first step to building a sustainable income with Zuri Agency. Here is exactly how every referral translates into real money in your pocket.
               </p>
             </FadeIn>
 
@@ -206,7 +206,7 @@ export default function EarningsPage() {
                       <h3 className="font-heading font-bold text-lg text-lux-navy">Direct Referral</h3>
                     </div>
                     <p className="text-lux-text leading-relaxed">
-                      When you share your unique referral link and someone clicks it and completes their KES 1,000 membership, you earn KES 350 immediately. This is your direct referral commission, and it represents 35% of the membership fee. Think of it as your reward for introducing a new person to the Aureus Network community. The payment lands in your M-Pesa account within seconds of their registration — no forms, no delays, no minimum thresholds.
+                      When you share your unique referral link and someone clicks it and completes their KES 1,000 membership, you earn KES 350 immediately. This is your direct referral commission, and it represents 35% of the membership fee. Think of it as your reward for introducing a new person to the Zuri Agency community. The payment lands in your M-Pesa account within seconds of their registration — no forms, no delays, no minimum thresholds.
                     </p>
                     <div className="mt-4 p-3 bg-lux-navy/5 rounded-lg">
                       <p className="text-sm font-medium text-lux-navy">Example: 10 direct referrals = KES 3,500 in your pocket</p>
@@ -225,7 +225,7 @@ export default function EarningsPage() {
                       <h3 className="font-heading font-bold text-lg text-lux-navy">Upline Override</h3>
                     </div>
                     <p className="text-lux-text leading-relaxed">
-                      This is where things get interesting. When someone you referred goes on to refer their own network, you earn KES 150 for every person they bring in. This is called the upline override commission, and it is the engine of passive income in Aureus Network. You do not need to be involved in those referrals — your team members do the work, and you earn 15% override on every membership generated in your downline.
+                      This is where things get interesting. When someone you referred goes on to refer their own network, you earn KES 150 for every person they bring in. This is called the upline override commission, and it is the engine of passive income in Zuri Agency. You do not need to be involved in those referrals — your team members do the work, and you earn 15% override on every membership generated in your downline.
                     </p>
                     <div className="mt-4 p-3 bg-lux-gold-pale rounded-lg">
                       <p className="text-sm font-medium text-lux-gold-dark">Example: 10 team members each refer 5 people = 50 × KES 150 = KES 7,500</p>
@@ -239,7 +239,7 @@ export default function EarningsPage() {
               <div className="bg-lux-navy rounded-xl p-6 lg:p-8 text-center">
                 <h3 className="font-heading font-bold text-2xl text-white mb-3">The Total Opportunity</h3>
                 <p className="text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                  When someone pays KES 1,000 to join Aureus Network, KES 500 is yours to earn. KES 350 goes directly to you as the person who referred them, and KES 150 goes to the person who referred you. This 50% payout ratio is among the highest in the industry. Most referral platforms pay 20-30% at best. We pay 50% because we believe that the people building the community deserve the largest share of the value they create. The remaining KES 500 keeps the platform running — servers, support, M-Pesa integration fees, security, and continuous improvement.
+                  When someone pays KES 1,000 to join Zuri Agency, KES 500 is yours to earn. KES 350 goes directly to you as the person who referred them, and KES 150 goes to the person who referred you. This 50% payout ratio is among the highest in the industry. Most referral platforms pay 20-30% at best. We pay 50% because we believe that the people building the community deserve the largest share of the value they create. The remaining KES 500 keeps the platform running — servers, support, M-Pesa integration fees, security, and continuous improvement.
                 </p>
               </div>
             </FadeIn>
@@ -403,7 +403,7 @@ export default function EarningsPage() {
             <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-sm font-medium bg-lux-gold-pale text-lux-gold-dark border border-lux-gold/20">Earnings Potential</span>
             <h2 className="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-lux-navy heading-underline">What You Can Realistically Earn</h2>
             <p className="mt-6 text-lg text-lux-text-light max-w-3xl mx-auto leading-relaxed">
-              Your income with Aureus Network depends entirely on how much time and energy you invest. Here are realistic projections based on how our current members are performing. These are not hypotheticals — these are actual earning ranges our community members achieve every single month.
+              Your income with Zuri Agency depends entirely on how much time and energy you invest. Here are realistic projections based on how our current members are performing. These are not hypotheticals — these are actual earning ranges our community members achieve every single month.
             </p>
           </FadeIn>
 
@@ -488,10 +488,10 @@ export default function EarningsPage() {
       <section className="py-16 lg:py-24 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeIn className="text-center mb-12">
-            <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-sm font-medium bg-lux-gold-pale text-lux-gold-dark border border-lux-gold/20">Why Choose Aureus</span>
-            <h2 className="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-lux-navy heading-underline">Aureus Network vs Other Options</h2>
+            <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-sm font-medium bg-lux-gold-pale text-lux-gold-dark border border-lux-gold/20">Why Choose Zuri Agency</span>
+            <h2 className="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-lux-navy heading-underline">Zuri Agency vs Other Options</h2>
             <p className="mt-6 text-lg text-lux-text-light max-w-2xl mx-auto leading-relaxed">
-              Before you commit your time and money anywhere, compare what Aureus Network offers versus traditional side hustles and employment. The differences speak for themselves.
+              Before you commit your time and money anywhere, compare what Zuri Agency offers versus traditional side hustles and employment. The differences speak for themselves.
             </p>
           </FadeIn>
 

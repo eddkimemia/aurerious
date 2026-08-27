@@ -29,13 +29,13 @@ export function JoinModal({ open, onOpenChange }: { open: boolean; onOpenChange:
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-lux-gold-pale mx-auto mb-4">
                 <CheckCircle className="h-8 w-8 text-lux-gold" />
               </div>
-              <h3 className="font-heading font-bold text-xl text-lux-navy mb-2">Welcome to Aureus Network!</h3>
+              <h3 className="font-heading font-bold text-xl text-lux-navy mb-2">Welcome to Zuri Agency!</h3>
               <p className="text-lux-text-light">Your registration has been received. Check your M-Pesa for the payment prompt.</p>
             </div>
           ) : (
             <>
               <DialogHeader>
-                <DialogTitle className="font-heading font-bold text-2xl text-lux-navy">Join Aureus Network</DialogTitle>
+                <DialogTitle className="font-heading font-bold text-2xl text-lux-navy">Join Zuri Agency</DialogTitle>
                 <DialogDescription className="text-lux-text-light">Complete the form below to activate your referral link and start earning KES 350 per referral.</DialogDescription>
               </DialogHeader>
               <form onSubmit={handleSubmit} className="mt-6 space-y-4">

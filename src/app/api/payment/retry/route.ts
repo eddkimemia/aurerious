@@ -51,9 +51,9 @@ export async function POST(request: NextRequest) {
     }
 
     const mpesaPhone = formatMpesaPhone(user.mpesaNumber || user.phone)
-    const reference = `AUR${Date.now()}${Math.random().toString(36).substring(2, 7).toUpperCase()}`
+    const reference = `ZUR${Date.now()}${Math.random().toString(36).substring(2, 7).toUpperCase()}`
 
-    const stkResult = await stkPush(mpesaPhone, 10, reference)
+    const stkResult = await stkPush(mpesaPhone, 1000, reference)
 
     if (!stkResult.success) {
       return NextResponse.json(
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
       data: {
         userId: user.id,
         phone: mpesaPhone,
-        amount: 10,
+        amount: 1000,
         reference,
         checkoutRequestId: stkResult.checkoutRequestId,
         merchantRequestId: `MR${Date.now()}`,

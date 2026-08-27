@@ -41,7 +41,7 @@ const tips = [
   {
     icon: MessageCircle,
     title: "Share Your Why",
-    desc: "People do not join opportunities \u2014 they join people. When you share your link, explain WHY you joined Aureus Network. Tell them about your goals: maybe you want to pay school fees, cover rent, start a side business, or just have some extra money for emergencies. When people see your genuine reason, they connect emotionally and are much more likely to join. A simple message like \u201cI joined because I need an extra KES 5,000 a month and this works\u201d is more powerful than any sales pitch.",
+    desc: "People do not join opportunities \u2014 they join people. When you share your link, explain WHY you joined Zuri Agency. Tell them about your goals: maybe you want to pay school fees, cover rent, start a side business, or just have some extra money for emergencies. When people see your genuine reason, they connect emotionally and are much more likely to join. A simple message like \u201cI joined because I need an extra KES 5,000 a month and this works\u201d is more powerful than any sales pitch.",
   },
   {
     icon: Phone,
@@ -51,7 +51,7 @@ const tips = [
   {
     icon: Users,
     title: "Build a Team, Not Just Referrals",
-    desc: "The real power of Aureus Network is in building a team. Your direct referrals earn you KES 350 each, but when those people refer others, you earn KES 150 per override too. That is how KES 1,000 turns into KES 10,000+ per month. Encourage your team members to share their links actively. Help them succeed, and you succeed even more. A rising tide lifts all boats.",
+    desc: "The real power of Zuri Agency is in building a team. Your direct referrals earn you KES 350 each, but when those people refer others, you earn KES 150 per override too. That is how KES 1,000 turns into KES 10,000+ per month. Encourage your team members to share their links actively. Help them succeed, and you succeed even more. A rising tide lifts all boats.",
   },
   {
     icon: Zap,
@@ -63,21 +63,21 @@ const tips = [
 const messages = [
   {
     channel: "WhatsApp",
-    text: "Hey! I just joined Aureus Network and I am earning KES 350 for every person I refer. It is super simple \u2014 no products, no selling. Want me to show you how it works?",
+    text: "Hey! I just joined Zuri Agency and I am earning KES 350 for every person I refer. It is super simple \u2014 no products, no selling. Want me to show you how it works?",
   },
   {
     channel: "SMS",
-    text: "Earn KES 350 per referral with Aureus Network. Join for KES 1,000 one-time. Get your link here: https://aureusnetwork.co.ke/ref/YOURCODE",
+    text: "Earn KES 350 per referral with Zuri Agency. Join for KES 1,000 one-time. Get your link here: https://zuriagency.co.ke/ref/YOURCODE",
   },
   {
     channel: "Social Media",
-    text: "Finally found a legit way to earn money online in Kenya! No scams, no products. Just share your link and earn M-Pesa commissions. Join me on Aureus Network!",
+    text: "Finally found a legit way to earn money online in Kenya! No scams, no products. Just share your link and earn M-Pesa commissions. Join me on Zuri Agency!",
   },
 ]
 
 export default function HowItWorksPage() {
   const [copied, setCopied] = useState(false)
-  const referralLink = "https://aureusnetwork.co.ke/ref/YOURCODE"
+  const referralLink = "https://zuriagency.co.ke/ref/YOURCODE"
 
   const handleCopy = async () => {
     try {
@@ -130,7 +130,7 @@ export default function HowItWorksPage() {
 
           <FadeIn delay={250}>
             <p className="mt-4 text-base text-lux-text-light max-w-3xl mx-auto leading-relaxed">
-              Most people think making money online is complicated. They imagine you need technical skills, a big following, or lots of capital. The truth is far simpler. Aureus Network has broken down the entire process into three straightforward steps that anyone with a phone and an M-Pesa account can follow. There is no learning curve, no confusing dashboard, and no expensive courses to buy. Whether you are a student in a hostel, a mum at home, a boda boda rider between trips, or a professional in the office \u2014 you can start earning referral income Kenya within minutes of joining. We have simplified everything so that your focus stays on what matters most: sharing the opportunity and watching your M-Pesa commissions grow.
+              Most people think making money online is complicated. They imagine you need technical skills, a big following, or lots of capital. The truth is far simpler. Zuri Agency has broken down the entire process into three straightforward steps that anyone with a phone and an M-Pesa account can follow. There is no learning curve, no confusing dashboard, and no expensive courses to buy. Whether you are a student in a hostel, a mum at home, a boda boda rider between trips, or a professional in the office \u2014 you can start earning referral income Kenya within minutes of joining. We have simplified everything so that your focus stays on what matters most: sharing the opportunity and watching your M-Pesa commissions grow.
             </p>
           </FadeIn>
         </div>
@@ -158,7 +158,7 @@ export default function HowItWorksPage() {
                   <CardContent className="p-6 lg:p-8">
                     <div className="flex items-center gap-4 mb-4">
                       <Users className="h-6 w-6 text-lux-gold" />
-                      <h3 className="font-heading font-bold text-2xl text-lux-navy">Step 1: Join Aureus Network</h3>
+                      <h3 className="font-heading font-bold text-2xl text-lux-navy">Step 1: Join Zuri Agency</h3>
                     </div>
                     <p className="text-lux-text-light leading-relaxed mb-3">
                       Your journey starts with a simple, one-time payment of <strong className="text-lux-gold-dark">KES 1,000</strong>. Think of it not as a cost, but as an investment that pays for itself almost immediately \u2014 after just 3 referrals, you have already earned back your KES 1,000 and are KES 50 in profit. Everything after that is pure income flowing straight to your M-Pesa.
@@ -237,7 +237,7 @@ export default function HowItWorksPage() {
                       <h3 className="font-heading font-bold text-2xl text-lux-navy">Step 3: Earn M-Pesa Commissions</h3>
                     </div>
                     <p className="text-lux-text-light leading-relaxed mb-3">
-                      This is where the magic happens. Every time someone joins Aureus Network using your referral link, you earn <strong className="text-lux-gold-dark">KES 350</strong> directly to your M-Pesa account. But that is just the beginning. You also earn <strong className="text-lux-gold-dark">KES 150</strong> for every person referred by someone on your team \u2014 these are called override commissions.
+                      This is where the magic happens. Every time someone joins Zuri Agency using your referral link, you earn <strong className="text-lux-gold-dark">KES 350</strong> directly to your M-Pesa account. But that is just the beginning. You also earn <strong className="text-lux-gold-dark">KES 150</strong> for every person referred by someone on your team \u2014 these are called override commissions.
                     </p>
                     <p className="text-lux-text-light leading-relaxed mb-4">
                       Here is how the compounding effect works in real life: Refer 10 people directly and earn <strong className="text-lux-gold-dark">KES 3,500</strong>. If each of those 10 people refers just 5 people each, that is 50 people in your extended network, earning you KES 150 each in override commissions \u2014 that is <strong className="text-lux-gold-dark">KES 7,500</strong> more. Your total is now <strong className="text-lux-gold-dark">KES 11,000</strong> from just 10 direct referrals. This is the power of team building. Your income grows exponentially as your network grows, creating true passive income Kenya that keeps paying you month after month.
@@ -268,7 +268,7 @@ export default function HowItWorksPage() {
             <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-sm font-medium bg-lux-gold-pale text-lux-gold-dark border border-lux-gold/20">Who Can Join</span>
             <h2 className="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-lux-navy heading-underline">Anyone With a Phone Can Earn</h2>
             <p className="mt-6 text-lg text-lux-text-light max-w-3xl mx-auto leading-relaxed">
-              Aureus Network is built for every Kenyan. There are no barriers, no restrictions, and no special requirements.
+              Zuri Agency is built for every Kenyan. There are no barriers, no restrictions, and no special requirements.
             </p>
           </FadeIn>
 
@@ -279,10 +279,10 @@ export default function HowItWorksPage() {
                   <strong className="text-lux-gold-dark">Students</strong> looking to earn pocket money without affecting their studies? Yes. <strong className="text-lux-gold-dark">Parents</strong> who need extra income while taking care of the family? Yes. <strong className="text-lux-gold-dark">Professionals</strong> who want a side hustle that does not conflict with their 9-to-5? Yes. <strong className="text-lux-gold-dark">Business owners</strong> who want to diversify their income streams? Yes. <strong className="text-lux-gold-dark">Retirees</strong> who need a simple way to supplement their pension? Absolutely yes.
                 </p>
                 <p>
-                  Aureus Network is open to <strong className="text-lux-gold-dark">anyone aged 18 and above</strong> with a phone and an M-Pesa account. That is literally all you need. There are no education requirements, no previous experience needed, no interview process, and no approval waiting period. If you can send a WhatsApp message, you can earn referral income Kenya. If you can share a link, you can make money online Kenya. The platform was deliberately designed to be accessible to every Kenyan, regardless of their background, education level, or current employment status.
+                  Zuri Agency is open to <strong className="text-lux-gold-dark">anyone aged 18 and above</strong> with a phone and an M-Pesa account. That is literally all you need. There are no education requirements, no previous experience needed, no interview process, and no approval waiting period. If you can send a WhatsApp message, you can earn referral income Kenya. If you can share a link, you can make money online Kenya. The platform was deliberately designed to be accessible to every Kenyan, regardless of their background, education level, or current employment status.
                 </p>
                 <p>
-                  Whether you are a university student in Nairobi looking for a work from home Kenya opportunity between lectures, a mother in Kisumu who wants to contribute to household expenses while caring for her children, a boda boda rider in Mombasa looking for extra income during slow hours, or a salaried professional in Nakuru wanting to build a passive income Kenya stream \u2014 Aureus Network welcomes you. The only requirement is that you are ready to take action and share the opportunity with others.
+                  Whether you are a university student in Nairobi looking for a work from home Kenya opportunity between lectures, a mother in Kisumu who wants to contribute to household expenses while caring for her children, a boda boda rider in Mombasa looking for extra income during slow hours, or a salaried professional in Nakuru wanting to build a passive income Kenya stream \u2014 Zuri Agency welcomes you. The only requirement is that you are ready to take action and share the opportunity with others.
                 </p>
                 <div className="flex flex-wrap gap-3 mt-4">
                   <Badge className="bg-lux-gold-pale text-lux-gold-dark border border-lux-gold/20">No degree needed</Badge>
@@ -296,7 +296,7 @@ export default function HowItWorksPage() {
 
             <FadeIn delay={100}>
               <div className="bg-lux-navy rounded-2xl p-8 text-white">
-                <h3 className="font-heading font-bold text-2xl mb-6 text-lux-gold">Who Thrives on Aureus Network?</h3>
+                <h3 className="font-heading font-bold text-2xl mb-6 text-lux-gold">Who Thrives on Zuri Agency?</h3>
                 <div className="space-y-4">
                   {[
                     { icon: GraduationCap, label: "Students", desc: "Earn while you learn. No class conflicts." },

@@ -49,7 +49,7 @@ const features = [
     icon: Lock,
     title: "No Monthly Fees",
     short: "Pay once, earn forever — no recurring charges",
-    long: "This is one of the biggest concerns people have. Many platforms lure you in with a low joining fee then hit you with monthly charges. Not Aureus Network. Your KES 1,000 covers you for life. You can refer one person today, take a break for six months, come back, and refer someone else. No penalties, no reactivation fees, no expiry.",
+    long: "This is one of the biggest concerns people have. Many platforms lure you in with a low joining fee then hit you with monthly charges. Not Zuri Agency. Your KES 1,000 covers you for life. You can refer one person today, take a break for six months, come back, and refer someone else. No penalties, no reactivation fees, no expiry.",
   },
   {
     icon: Globe,
@@ -110,7 +110,7 @@ const checklist = [
   { step: 5, title: "Build & Repeat", desc: "Encourage your referrals to share their own links. Earn KES 150 override on every person they refer." },
 ]
 
-const referralLink = "https://aureusnetwork.co.ke/ref/YOURNAME123"
+const referralLink = "https://zuriagency.co.ke/ref/YOURNAME123"
 
 export default function FeaturesPageContent() {
   const [copied, setCopied] = useState(false)
@@ -144,22 +144,22 @@ export default function FeaturesPageContent() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <FadeIn>
             <Badge className="mb-6 px-4 py-2 bg-lux-gold-pale text-lux-gold-dark border border-lux-gold/20 font-medium text-sm">
-              Why Choose Aureus Network
+              Why Choose Zuri Agency
             </Badge>
           </FadeIn>
           <FadeIn delay={100}>
             <h1 className="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl text-lux-navy heading-underline leading-tight">
-              Why Choose <span className="text-gradient">Aureus Network</span>?
+              Why Choose <span className="text-gradient">Zuri Agency</span>?
             </h1>
           </FadeIn>
           <FadeIn delay={200}>
             <p className="mt-6 text-lg sm:text-xl text-lux-text-light max-w-3xl mx-auto leading-relaxed">
-              Most online income opportunities promise the world but deliver nothing. Aureus Network is different because we stripped away everything that makes other platforms complicated. No products. No inventory. No monthly fees. No sales targets. Just a simple, proven system that works for ordinary Kenyans who want to earn extra income without the usual headaches.
+              Most online income opportunities promise the world but deliver nothing. Zuri Agency is different because we stripped away everything that makes other platforms complicated. No products. No inventory. No monthly fees. No sales targets. Just a simple, proven system that works for ordinary Kenyans who want to earn extra income without the usual headaches.
             </p>
           </FadeIn>
           <FadeIn delay={300}>
             <p className="mt-4 text-base text-lux-text-light max-w-2xl mx-auto leading-relaxed">
-              Whether you are a student looking for pocket money, a parent wanting to supplement the family income, or someone who simply wants to work from home, Aureus Network gives you a genuine opportunity. There is no catch, no fine print, and no hidden agenda. We succeed when you succeed, and we have built every feature with that philosophy in mind.
+              Whether you are a student looking for pocket money, a parent wanting to supplement the family income, or someone who simply wants to work from home, Zuri Agency gives you a genuine opportunity. There is no catch, no fine print, and no hidden agenda. We succeed when you succeed, and we have built every feature with that philosophy in mind.
             </p>
           </FadeIn>
         </div>
@@ -201,7 +201,7 @@ export default function FeaturesPageContent() {
               How It Compares
             </h2>
             <p className="mt-6 text-lg text-lux-text-light max-w-2xl mx-auto leading-relaxed">
-              See how Aureus Network stacks up against traditional income options. The difference is clear.
+              See how Zuri Agency stacks up against traditional income options. The difference is clear.
             </p>
           </FadeIn>
 
@@ -211,7 +211,7 @@ export default function FeaturesPageContent() {
                 <thead>
                   <tr className="bg-lux-navy text-white">
                     <th className="px-6 py-4 font-heading font-bold text-sm sm:text-base">Feature</th>
-                    <th className="px-6 py-4 font-heading font-bold text-sm sm:text-base text-lux-gold">Aureus Network</th>
+                    <th className="px-6 py-4 font-heading font-bold text-sm sm:text-base text-lux-gold">Zuri Agency</th>
                     <th className="px-6 py-4 font-heading font-bold text-sm sm:text-base text-gray-400">Network Marketing</th>
                     <th className="px-6 py-4 font-heading font-bold text-sm sm:text-base text-gray-400">Freelance</th>
                     <th className="px-6 py-4 font-heading font-bold text-sm sm:text-base text-gray-400">Employment</th>
@@ -256,7 +256,7 @@ export default function FeaturesPageContent() {
 
           <FadeIn delay={200}>
             <p className="mt-8 text-center text-lux-text-light max-w-3xl mx-auto leading-relaxed">
-              The verdict is clear. Aureus Network offers the lowest barrier to entry, the fastest payments, the most flexibility, and no ongoing costs. Whether you compare it to network marketing, freelancing, or traditional employment, the advantages are undeniable. You are not just choosing a platform — you are choosing a better way to earn.
+              The verdict is clear. Zuri Agency offers the lowest barrier to entry, the fastest payments, the most flexibility, and no ongoing costs. Whether you compare it to network marketing, freelancing, or traditional employment, the advantages are undeniable. You are not just choosing a platform — you are choosing a better way to earn.
             </p>
           </FadeIn>
         </div>

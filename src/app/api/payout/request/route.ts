@@ -39,18 +39,29 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const pendingCommissions = await db.commission.aggregate({
-      where: { userId: session.user.id, status: "pending" },
-      _sum: { amount: true },
-    })
+    const [pendingCommissions, lockedBonus] = await Promise.all([
+      db.commission.aggregate({
+        where: { userId: session.user.id, status: "pending" },
+        _sum: { amount: true },
+      }),
+      db.commission.aggregate({
+        where: { userId: session.user.id, status: "locked" },
+        _sum: { amount: true },
+      }),
+    ])
 
     const availableBalance = pendingCommissions._sum.amount || 0
+    const lockedBalance = lockedBonus._sum.amount || 0
 
     if (amount > availableBalance) {
+      const hint = lockedBalance > 0
+        ? ` You have KES ${lockedBalance.toFixed(2)} locked (signup bonus requires 5 referrals to unlock).`
+        : ""
       return NextResponse.json(
         {
-          error: "Insufficient balance",
+          error: `Insufficient withdrawable balance.${hint}`,
           available: availableBalance,
+          locked: lockedBalance,
         },
         { status: 400 }
       )

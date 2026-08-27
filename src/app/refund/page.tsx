@@ -25,7 +25,7 @@ export default function RefundPage() {
           <section>
             <h2 className="font-heading text-xl font-bold text-lux-navy mb-3">1. Membership Fees Are Non-Refundable</h2>
             <p>
-              The one-time membership fee of KES 1,000 is non-refundable. By joining Aureus Network, you acknowledge that this fee grants you immediate access to the platform, including your referral link, member dashboard, and the ability to earn commissions. Once paid, the fee cannot be refunded.
+              The one-time membership fee of KES 1,000 is non-refundable. By joining Zuri Agency, you acknowledge that this fee grants you immediate access to the platform, including your referral link, member dashboard, and the ability to earn commissions. Once paid, the fee cannot be refunded.
             </p>
           </section>
 
@@ -53,14 +53,14 @@ export default function RefundPage() {
           <section>
             <h2 className="font-heading text-xl font-bold text-lux-navy mb-3">5. How to Request a Refund</h2>
             <p>
-              To request a refund under the exceptional circumstances listed above, please contact us at info@aureusnetwork.co.ke with your full name, phone number, M-Pesa transaction code, and a detailed explanation. We will review your request and respond within 5-7 business days.
+              To request a refund under the exceptional circumstances listed above, please contact us at info@zuriagency.co.ke with your full name, phone number, M-Pesa transaction code, and a detailed explanation. We will review your request and respond within 5-7 business days.
             </p>
           </section>
 
           <section>
             <h2 className="font-heading text-xl font-bold text-lux-navy mb-3">6. Contact Us</h2>
             <p>
-              For any questions regarding this refund policy, please reach out to us at info@aureusnetwork.co.ke or via WhatsApp at 0753728292.
+              For any questions regarding this refund policy, please reach out to us at info@zuriagency.co.ke or via WhatsApp at 0753728292.
             </p>
           </section>
         </div>

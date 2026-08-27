@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import FaqPageContent from "./faq-content"
 
 export const metadata: Metadata = {
-  title: "FAQ - Aureus Network",
+  title: "FAQ - Zuri Agency",
   description:
-    "Frequently asked questions about Aureus Network referral platform. Learn about costs, earnings, payments, and more.",
+    "Frequently asked questions about Zuri Agency referral platform. Learn about costs, earnings, payments, and more.",
 }
 
 export default function FaqPage() {

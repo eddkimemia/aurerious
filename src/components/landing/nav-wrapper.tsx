@@ -38,7 +38,7 @@ export function NavWrapper() {
             <Link href="/" className="flex items-center gap-2 group">
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-lux-navy font-heading font-bold text-white text-lg shadow-md shadow-lux-navy/20 group-hover:shadow-lg group-hover:shadow-lux-navy/30 transition-all group-hover:scale-105">A</div>
               <span className="font-heading font-bold text-lg tracking-tight text-lux-navy">
-                Aureus<span className="text-lux-gold">Network</span>
+                Zuri<span className="text-lux-gold">Agency</span>
               </span>
             </Link>
 

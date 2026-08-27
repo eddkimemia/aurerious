@@ -9,11 +9,11 @@ import { Badge } from "@/components/ui/badge"
 import { FadeIn, FadeInScale, SectionHeading } from "@/components/landing/shared"
 
 const testimonials = [
-  { name: "Sarah M.", location: "Nairobi", text: "I joined Aureus Network three months ago with zero expectations. I had tried other side hustles before — selling products, freelance writing, even digital marketing — and nothing ever stuck. But this was different. I simply shared my referral link on my WhatsApp status and within my church group. In my first week, 10 friends joined using my link. I made KES 3,500 before I even fully understood what was happening. Today, three months in, I have earned KES 12,250. That is money that has helped me pay my son's school fees without stress. I have never had to explain, justify, or sell anything. I just shared my experience and people wanted to join too.", stars: 5, amount: "KES 12,250", joined: "3 months ago" },
-  { name: "James K.", location: "Mombasa", text: "I left my sales job six months ago because I realized I was working 12-hour days for peanuts. A friend told me about Aureus Network and I saw the potential immediately. The math was simple — KES 350 per referral, unlimited potential. I started aggressively sharing my link on social media, in WhatsApp groups, and even printed flyers for my local estate in Mombasa. Today my team has 50 active members and is growing by 10-15 people every week. My upline earnings alone are KES 30,000 per month. Combined with my direct referrals, I am earning over KES 45,000 every single month. That is more than I made at my job, and I work half the hours. No boss, no commute, no nonsense.", stars: 5, amount: "KES 45,000", joined: "6 months ago" },
+  { name: "Sarah M.", location: "Nairobi", text: "I joined Zuri Agency three months ago with zero expectations. I had tried other side hustles before — selling products, freelance writing, even digital marketing — and nothing ever stuck. But this was different. I simply shared my referral link on my WhatsApp status and within my church group. In my first week, 10 friends joined using my link. I made KES 3,500 before I even fully understood what was happening. Today, three months in, I have earned KES 12,250. That is money that has helped me pay my son's school fees without stress. I have never had to explain, justify, or sell anything. I just shared my experience and people wanted to join too.", stars: 5, amount: "KES 12,250", joined: "3 months ago" },
+  { name: "James K.", location: "Mombasa", text: "I left my sales job six months ago because I realized I was working 12-hour days for peanuts. A friend told me about Zuri Agency and I saw the potential immediately. The math was simple — KES 350 per referral, unlimited potential. I started aggressively sharing my link on social media, in WhatsApp groups, and even printed flyers for my local estate in Mombasa. Today my team has 50 active members and is growing by 10-15 people every week. My upline earnings alone are KES 30,000 per month. Combined with my direct referrals, I am earning over KES 45,000 every single month. That is more than I made at my job, and I work half the hours. No boss, no commute, no nonsense.", stars: 5, amount: "KES 45,000", joined: "6 months ago" },
   { name: "Grace W.", location: "Kisumu", text: "I was skeptical at first. Who would not be? A platform that pays you for referring people sounds too good to be true. But I read through the entire website, saw the transparent breakdown of how KES 1,000 is distributed, and decided to take a chance on KES 1,000. That is less than what I spend on airtime in a month. I referred my sister, my neighbor, and my colleague at work. Three people. I made my KES 1,000 back instantly. That was the moment I knew this was real. Today I have referred 24 people and earned KES 8,400. For someone in Kisumu, that is life-changing money. I no longer have to choose between transport fare and buying lunch.", stars: 5, amount: "KES 8,400", joined: "2 months ago" },
-  { name: "Daniel O.", location: "Nakuru", text: "The transparency is what won me over. No hidden fees, no confusing fine print, no monthly targets you have to hit before you qualify for commissions. Just clean, straightforward math — KES 350 per direct referral and KES 150 per team referral. I have referred 25 people and I earn consistently every month without fail. The M-Pesa payments arrive instantly, usually within 30 seconds of someone joining. I have tried other referral programs before and they always find reasons to delay or deny payments. Aureus Network is different. They pay what they promise, when they promise it. That is rare in Kenya and I respect it.", stars: 5, amount: "KES 15,750", joined: "4 months ago" },
-  { name: "Lucy N.", location: "Thika", text: "As a university student in Thika, I needed a way to make money that would not interfere with my classes. I cannot work a regular job because of my lecture schedule, and most online opportunities require skills I am still learning. Aureus Network was the perfect solution. I share my referral link on WhatsApp groups — my class groups, my church youth group, even my family group — and I earn KES 350 each time someone joins. It is that simple. I have earned KES 7,000 so far and it has covered my hostel rent and food for two months. My friends think I am lucky. I tell them it is not luck — it is just being part of the right platform at the right time.", stars: 5, amount: "KES 7,000", joined: "2 months ago" },
+  { name: "Daniel O.", location: "Nakuru", text: "The transparency is what won me over. No hidden fees, no confusing fine print, no monthly targets you have to hit before you qualify for commissions. Just clean, straightforward math — KES 350 per direct referral and KES 150 per team referral. I have referred 25 people and I earn consistently every month without fail. The M-Pesa payments arrive instantly, usually within 30 seconds of someone joining. I have tried other referral programs before and they always find reasons to delay or deny payments. Zuri Agency is different. They pay what they promise, when they promise it. That is rare in Kenya and I respect it.", stars: 5, amount: "KES 15,750", joined: "4 months ago" },
+  { name: "Lucy N.", location: "Thika", text: "As a university student in Thika, I needed a way to make money that would not interfere with my classes. I cannot work a regular job because of my lecture schedule, and most online opportunities require skills I am still learning. Zuri Agency was the perfect solution. I share my referral link on WhatsApp groups — my class groups, my church youth group, even my family group — and I earn KES 350 each time someone joins. It is that simple. I have earned KES 7,000 so far and it has covered my hostel rent and food for two months. My friends think I am lucky. I tell them it is not luck — it is just being part of the right platform at the right time.", stars: 5, amount: "KES 7,000", joined: "2 months ago" },
 ]
 
 const milestones = [
@@ -24,7 +24,7 @@ const milestones = [
 ]
 
 const activityFeedData = [
-  { name: "Mary W.", action: "joined Aureus Network", time: "2 min ago", type: "join" },
+  { name: "Mary W.", action: "joined Zuri Agency", time: "2 min ago", type: "join" },
   { name: "Peter K.", action: "received KES 350 direct commission", time: "5 min ago", type: "earning" },
   { name: "Jane M.", action: "referred 3 new members this morning", time: "12 min ago", type: "referral" },
   { name: "David O.", action: "received KES 150 upline commission", time: "18 min ago", type: "earning" },
@@ -95,11 +95,11 @@ export default function TestimonialsPage() {
           <SectionHeading
             badge="Real People, Real Results"
             title="What Our Members Say"
-            subtitle="Hear from real Kenyans who are earning with Aureus Network."
+            subtitle="Hear from real Kenyans who are earning with Zuri Agency."
           />
           <FadeIn delay={200}>
             <p className="mt-8 text-lg text-lux-text-light max-w-3xl mx-auto leading-relaxed">
-              Nothing builds trust like hearing from real people who have actually earned real money. The testimonials you are about to read are not paid actors, stock photos, or fabricated success stories. These are real Kenyans from Nairobi, Mombasa, Kisumu, Nakuru, Thika, and everywhere in between who took a chance on Aureus Network and changed their financial situation. Every name, every location, every earnings figure is authentic and verifiable. We do not need to make up success stories when thousands of our members are living them every single day.
+              Nothing builds trust like hearing from real people who have actually earned real money. The testimonials you are about to read are not paid actors, stock photos, or fabricated success stories. These are real Kenyans from Nairobi, Mombasa, Kisumu, Nakuru, Thika, and everywhere in between who took a chance on Zuri Agency and changed their financial situation. Every name, every location, every earnings figure is authentic and verifiable. We do not need to make up success stories when thousands of our members are living them every single day.
             </p>
             <p className="mt-4 text-lux-text-light max-w-3xl mx-auto leading-relaxed">
               Scroll through their stories below. Read what they have to say about the platform, the payouts, and the life-changing impact of earning KES 350 per referral. Then imagine what your own testimonial could look like a few months from now.
@@ -252,7 +252,7 @@ export default function TestimonialsPage() {
             <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-sm font-medium bg-lux-gold-pale text-lux-gold-dark border border-lux-gold/20">Real Impact</span>
             <h2 className="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-lux-navy heading-underline">Life-Changing Results</h2>
             <p className="mt-6 text-lg text-lux-text-light max-w-2xl mx-auto leading-relaxed">
-              Behind every M-Pesa notification is a real person whose life changed because they decided to join Aureus Network. Here is what those earnings actually mean to them.
+              Behind every M-Pesa notification is a real person whose life changed because they decided to join Zuri Agency. Here is what those earnings actually mean to them.
             </p>
           </FadeIn>
 
@@ -298,7 +298,7 @@ export default function TestimonialsPage() {
               <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-sm font-medium bg-lux-gold-pale text-lux-gold-dark border border-lux-gold/20">Trust Score</span>
               <h2 className="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-lux-navy heading-underline">What Members Say About Us</h2>
               <p className="mt-6 text-lg text-lux-text-light max-w-2xl mx-auto leading-relaxed">
-                We take feedback seriously. Every review on this page comes from a verified Aureus Network member. We do not filter, censor, or cherry-pick. These are real ratings from real people who have used the platform and received real payments.
+                We take feedback seriously. Every review on this page comes from a verified Zuri Agency member. We do not filter, censor, or cherry-pick. These are real ratings from real people who have used the platform and received real payments.
               </p>
             </FadeIn>
 
@@ -457,7 +457,7 @@ export default function TestimonialsPage() {
           <FadeIn delay={400}>
             <div className="mt-8 p-5 lg:p-6 bg-lux-navy/5 rounded-xl max-w-3xl mx-auto">
               <p className="text-sm text-lux-text leading-relaxed text-center">
-                Every single payment on Aureus Network is processed through the official M-Pesa API. There is no manual processing, no &quot;pending&quot; status that lasts days, and no excuses. When the system says you have been paid, the money is already in your M-Pesa account. We have processed over 50,000 commissions with a 99.98% success rate. The 0.02% failures are typically wrong phone numbers, which our support team corrects within minutes.
+                Every single payment on Zuri Agency is processed through the official M-Pesa API. There is no manual processing, no &quot;pending&quot; status that lasts days, and no excuses. When the system says you have been paid, the money is already in your M-Pesa account. We have processed over 50,000 commissions with a 99.98% success rate. The 0.02% failures are typically wrong phone numbers, which our support team corrects within minutes.
               </p>
             </div>
           </FadeIn>
@@ -522,7 +522,7 @@ export default function TestimonialsPage() {
             <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-sm font-medium bg-lux-gold-pale text-lux-gold-dark border border-lux-gold/20">Live Feed</span>
             <h2 className="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-lux-navy heading-underline">Real-Time Member Activity</h2>
             <p className="mt-6 text-lg text-lux-text-light max-w-2xl mx-auto leading-relaxed">
-              See what other members are doing right now. These are not simulations or placeholders — these are real actions happening on the Aureus Network platform in real time.
+              See what other members are doing right now. These are not simulations or placeholders — these are real actions happening on the Zuri Agency platform in real time.
             </p>
           </FadeIn>
 

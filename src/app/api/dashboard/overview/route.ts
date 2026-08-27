@@ -11,13 +11,15 @@ export async function GET() {
 
     const userId = session.user.id
 
-    const [user, earningsAgg, pendingAgg, directAgg, overrideAgg, referrals, recentCommissions] = await Promise.all([
+    const [user, earningsAgg, pendingAgg, lockedAgg, bonusAgg, directAgg, overrideAgg, referrals, recentCommissions] = await Promise.all([
       db.user.findUnique({
         where: { id: userId },
         select: { id: true, name: true, email: true, phone: true, referralCode: true, mpesaNumber: true, createdAt: true },
       }),
       db.commission.aggregate({ where: { userId }, _sum: { amount: true } }),
       db.commission.aggregate({ where: { userId, status: "pending" }, _sum: { amount: true } }),
+      db.commission.aggregate({ where: { userId, status: "locked" }, _sum: { amount: true } }),
+      db.commission.findFirst({ where: { userId, type: "signup_bonus" } }),
       db.commission.aggregate({ where: { userId, type: "direct" }, _sum: { amount: true } }),
       db.commission.aggregate({ where: { userId, type: "override" }, _sum: { amount: true } }),
       db.referral.findMany({ where: { referrerId: userId }, include: { referee: { select: { id: true, name: true, phone: true, createdAt: true } } }, orderBy: { createdAt: "desc" } }),
@@ -45,17 +47,27 @@ export async function GET() {
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
     const referralLink = `${baseUrl}/ref/${user.referralCode}`
 
+    // Auto-unlock bonus if eligible (safety net)
+    if (bonusAgg?.status === "locked" && activeReferrals.length >= 5) {
+      const { checkAndUnlockSignupBonus } = await import("@/lib/commission-engine")
+      await checkAndUnlockSignupBonus(userId)
+    }
+
     return NextResponse.json({
       user: { name: user.name, email: user.email, phone: user.phone, referralCode: user.referralCode, mpesaNumber: user.mpesaNumber },
       stats: {
         totalEarnings: earningsAgg._sum.amount || 0,
         pendingCommissions: pendingAgg._sum.amount || 0,
+        lockedBonus: lockedAgg._sum.amount || 0,
+        signupBonus: bonusAgg ? { amount: bonusAgg.amount, status: bonusAgg.status } : null,
         activeReferrals: activeReferrals.length,
         teamSize,
+        referralsNeededForBonus: Math.max(0, 5 - activeReferrals.length),
       },
       earningsBreakdown: {
         direct: directAgg._sum.amount || 0,
         override: overrideAgg._sum.amount || 0,
+        bonus: bonusAgg?.amount || 0,
       },
       referralLink,
       recentCommissions,

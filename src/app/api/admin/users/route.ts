@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
 import { requireAdmin } from "@/lib/auth-helpers"
-import { processReferralCommission } from "@/lib/commission-engine"
+import { createSignupBonus, processReferralCommission } from "@/lib/commission-engine"
 
 export async function GET(request: NextRequest) {
   const forbidden = await requireAdmin()
@@ -113,12 +113,15 @@ export async function PATCH(request: NextRequest) {
         data: {
           userId,
           type: "payment",
-          amount: 10,
+          amount: 1000,
           status: "completed",
           reference: `ADMIN-ACTIVATE-${Date.now()}`,
           description: "Manual activation by admin",
         },
       })
+
+      // Credit signup bonus for manually activated user
+      await createSignupBonus(userId)
 
       if (user.referredBy) {
         await processReferralCommission(userId)

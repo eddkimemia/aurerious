@@ -46,7 +46,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </div>
         <div>
           <span className="font-heading font-bold text-base text-white block leading-tight">
-            Aureus<span className="text-lux-gold">Network</span>
+            Zuri<span className="text-lux-gold">Agency</span>
           </span>
           <span className="text-[10px] text-lux-gold/70 uppercase tracking-wider font-medium">Member Dashboard</span>
         </div>

@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation"
 export default function RefLanding({ params }: { params: Promise<{ code: string }> }) {
   const router = useRouter()
   const [copied, setCopied] = useState(false)
-  const [referrerName, setReferrerName] = useState("Aureus Network")
+  const [referrerName, setReferrerName] = useState("Zuri Agency")
   const [referrerInitials, setReferrerInitials] = useState("AN")
   const [totalMembers, setTotalMembers] = useState(0)
   const [joinedToday, setJoinedToday] = useState(0)
@@ -53,7 +53,7 @@ export default function RefLanding({ params }: { params: Promise<{ code: string 
       .catch(() => {})
   }, [referralCode])
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://aureusnetwork.co.ke"
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://zuriagency.co.ke"
 
   const copyRef = () => {
     navigator.clipboard?.writeText(`${baseUrl}/ref/${referralCode}`)
@@ -85,7 +85,7 @@ export default function RefLanding({ params }: { params: Promise<{ code: string 
           <span className="font-heading font-bold text-white text-sm">A</span>
         </div>
         <span className="font-heading font-bold text-lg text-lux-navy">
-          Aureus<span className="text-lux-gold">Network</span>
+          Zuri<span className="text-lux-gold">Agency</span>
         </span>
       </div>
 

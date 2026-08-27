@@ -25,14 +25,14 @@ export default function TermsPage() {
           <section>
             <h2 className="font-heading text-xl font-bold text-lux-navy mb-3">1. Acceptance of Terms</h2>
             <p>
-              By accessing or using Aureus Network (&quot;the Platform&quot;), you agree to be bound by these Terms &amp; Conditions. If you do not agree, please do not use the Platform. These terms apply to all visitors, members, and users of Aureus Network.
+              By accessing or using Zuri Agency (&quot;the Platform&quot;), you agree to be bound by these Terms &amp; Conditions. If you do not agree, please do not use the Platform. These terms apply to all visitors, members, and users of Zuri Agency.
             </p>
           </section>
 
           <section>
             <h2 className="font-heading text-xl font-bold text-lux-navy mb-3">2. Membership &amp; Fees</h2>
             <p>
-              Membership to Aureus Network requires a one-time non-refundable fee of KES 1,000. This fee grants you access to a unique referral link, a member dashboard, and the ability to earn commissions. There are no recurring or monthly fees associated with membership.
+              Membership to Zuri Agency requires a one-time non-refundable fee of KES 1,000. This fee grants you access to a unique referral link, a member dashboard, and the ability to earn commissions. There are no recurring or monthly fees associated with membership.
             </p>
           </section>
 
@@ -40,6 +40,13 @@ export default function TermsPage() {
             <h2 className="font-heading text-xl font-bold text-lux-navy mb-3">3. Commission Structure</h2>
             <p>
               Members earn a commission of KES 350 (35% of KES 1,000) for each direct referral who joins through their unique link. Additionally, members earn an override commission of KES 150 (15% of KES 1,000) for referrals made by their direct downline members. Commissions are paid via M-Pesa and are subject to verification.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-xl font-bold text-lux-navy mb-3">3.1 Signup Bonus</h2>
+            <p>
+              Every new member receives a <strong>KES 500 airtime bonus</strong> credited instantly upon successful payment of the KES 1,000 membership fee. This bonus is displayed as &quot;locked&quot; in your dashboard and becomes withdrawable only after you achieve <strong>5 successful direct referrals</strong> (completed status). The bonus is then automatically unlocked and added to your withdrawable balance. The signup bonus is a one-time reward per account and cannot be transferred.
             </p>
           </section>
 
@@ -53,7 +60,7 @@ export default function TermsPage() {
           <section>
             <h2 className="font-heading text-xl font-bold text-lux-navy mb-3">5. Limitation of Liability</h2>
             <p>
-              Aureus Network is provided on an &ldquo;as is&rdquo; basis. We make no guarantees regarding earnings or continued availability of the platform. We are not liable for any indirect, incidental, or consequential damages arising from your use of the Platform. The maximum liability shall not exceed the membership fee paid.
+              Zuri Agency is provided on an &ldquo;as is&rdquo; basis. We make no guarantees regarding earnings or continued availability of the platform. We are not liable for any indirect, incidental, or consequential damages arising from your use of the Platform. The maximum liability shall not exceed the membership fee paid.
             </p>
           </section>
 

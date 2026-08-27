@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { TrendingUp, Users, DollarSign, Clock, Copy, Check, ArrowUpRight, Loader2 } from "lucide-react"
+import { TrendingUp, Users, DollarSign, Clock, Copy, Check, ArrowUpRight, Loader2, Gift, Lock } from "lucide-react"
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -11,8 +11,8 @@ import { cn } from "@/lib/utils"
 
 interface OverviewData {
   user: { name: string; referralCode: string }
-  stats: { totalEarnings: number; pendingCommissions: number; activeReferrals: number; teamSize: number }
-  earningsBreakdown: { direct: number; override: number }
+  stats: { totalEarnings: number; pendingCommissions: number; lockedBonus: number; signupBonus: { amount: number; status: string } | null; activeReferrals: number; teamSize: number; referralsNeededForBonus: number }
+  earningsBreakdown: { direct: number; override: number; bonus: number }
   referralLink: string
   recentCommissions: { id: string; amount: number; type: string; status: string; description: string; createdAt: string }[]
 }
@@ -109,6 +109,45 @@ export default function DashboardOverview() {
           </Button>
         </CardContent>
       </Card>
+
+      {data.stats.signupBonus && (
+        <Card className={`border-2 shadow-sm ${data.stats.signupBonus.status === "locked" ? "border-orange-200 bg-orange-50/70" : "border-green-200 bg-green-50/70"}`}>
+          <CardContent className="p-5">
+            <div className="flex items-start gap-4">
+              <div className={`flex h-12 w-12 items-center justify-center rounded-xl flex-shrink-0 ${data.stats.signupBonus.status === "locked" ? "bg-orange-100" : "bg-green-100"}`}>
+                {data.stats.signupBonus.status === "locked" ? <Lock className="h-6 w-6 text-orange-600" /> : <Gift className="h-6 w-6 text-green-600" />}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="font-heading font-bold text-lux-navy">KES 500 Airtime Bonus</h3>
+                  <Badge variant="outline" className={data.stats.signupBonus.status === "locked" ? "bg-orange-100 text-orange-700 border-orange-200 capitalize" : "bg-green-100 text-green-700 border-green-200 capitalize"}>{data.stats.signupBonus.status}</Badge>
+                </div>
+                {data.stats.signupBonus.status === "locked" ? (
+                  <>
+                    <p className="text-sm text-lux-text-light mt-1">Credited instantly after membership — unlock by referring 5 people.</p>
+                    <div className="mt-3">
+                      <div className="flex items-center justify-between text-xs text-lux-text-light mb-1">
+                        <span>{data.stats.activeReferrals} / 5 referrals</span>
+                        <span>{Math.round((data.stats.activeReferrals / 5) * 100)}% — {data.stats.referralsNeededForBonus} left</span>
+                      </div>
+                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-lux-gold transition-all" style={{ width: `${Math.min(100, (data.stats.activeReferrals / 5) * 100)}%` }} />
+                      </div>
+                    </div>
+                    <p className="text-xs text-orange-700 mt-2 font-medium">Complete {data.stats.referralsNeededForBonus} more referral{data.stats.referralsNeededForBonus !== 1 ? "s" : ""} to withdraw your bonus.</p>
+                  </>
+                ) : (
+                  <p className="text-sm text-green-700 mt-1 font-medium">🎉 Congratulations! Your KES 500 bonus is now withdrawable and included in your pending balance.</p>
+                )}
+              </div>
+              <div className="text-right flex-shrink-0">
+                <p className="font-heading font-bold text-xl text-lux-navy">KES {data.stats.signupBonus.amount.toLocaleString()}</p>
+                <p className="text-xs text-lux-text-light">{data.stats.signupBonus.status === "locked" ? "Locked" : "Available"}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       <div className="grid lg:grid-cols-2 gap-6">
         <Card className="border-lux-gold/10 shadow-sm">

@@ -35,7 +35,7 @@
   <line x1="60" y1="280" x2="340" y2="280" stroke="#D4AF37" stroke-width="1" opacity="0.5"/>
   <!-- Details -->
   <text x="60" y="305" font-family="Arial, sans-serif" font-size="12" fill="#0F2847" opacity="0.5">From</text>
-  <text x="60" y="325" font-family="Arial, sans-serif" font-size="14" fill="#0F2847" font-weight="bold">Aureus Network</text>
+  <text x="60" y="325" font-family="Arial, sans-serif" font-size="14" fill="#0F2847" font-weight="bold">Zuri Agency</text>
   <text x="60" y="350" font-family="Arial, sans-serif" font-size="12" fill="#0F2847" opacity="0.5">Transaction ID</text>
   <text x="60" y="370" font-family="Arial, sans-serif" font-size="13" fill="#0F2847">TRX7A3B92F1</text>
   <text x="60" y="395" font-family="Arial, sans-serif" font-size="12" fill="#0F2847" opacity="0.5">Date &amp; Time</text>

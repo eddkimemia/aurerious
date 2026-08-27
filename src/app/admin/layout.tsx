@@ -67,7 +67,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
         <div>
           <span className="font-heading font-bold text-base text-white block leading-tight">
-            Aureus<span className="text-lux-gold">Network</span>
+            Zuri<span className="text-lux-gold">Agency</span>
           </span>
           <Badge className="mt-1 bg-lux-gold/15 text-lux-gold border-lux-gold/20 text-[10px] px-2 py-0 h-4">
             <ShieldCheck className="h-3 w-3 mr-1" />

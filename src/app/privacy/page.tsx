@@ -25,7 +25,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="font-heading text-xl font-bold text-lux-navy mb-3">1. Information We Collect</h2>
             <p>
-              We collect personal information you voluntarily provide when registering for Aureus Network, including your full name, phone number, email address, and M-Pesa transaction details. We also collect referral data, commission earnings, and usage analytics to improve our service.
+              We collect personal information you voluntarily provide when registering for Zuri Agency, including your full name, phone number, email address, and M-Pesa transaction details. We also collect referral data, commission earnings, and usage analytics to improve our service.
             </p>
           </section>
 
@@ -46,7 +46,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="font-heading text-xl font-bold text-lux-navy mb-3">4. Data Protection (DPA Compliance)</h2>
             <p>
-              Aureus Network complies with the Kenya Data Protection Act, 2019. You have the right to access, correct, or delete your personal data. You may request a copy of your data or withdraw consent at any time by contacting us. We implement appropriate technical and organizational measures to protect your data.
+              Zuri Agency complies with the Kenya Data Protection Act, 2019. You have the right to access, correct, or delete your personal data. You may request a copy of your data or withdraw consent at any time by contacting us. We implement appropriate technical and organizational measures to protect your data.
             </p>
           </section>
 
@@ -60,7 +60,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="font-heading text-xl font-bold text-lux-navy mb-3">6. Contact</h2>
             <p>
-              For any privacy-related inquiries, data requests, or concerns, please contact us at info@aureusnetwork.co.ke or via WhatsApp at 0753728292. We aim to respond within 48 hours.
+              For any privacy-related inquiries, data requests, or concerns, please contact us at info@zuriagency.co.ke or via WhatsApp at 0753728292. We aim to respond within 48 hours.
             </p>
           </section>
         </div>

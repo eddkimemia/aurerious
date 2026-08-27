@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aureusnetwork.co.ke/sitemap.xml
+Sitemap: https://zuriagency.co.ke/sitemap.xml

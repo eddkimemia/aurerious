@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
       commissionFilter.createdAt = { gte: dateFilter }
     }
 
-    const [totalAgg, pendingAgg, paidAgg, periodAgg, recentCommissions] = await Promise.all([
+    const [totalAgg, pendingAgg, paidAgg, lockedAgg, bonusAgg, referralCount, periodAgg, recentCommissions] = await Promise.all([
       db.commission.aggregate({
         where: { userId: session.user.id },
         _sum: { amount: true },
@@ -38,6 +38,16 @@ export async function GET(request: NextRequest) {
       db.commission.aggregate({
         where: { userId: session.user.id, status: "paid" },
         _sum: { amount: true },
+      }),
+      db.commission.aggregate({
+        where: { userId: session.user.id, status: "locked" },
+        _sum: { amount: true },
+      }),
+      db.commission.findFirst({
+        where: { userId: session.user.id, type: "signup_bonus" },
+      }),
+      db.referral.count({
+        where: { referrerId: session.user.id, status: "completed" },
       }),
       db.commission.aggregate({
         where: commissionFilter,
@@ -54,6 +64,10 @@ export async function GET(request: NextRequest) {
       totalEarned: totalAgg._sum.amount || 0,
       pending: pendingAgg._sum.amount || 0,
       paidOut: paidAgg._sum.amount || 0,
+      locked: lockedAgg._sum.amount || 0,
+      signupBonus: bonusAgg ? { amount: bonusAgg.amount, status: bonusAgg.status, type: bonusAgg.type } : null,
+      referralCount,
+      requiredForBonus: 5,
       thisPeriod: periodAgg._sum.amount || 0,
       period,
       recentCommissions,

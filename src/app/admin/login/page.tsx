@@ -110,7 +110,7 @@ export default function AdminLoginPage() {
               <Input
                 id="email"
                 type="text"
-                placeholder="admin@aureusnetwork.co.ke"
+                placeholder="admin@zuriagency.co.ke"
                 className="border-lux-gold/20 focus-visible:border-lux-gold input-glow"
                 value={login}
                 onChange={(e) => setLogin(e.target.value)}

@@ -54,9 +54,9 @@ export default function ReferralsPage() {
   const recentReferrals = data?.referrals?.slice(0, 10) || []
   const referralLink = data?.referralLink || ""
   const shareLinks = [
-    { name: "WhatsApp", href: `https://wa.me/?text=${encodeURIComponent(`Join Aureus Network and start earning KES 350 per referral! ${referralLink}`)}`, color: "bg-[#25D366] hover:bg-[#1DA851]" },
-    { name: "Facebook", href: `https://www.facebook.com/sharer/sharer.php?quote=${encodeURIComponent(`Join Aureus Network and start earning KES 350 per referral!`)}&u=${encodeURIComponent(referralLink)}`, color: "bg-[#1877F2] hover:bg-[#166FE5]" },
-    { name: "Twitter", href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`Join Aureus Network and start earning KES 350 per referral!`)}&url=${encodeURIComponent(referralLink)}`, color: "bg-[#1DA1F2] hover:bg-[#1A91DA]" },
+    { name: "WhatsApp", href: `https://wa.me/?text=${encodeURIComponent(`Join Zuri Agency and start earning KES 350 per referral! ${referralLink}`)}`, color: "bg-[#25D366] hover:bg-[#1DA851]" },
+    { name: "Facebook", href: `https://www.facebook.com/sharer/sharer.php?quote=${encodeURIComponent(`Join Zuri Agency and start earning KES 350 per referral!`)}&u=${encodeURIComponent(referralLink)}`, color: "bg-[#1877F2] hover:bg-[#166FE5]" },
+    { name: "Twitter", href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`Join Zuri Agency and start earning KES 350 per referral!`)}&url=${encodeURIComponent(referralLink)}`, color: "bg-[#1DA1F2] hover:bg-[#1A91DA]" },
   ]
 
   return (

@@ -129,7 +129,7 @@ function RegisterForm() {
             <CardTitle className="font-heading text-2xl text-lux-navy mb-2">Check Your Phone</CardTitle>
             <CardDescription className="text-lux-text-light text-base leading-relaxed">
               An M-Pesa payment prompt has been sent to <strong className="text-lux-navy">{form.phone}</strong>.
-              Enter your M-Pesa PIN to complete the KES 10 membership payment.
+              Enter your M-Pesa PIN to complete the KES 1,000 membership payment.
             </CardDescription>
 
             <div className="mt-8 space-y-4">
@@ -184,7 +184,7 @@ function RegisterForm() {
           <span className="font-heading font-bold text-white text-xl">A</span>
         </div>
         <span className="font-heading font-bold text-2xl text-lux-navy">
-          Aureus<span className="text-lux-gold">Network</span>
+          Zuri<span className="text-lux-gold">Agency</span>
         </span>
       </div>
 
@@ -192,7 +192,7 @@ function RegisterForm() {
         <CardHeader className="text-center pb-2">
           <CardTitle className="font-heading text-2xl text-lux-navy">Create Your Account</CardTitle>
           <CardDescription className="text-lux-text-light">
-            Join Aureus Network and start earning referral commissions
+            Join Zuri Agency and start earning referral commissions
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4 pt-4">
@@ -261,7 +261,7 @@ function RegisterForm() {
                 <div className="flex-1 min-w-0">
                   <p className="font-heading font-semibold text-sm text-lux-navy">One-Time Membership Fee</p>
                   <p className="text-sm text-lux-text-light mt-1">
-                    Pay <strong className="text-lux-navy">KES 10</strong> via M-Pesa to activate your account and start earning.
+                    Pay <strong className="text-lux-navy">KES 1,000</strong> via M-Pesa to activate your account and start earning. Get <strong className="text-lux-gold">KES 500 airtime bonus</strong> instantly.
                   </p>
                 </div>
               </div>
@@ -269,7 +269,7 @@ function RegisterForm() {
 
             <Button type="submit" disabled={loading} className="w-full bg-lux-gold hover:bg-lux-gold-dark text-white font-heading font-bold h-11 rounded-lg shadow-lg shadow-lux-gold/25 hover:shadow-xl transition-all btn-shine">
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Phone className="h-4 w-4" />}
-              {loading ? "Initiating Payment..." : "Pay KES 10 via M-Pesa"}
+              {loading ? "Initiating Payment..." : "Pay KES 1,000 via M-Pesa"}
             </Button>
           </form>
 
@@ -292,8 +292,9 @@ function RegisterForm() {
           </DialogHeader>
           <div className="space-y-4">
             <div className="rounded-xl bg-lux-gold-pale border border-lux-gold/20 p-4 text-center">
-              <p className="font-heading font-bold text-2xl text-lux-navy">KES 10</p>
+              <p className="font-heading font-bold text-2xl text-lux-navy">KES 1,000</p>
               <p className="text-sm text-lux-text-light">One-time membership fee</p>
+              <p className="text-xs text-lux-gold font-semibold mt-2">+ KES 500 signup bonus after payment!</p>
             </div>
             <p className="text-sm text-lux-text text-center">
               An M-Pesa payment prompt will be sent to your phone after you submit the form.

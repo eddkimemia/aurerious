@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils"
 const faqs = [
   {
     q: "How much does it cost to join?",
-    a: "A one-time membership fee of KES 1,000. No recurring charges, no hidden fees, no monthly subscriptions, no annual renewals, no maintenance costs — just a single payment that gives you lifetime access to the referral platform. You pay once and earn forever. Many people ask if there are any other costs down the line, and the answer is always no. Whether you refer one person or one thousand, you never pay another shilling. This is what makes Aureus Network different from every other opportunity out there. When you see platforms charging monthly fees or requiring minimum purchases, you know they are not built for your success. We are different because we only win when you win.",
+    a: "A one-time membership fee of KES 1,000. No recurring charges, no hidden fees, no monthly subscriptions, no annual renewals, no maintenance costs — just a single payment that gives you lifetime access to the referral platform. You pay once and earn forever. Many people ask if there are any other costs down the line, and the answer is always no. Whether you refer one person or one thousand, you never pay another shilling. This is what makes Zuri Agency different from every other opportunity out there. When you see platforms charging monthly fees or requiring minimum purchases, you know they are not built for your success. We are different because we only win when you win.",
   },
   {
     q: "How do I earn?",
@@ -28,23 +28,23 @@ const faqs = [
   },
   {
     q: "Is this a pyramid scheme?",
-    a: "No. Absolutely not. Aureus Network is a legitimate referral-based income platform that is fully compliant with Kenyan regulations. Pyramid schemes are illegal because they require payment for the right to recruit others and they promise returns that come primarily from recruiting, not from any underlying product or service. Our model is completely different. You earn commissions when real people choose to join a real platform that provides real value — the ability to earn referral income themselves. There are no recruitment targets, no penalties for inactivity, no complex compensation plans designed to confuse you. We are transparent about how everything works, and we welcome scrutiny from regulators, journalists, or anyone who wants to understand our model.",
+    a: "No. Absolutely not. Zuri Agency is a legitimate referral-based income platform that is fully compliant with Kenyan regulations. Pyramid schemes are illegal because they require payment for the right to recruit others and they promise returns that come primarily from recruiting, not from any underlying product or service. Our model is completely different. You earn commissions when real people choose to join a real platform that provides real value — the ability to earn referral income themselves. There are no recruitment targets, no penalties for inactivity, no complex compensation plans designed to confuse you. We are transparent about how everything works, and we welcome scrutiny from regulators, journalists, or anyone who wants to understand our model.",
   },
   {
     q: "Can I join from anywhere in Kenya?",
-    a: "Yes. As long as you have M-Pesa and some form of internet access — even basic mobile data on a feature phone — you can join and start earning from anywhere in the country. Whether you are in Nairobi's CBD, Kisumu's lakeside, Mombasa's coast, Nakuru's town centre, Eldoret, Nyeri, Machakos, or a rural village in Baringo, Turkana, or Taita Taveta, the platform works exactly the same way. You do not need a smartphone, though it makes things easier. A basic phone with internet capability is enough to register and share your link. Location has never been a barrier to earning with Aureus Network, and we are proud that our members come from every corner of Kenya.",
+    a: "Yes. As long as you have M-Pesa and some form of internet access — even basic mobile data on a feature phone — you can join and start earning from anywhere in the country. Whether you are in Nairobi's CBD, Kisumu's lakeside, Mombasa's coast, Nakuru's town centre, Eldoret, Nyeri, Machakos, or a rural village in Baringo, Turkana, or Taita Taveta, the platform works exactly the same way. You do not need a smartphone, though it makes things easier. A basic phone with internet capability is enough to register and share your link. Location has never been a barrier to earning with Zuri Agency, and we are proud that our members come from every corner of Kenya.",
   },
   {
     q: "What happens if I stop referring?",
-    a: "If you stop referring, you simply stop earning new commissions. That is it. Any commissions you have already earned and that have been processed remain yours permanently — we never claw back paid commissions. There are no penalties for inactivity, no account closure due to dormancy, no reactivation fees, and no loss of your team. Your account stays active indefinitely. You can take a break for six months, travel, focus on other priorities, come back, and pick up right where you left off. This flexibility is especially valuable for students during exam periods, parents during busy seasons like December, or anyone whose life circumstances change. With Aureus Network, you are always in control.",
+    a: "If you stop referring, you simply stop earning new commissions. That is it. Any commissions you have already earned and that have been processed remain yours permanently — we never claw back paid commissions. There are no penalties for inactivity, no account closure due to dormancy, no reactivation fees, and no loss of your team. Your account stays active indefinitely. You can take a break for six months, travel, focus on other priorities, come back, and pick up right where you left off. This flexibility is especially valuable for students during exam periods, parents during busy seasons like December, or anyone whose life circumstances change. With Zuri Agency, you are always in control.",
   },
   {
     q: "How quickly do I get paid?",
-    a: "Instantly. The moment someone joins through your link and completes their KES 1,000 membership payment, your KES 350 commission is triggered and sent to your M-Pesa automatically. There are absolutely no delays, no processing queues, no manual approval steps, no waiting for a payout run at the end of the week. The entire system is fully automated and works in real time. Many of our members report receiving their M-Pesa notification within 60 seconds of their referral completing registration. This instant payment system is one of the main reasons people love and trust Aureus Network — because you see the results of your effort immediately, not after a long waiting period.",
+    a: "Instantly. The moment someone joins through your link and completes their KES 1,000 membership payment, your KES 350 commission is triggered and sent to your M-Pesa automatically. There are absolutely no delays, no processing queues, no manual approval steps, no waiting for a payout run at the end of the week. The entire system is fully automated and works in real time. Many of our members report receiving their M-Pesa notification within 60 seconds of their referral completing registration. This instant payment system is one of the main reasons people love and trust Zuri Agency — because you see the results of your effort immediately, not after a long waiting period.",
   },
   {
-    q: "Is Aureus Network registered in Kenya?",
-    a: "Yes, Aureus Network is fully registered and compliant with all relevant Kenyan business regulations. We operate transparently under Kenyan law and follow all applicable rules governing digital platforms and referral-based income models in Kenya. Our headquarters are based in Nairobi, and we work exclusively with local payment providers to ensure seamless M-Pesa integration. You can be completely confident that you are joining a legitimate, professionally run organisation that is here for the long term. We are not some foreign company trying to extract money from Kenyans — we are Kenyans, building for Kenyans, and we are committed to operating with integrity and transparency at every level.",
+    q: "Is Zuri Agency registered in Kenya?",
+    a: "Yes, Zuri Agency is fully registered and compliant with all relevant Kenyan business regulations. We operate transparently under Kenyan law and follow all applicable rules governing digital platforms and referral-based income models in Kenya. Our headquarters are based in Nairobi, and we work exclusively with local payment providers to ensure seamless M-Pesa integration. You can be completely confident that you are joining a legitimate, professionally run organisation that is here for the long term. We are not some foreign company trying to extract money from Kenyans — we are Kenyans, building for Kenyans, and we are committed to operating with integrity and transparency at every level.",
   },
   {
     q: "What if I don't know anyone to refer?",
@@ -63,12 +63,12 @@ const faqs = [
 const myths = [
   {
     myth: "It is a pyramid scheme",
-    reality: "Pyramid schemes are illegal because they inevitably collapse when recruitment slows down, leaving most participants with losses. Aureus Network is fundamentally different. We are a sustainable referral-based platform that provides ongoing value to every member regardless of whether they recruit others. The platform does not depend on endless recruitment to survive. Members earn commissions for introducing new people to a legitimate service, and the platform continues operating normally regardless of growth rate. There are no recruitment fees beyond the one-time KES 1,000 membership, no pressure to recruit a minimum number of people, and the business model is transparent and simple. We welcome any scrutiny because we have nothing to hide. Our model is legal, ethical, and built to last.",
+    reality: "Pyramid schemes are illegal because they inevitably collapse when recruitment slows down, leaving most participants with losses. Zuri Agency is fundamentally different. We are a sustainable referral-based platform that provides ongoing value to every member regardless of whether they recruit others. The platform does not depend on endless recruitment to survive. Members earn commissions for introducing new people to a legitimate service, and the platform continues operating normally regardless of growth rate. There are no recruitment fees beyond the one-time KES 1,000 membership, no pressure to recruit a minimum number of people, and the business model is transparent and simple. We welcome any scrutiny because we have nothing to hide. Our model is legal, ethical, and built to last.",
     icon: XCircle,
   },
   {
     myth: "You need to recruit many people to earn anything meaningful",
-    reality: "Even a single referral earns you KES 350 instantly — that is real money you can use immediately for airtime, food, transport, or anything else. You do not need a large team to see value from Aureus Network. Many of our members are perfectly happy earning an extra KES 1,000 to KES 3,000 per month by referring just a handful of people. That extra income can make a real difference — covering your daily transport, buying data bundles, or treating your family on the weekend. The override bonus for building a team is an additional benefit that you can choose to pursue or ignore. You earn at your own pace, at your own comfort level, with no pressure from anyone.",
+    reality: "Even a single referral earns you KES 350 instantly — that is real money you can use immediately for airtime, food, transport, or anything else. You do not need a large team to see value from Zuri Agency. Many of our members are perfectly happy earning an extra KES 1,000 to KES 3,000 per month by referring just a handful of people. That extra income can make a real difference — covering your daily transport, buying data bundles, or treating your family on the weekend. The override bonus for building a team is an additional benefit that you can choose to pursue or ignore. You earn at your own pace, at your own comfort level, with no pressure from anyone.",
     icon: XCircle,
   },
   {
@@ -78,7 +78,7 @@ const myths = [
   },
   {
     myth: "You need special skills, experience, or a large social media following",
-    reality: "If you can share a link, you can earn. There is absolutely no training course required, no technical expertise needed, no sales experience necessary, and no social media following required. The platform handles everything automatically — tracking referrals, processing payments, managing accounts. Your only job is to let people know that the opportunity exists. We provide ready-made messages, graphics, and promotional resources so you do not even need to write your own content or design your own materials. If you can use WhatsApp to send a message to a friend, you already have all the skills you need to succeed with Aureus Network. It really is that simple.",
+    reality: "If you can share a link, you can earn. There is absolutely no training course required, no technical expertise needed, no sales experience necessary, and no social media following required. The platform handles everything automatically — tracking referrals, processing payments, managing accounts. Your only job is to let people know that the opportunity exists. We provide ready-made messages, graphics, and promotional resources so you do not even need to write your own content or design your own materials. If you can use WhatsApp to send a message to a friend, you already have all the skills you need to succeed with Zuri Agency. It really is that simple.",
     icon: XCircle,
   },
 ]
@@ -145,7 +145,7 @@ export default function FaqPageContent() {
           </div>
           <FadeIn>
             <p className="mt-8 text-center text-sm text-lux-text-light max-w-2xl mx-auto leading-relaxed">
-              These numbers represent the core of how Aureus Network works. No complicated calculations, no confusing tiers, no fine print. Just straightforward earnings that you can count on. Every figure above is fixed and transparent — what you see is exactly what you get.
+              These numbers represent the core of how Zuri Agency works. No complicated calculations, no confusing tiers, no fine print. Just straightforward earnings that you can count on. Every figure above is fixed and transparent — what you see is exactly what you get.
             </p>
           </FadeIn>
         </div>
@@ -251,7 +251,7 @@ export default function FaqPageContent() {
               Our Commitment to You
             </h2>
             <p className="mt-6 text-lg text-lux-text-light max-w-2xl mx-auto leading-relaxed">
-              When you reach out to Aureus Network, you are not talking to a chatbot or an outsourced call centre. You are talking to real people who genuinely care about helping you succeed. Here is what you can expect from us.
+              When you reach out to Zuri Agency, you are not talking to a chatbot or an outsourced call centre. You are talking to real people who genuinely care about helping you succeed. Here is what you can expect from us.
             </p>
           </FadeIn>
 
@@ -334,7 +334,7 @@ export default function FaqPageContent() {
                   Reach out to us directly on any of the channels below. We will give you the honest answer you deserve — no pressure, no sales pitch, no high-pressure tactics, no automated responses. Just a real person having a real conversation with you. That is how we treat every single person who reaches out to us.
                 </p>
                 <p className="text-gray-400 mb-8 max-w-md mx-auto leading-relaxed text-sm">
-                  We respond to WhatsApp messages within minutes during business hours, and emails within 24 hours (usually much faster). You are never ignored when you reach out to Aureus Network. Every message gets a response from a real human being who genuinely wants to help you.
+                  We respond to WhatsApp messages within minutes during business hours, and emails within 24 hours (usually much faster). You are never ignored when you reach out to Zuri Agency. Every message gets a response from a real human being who genuinely wants to help you.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                   <a
@@ -347,7 +347,7 @@ export default function FaqPageContent() {
                     WhatsApp Us
                   </a>
                   <a
-                    href="mailto:info@aureusnetwork.co.ke"
+                    href="mailto:info@zuriagency.co.ke"
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold transition-all hover:scale-105 border border-white/20"
                   >
                     <Mail className="h-5 w-5" />

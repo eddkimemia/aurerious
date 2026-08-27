@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
 import { processCallback } from "@/services/mpesa"
-import { processReferralCommission } from "@/lib/commission-engine"
+import { createSignupBonus, processReferralCommission } from "@/lib/commission-engine"
 
 export async function POST(request: NextRequest) {
   try {
@@ -68,6 +68,8 @@ export async function POST(request: NextRequest) {
         })
 
         if (existingTransaction.type === "registration") {
+          // Credit KES 500 signup airtime bonus immediately (locked until 5 referrals)
+          await createSignupBonus(existingTransaction.userId)
           await processReferralCommission(existingTransaction.userId)
         }
 

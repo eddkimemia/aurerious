@@ -52,7 +52,7 @@ export function SocialProofToast() {
         </div>
         <div className="min-w-0">
           <p className="text-sm font-semibold text-lux-navy truncate">{d.name} <span className="font-normal text-lux-text-light">from {d.city}</span></p>
-          <p className="text-xs text-lux-text-light">just joined Aureus Network &middot; {d.time}</p>
+          <p className="text-xs text-lux-text-light">just joined Zuri Agency &middot; {d.time}</p>
         </div>
       </div>
     </div>

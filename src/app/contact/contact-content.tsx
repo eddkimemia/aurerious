@@ -25,9 +25,9 @@ const channels = [
   {
     icon: Mail,
     title: "Email",
-    detail: "info@aureusnetwork.co.ke",
+    detail: "info@zuriagency.co.ke",
     description: "Prefer to write everything out? Send us an email and we will respond within 24 hours — usually much faster. Email is best for detailed inquiries, account issues, or when you need to attach documents or screenshots.",
-    href: "mailto:info@aureusnetwork.co.ke",
+    href: "mailto:info@zuriagency.co.ke",
     color: "#D4AF37",
     bg: "bg-lux-gold-pale",
     cta: "Send Email",
@@ -93,7 +93,7 @@ export default function ContactPageContent() {
           </FadeIn>
           <FadeIn delay={200}>
             <p className="mt-6 text-lg sm:text-xl text-lux-text-light max-w-2xl mx-auto leading-relaxed">
-              We are real people behind Aureus Network, and we take your questions seriously. Whether you are ready to join, curious about how it works, or need help with your account, we are here for you. You are not just a number to us — every person who reaches out matters, and we treat every conversation with the respect and attention it deserves.
+              We are real people behind Zuri Agency, and we take your questions seriously. Whether you are ready to join, curious about how it works, or need help with your account, we are here for you. You are not just a number to us — every person who reaches out matters, and we treat every conversation with the respect and attention it deserves.
             </p>
           </FadeIn>
           <FadeIn delay={300}>
@@ -191,11 +191,11 @@ export default function ContactPageContent() {
                   </div>
                   <div className="space-y-4 text-lux-text-light leading-relaxed">
                     <p>
-                      Aureus Network is proudly headquartered in Nairobi, Kenya. We are a Kenyan company serving Kenyan members, and we believe in being accessible to the people who make our platform what it is.
+                      Zuri Agency is proudly headquartered in Nairobi, Kenya. We are a Kenyan company serving Kenyan members, and we believe in being accessible to the people who make our platform what it is.
                     </p>
                     <div className="bg-lux-cream rounded-xl p-5 border border-lux-gold/10">
                       <p className="font-heading font-semibold text-lux-navy">Physical Address</p>
-                      <p className="mt-1">Aureus Network Limited</p>
+                      <p className="mt-1">Zuri Agency Limited</p>
                       <p>Nairobi, Kenya</p>
                       <p className="mt-2 text-sm">PO Box 12345-00100</p>
                       <p className="text-sm">Nairobi, Kenya</p>

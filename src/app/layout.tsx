@@ -21,28 +21,28 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Aureus Network - Refer. Earn. Grow. | Premium Referral Platform",
-    template: "%s | Aureus Network",
+    default: "Zuri Agency - Refer. Earn. Grow. | Premium Referral Platform",
+    template: "%s | Zuri Agency",
   },
   description:
     "A premium referral-based income platform where members earn KES 350 commissions by bringing others into the opportunity. Join for KES 1,000 one-time.",
   keywords: [
-    "Aureus Network", "referral income", "Kenya", "M-Pesa",
+    "Zuri Agency", "referral income", "Kenya", "M-Pesa",
     "earn money online", "referral commission", "KES", "passive income",
   ],
-  authors: [{ name: "Aureus Network" }],
+  authors: [{ name: "Zuri Agency" }],
   icons: { icon: "/images/logo.svg" },
   openGraph: {
-    title: "Aureus Network - Turn Your Network Into Monthly Income",
+    title: "Zuri Agency - Turn Your Network Into Monthly Income",
     description: "Earn 35% commission on every person you refer. No products to sell. Join for KES 1,000.",
-    url: "https://aureusnetwork.co.ke",
-    siteName: "Aureus Network",
+    url: "https://zuriagency.co.ke",
+    siteName: "Zuri Agency",
     type: "website",
     locale: "en_KE",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aureus Network - Turn Your Network Into Monthly Income",
+    title: "Zuri Agency - Turn Your Network Into Monthly Income",
     description: "Earn KES 350 per referral. Join thousands of Kenyans building referral income.",
   },
   robots: { index: true, follow: true },
