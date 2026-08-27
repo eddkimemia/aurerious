@@ -3,3 +3,111 @@
 - Network:       http://172.31.208.1:3000
 - Environments: .env
 ✓ Ready in 4.1s
+
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/admin" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <RootLayout>
+                        <html lang="en" suppressHydrationWarning={true}>
+                          <body
+                            className="__variable_246ccd __variable_c29908 antialiased bg-background text-foreground f..."
+-                           cz-shortcut-listen="true"
+                          >
+                  ...
+ 
+○ Compiling /api/auth/[...nextauth] ...
+⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+○ Compiling /admin ...
+ GET /api/auth/session 200 in 14.7s (next.js: 14.3s, application-code: 346ms)
+⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /admin/login 200 in 27.6s (next.js: 25.4s, application-code: 2.2s)
+ GET /admin 200 in 32.8s (next.js: 30.5s, application-code: 2.3s)
+ GET /api/auth/session 200 in 558ms (next.js: 269ms, application-code: 289ms)
+ GET /admin/login 200 in 123ms (next.js: 12ms, application-code: 112ms)
+ GET /api/auth/session 200 in 49ms (next.js: 8ms, application-code: 41ms)
+ GET /api/auth/session 200 in 51ms (next.js: 9ms, application-code: 43ms)
+ GET /api/auth/session 200 in 32ms (next.js: 7ms, application-code: 26ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/admin" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <RootLayout>
+                        <html lang="en" suppressHydrationWarning={true}>
+                          <body
+                            className="__variable_246ccd __variable_c29908 antialiased bg-background text-foreground f..."
+-                           cz-shortcut-listen="true"
+                          >
+                  ...
+ 
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+ GET /api/auth/providers 200 in 150ms (next.js: 50ms, application-code: 99ms)
+ GET /api/auth/csrf 200 in 51ms (next.js: 8ms, application-code: 43ms)
+ POST /api/auth/callback/credentials 200 in 529ms (next.js: 10ms, application-code: 519ms)
+ GET /api/auth/session 200 in 44ms (next.js: 8ms, application-code: 36ms)
+ GET /admin 200 in 201ms (next.js: 14ms, application-code: 187ms)
+○ Compiling /api/admin/overview ...
+ GET /api/auth/session 200 in 6.7s (next.js: 6.5s, application-code: 195ms)
+ GET /api/admin/overview 200 in 6.9s (next.js: 6.7s, application-code: 224ms)
+ GET /api/admin/overview 200 in 57ms (next.js: 7ms, application-code: 50ms)
+ GET /admin/users 200 in 3.6s (next.js: 3.4s, application-code: 217ms)
+○ Compiling /api/admin/users ...
+ GET /api/auth/session 200 in 4.0s (next.js: 3.9s, application-code: 131ms)
+ GET /api/admin/users?page=1&limit=20 200 in 4.1s (next.js: 3.9s, application-code: 176ms)
+ GET /api/admin/users?page=1&limit=20 200 in 79ms (next.js: 8ms, application-code: 71ms)
+○ Compiling /admin/transactions ...
+ GET /admin/transactions 200 in 3.6s (next.js: 3.4s, application-code: 164ms)
+○ Compiling /api/admin/transactions ...
+ GET /api/auth/session 200 in 4.4s (next.js: 4.3s, application-code: 111ms)
+ GET /api/admin/transactions 200 in 4.5s (next.js: 4.4s, application-code: 150ms)
+ GET /api/admin/transactions 200 in 48ms (next.js: 7ms, application-code: 41ms)
+ GET /admin/transactions 200 in 781ms (next.js: 278ms, application-code: 502ms)
+  Reload env: .env
+ GET /admin/transactions 200 in 893ms (next.js: 665ms, application-code: 228ms)
+ GET /admin/transactions 200 in 92ms (next.js: 9ms, application-code: 83ms)
+ GET /admin/transactions 200 in 111ms (next.js: 10ms, application-code: 101ms)

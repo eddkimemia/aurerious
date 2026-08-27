@@ -30,6 +30,13 @@ declare module "next-auth/jwt" {
   }
 }
 
+if (!process.env.NEXTAUTH_SECRET) {
+  process.env.NEXTAUTH_SECRET = "zuri-agency-dev-secret-change-in-production-32chars"
+}
+if (!process.env.NEXTAUTH_URL) {
+  process.env.NEXTAUTH_URL = process.env.NEXT_PUBLIC_APP_URL || "https://zuriagency.co.ke"
+}
+
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -105,7 +112,7 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || "zuri-agency-dev-secret-change-in-production-32chars",
 }
 
 export const auth = () => getServerSession(authOptions)
