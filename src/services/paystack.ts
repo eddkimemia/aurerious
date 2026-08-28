@@ -23,6 +23,10 @@ export async function initializeTransaction(params: {
   error?: string
 }> {
   if (!isConfigured()) {
+    if (process.env.NODE_ENV === "production") {
+      console.error("[Paystack] Not configured in production - failing")
+      return { success: false, error: "Payment gateway not configured. Contact support." }
+    }
     console.log("[Paystack] Mock initialize (not configured):", params)
     const reference = params.reference
     return {
@@ -57,21 +61,10 @@ export async function initializeTransaction(params: {
     const data = await res.json()
 
     if (!res.ok || !data.status) {
-      console.warn("[Paystack] initialize failed", data)
-      // Fallback to mock for resilience (allows registration even if Paystack keys invalid, as with previous Mpesa mock)
-      // In production, you may want to return error instead
-      if (process.env.NODE_ENV !== "production") {
-        console.warn("[Paystack] Falling back to mock due to initialize failure")
-        return {
-          success: true,
-          reference: params.reference,
-          authorizationUrl: `https://paystack.mock/checkout/${params.reference}`,
-          accessCode: `mock_${params.reference}`,
-        }
-      }
+      console.error("[Paystack] initialize failed", data)
       return {
         success: false,
-        error: data.message || "Paystack initialization failed",
+        error: data.message || "Paystack initialization failed - check API keys",
       }
     }
 
@@ -82,13 +75,10 @@ export async function initializeTransaction(params: {
       accessCode: data.data.access_code,
     }
   } catch (e: any) {
-    console.warn("[Paystack] initialize exception, mock fallback", e)
-    // Fallback to mock to keep registration working (like Mpesa mock)
+    console.error("[Paystack] initialize exception", e)
     return {
-      success: true,
-      reference: params.reference,
-      authorizationUrl: `https://paystack.mock/checkout/${params.reference}`,
-      accessCode: `mock_${params.reference}`,
+      success: false,
+      error: e.message || "Paystack initialization error",
     }
   }
 }
@@ -105,7 +95,11 @@ export async function verifyTransaction(reference: string): Promise<{
   error?: string
 }> {
   if (!isConfigured()) {
-    console.log("[Paystack] Mock verify:", reference)
+    if (process.env.NODE_ENV === "production") {
+      console.error("[Paystack] Mock verify not allowed in production")
+      return { success: false, status: "pending", error: "Not configured" }
+    }
+    console.log("[Paystack] Mock verify (not configured):", reference)
     return {
       success: true,
       status: "success",
@@ -113,58 +107,6 @@ export async function verifyTransaction(reference: string): Promise<{
       gatewayResponse: "Successful",
       paidAt: new Date().toISOString(),
       channel: "card",
-    }
-  }
-
-  // If reference is mock, treat as success immediately
-  if (reference.startsWith("wsr_") || reference.startsWith("mock_") || reference.startsWith("ZUR")) {
-    // For local mock references that haven't gone through real Paystack, we need to check DB status
-    // This fallback is for testing without real Paystack - assume success after polling
-    // In production, real Paystack references will be verified via API
-    // We try real verify first, if it fails we fallback to checking if it's our mock
-    try {
-      const res = await fetch(`${BASE_URL}/transaction/verify/${reference}`, {
-        headers: { Authorization: `Bearer ${SECRET_KEY}` },
-      })
-      const data = await res.json()
-      if (res.ok && data.status && data.data?.status === "success") {
-        return {
-          success: true,
-          status: data.data.status,
-          amount: data.data.amount,
-          gatewayResponse: data.data.gateway_response,
-          paidAt: data.data.paid_at,
-          channel: data.data.channel,
-          customerEmail: data.data.customer?.email,
-          metadata: data.data.metadata,
-        }
-      }
-      // If Paystack says not found for our mock ZUR reference, treat as pending/mock success for dev
-      if (reference.startsWith("ZUR") || reference.startsWith("wsr_")) {
-        console.log("[Paystack] Mock reference verify fallback as success", reference)
-        return {
-          success: true,
-          status: "success",
-          amount: 100000,
-          gatewayResponse: "Successful",
-          paidAt: new Date().toISOString(),
-          channel: "card",
-        }
-      }
-      return { success: false, error: data.message || "Verification failed" }
-    } catch (e) {
-      // Fallback for mock
-      if (reference.startsWith("ZUR") || reference.startsWith("wsr_") || reference.startsWith("mock_")) {
-        return {
-          success: true,
-          status: "success",
-          amount: 100000,
-          gatewayResponse: "Successful",
-          paidAt: new Date().toISOString(),
-          channel: "card",
-        }
-      }
-      return { success: false, error: String(e) }
     }
   }
 

@@ -59,36 +59,6 @@ export async function GET(request: NextRequest) {
       }
       return NextResponse.json({ status: "completed", reference })
     } else {
-      // Check if mock reference should be considered completed for polling
-      // For mock, we treat any pending as completed after first verify
-      if (reference.startsWith("ZUR") || reference.startsWith("wsr_") || reference.startsWith("mock_")) {
-        await db.paystackTransaction.update({
-          where: { reference },
-          data: { status: "completed", gatewayResponse: "Successful (mock)" },
-        })
-        if (tx.userId) {
-          await db.user.update({ where: { id: tx.userId }, data: { status: "active" } })
-          const { createSignupBonus, processReferralCommission } = await import("@/lib/commission-engine")
-          const existingPayment = await db.transaction.findFirst({
-            where: { userId: tx.userId, reference },
-          })
-          if (!existingPayment) {
-            await db.transaction.create({
-              data: {
-                userId: tx.userId,
-                type: "payment",
-                amount: tx.amount,
-                status: "completed",
-                reference,
-                description: `Paystack payment of KES ${tx.amount.toFixed(2)} (mock)`,
-              },
-            })
-            await createSignupBonus(tx.userId)
-            await processReferralCommission(tx.userId)
-          }
-        }
-        return NextResponse.json({ status: "completed", reference })
-      }
       return NextResponse.json({ status: "pending", reference })
     }
   } catch (error) {

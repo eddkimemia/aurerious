@@ -20,11 +20,11 @@ const sections = [
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-lux-cream overflow-x-hidden">
-      {/* Hero */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-lux-gold/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-lux-navy/5 rounded-full blur-3xl" />
+      {/* Hero - FIXED OVERFLOW FOR MOBILE */}
+      <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center overflow-hidden w-full max-w-full">
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute top-0 right-0 w-[min(600px,80vw)] h-[min(600px,80vw)] bg-lux-gold/5 rounded-full blur-3xl max-w-full" />
+          <div className="absolute bottom-0 left-0 w-[min(400px,60vw)] h-[min(400px,60vw)] bg-lux-navy/5 rounded-full blur-3xl max-w-full" />
           <div className="absolute top-1/3 left-1/3 w-3 h-3 bg-lux-gold/20 rounded-full animate-pulse-slow" />
           <div className="absolute top-1/4 right-1/4 w-2 h-2 bg-lux-navy/15 rounded-full animate-pulse-slow" style={{ animationDelay: "1s" }} />
           <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "radial-gradient(circle, #0F2847 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
@@ -34,9 +34,9 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="text-center lg:text-left">
               <FadeIn>
-                <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-lux-gold to-lux-gold-light text-white border-0 font-bold text-sm inline-flex items-center gap-2 shadow-lg shadow-lux-gold/20 animate-pulse-slow">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-lux-gold text-xs">🎁</span>
-                  LIMITED: Get KES 500 Bonus Instantly + KES 350 Per Referral For Life
+                <Badge className="mb-6 px-3 sm:px-4 py-2 bg-gradient-to-r from-lux-gold to-lux-gold-light text-white border-0 font-bold text-xs sm:text-sm inline-flex items-center gap-2 shadow-lg shadow-lux-gold/20 animate-pulse-slow max-w-full whitespace-normal text-center leading-tight break-words">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-lux-gold text-xs flex-shrink-0">🎁</span>
+                  <span className="break-words">LIMITED: Get KES 500 Bonus Instantly + KES 350 Per Referral For Life</span>
                 </Badge>
               </FadeIn>
 
@@ -47,9 +47,12 @@ export default function HomePage() {
               </FadeIn>
 
               <FadeIn delay={200}>
-                <p className="mt-6 text-lg sm:text-xl text-lux-navy leading-relaxed max-w-xl mx-auto lg:mx-0 font-semibold">
-                  Pay once <span className="text-lux-gold-dark">KES 1,000</span> → Get <span className="bg-lux-gold text-white px-2 py-1 rounded-full text-sm">KES 500 Bonus Instantly</span> + Earn <strong>KES 350</strong> per direct referral + <strong>KES 150</strong> override forever. 50% payout. Instant Paystack & M-Pesa.
+                <p className="mt-6 text-base sm:text-lg lg:text-xl text-lux-navy leading-relaxed max-w-xl mx-auto lg:mx-0 font-semibold flex flex-wrap items-center gap-2 justify-center lg:justify-start">
+                  <span>Pay once <span className="text-lux-gold-dark">KES 1,000</span> →</span>
+                  <span className="bg-lux-gold text-white px-3 py-1 rounded-full text-xs sm:text-sm whitespace-nowrap">KES 500 Bonus Instantly</span>
+                  <span>+ Earn <strong>KES 350</strong> per direct + <strong>KES 150</strong> override forever.</span>
                 </p>
+                <p className="mt-2 text-sm text-lux-text-light text-center lg:text-left">50% payout. Instant Paystack & M-Pesa.</p>
               </FadeIn>
 
               <FadeIn delay={250}>
@@ -59,40 +62,40 @@ export default function HomePage() {
               </FadeIn>
 
               <FadeIn delay={300}>
-                <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                  <Link href="/register">
-                    <Button size="lg" className="bg-lux-cta hover:bg-lux-cta-hover text-white font-heading font-bold text-lg px-8 h-14 rounded-full shadow-xl shadow-lux-gold/25 transition-all hover:shadow-2xl hover:scale-105 group relative overflow-hidden glow-cta btn-shine">
+                <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start w-full max-w-full">
+                  <Link href="/register" className="w-full sm:w-auto">
+                    <Button size="lg" className="w-full sm:w-auto bg-lux-cta hover:bg-lux-cta-hover text-white font-heading font-bold text-base sm:text-lg px-6 sm:px-8 h-14 rounded-full shadow-xl shadow-lux-gold/25 transition-all hover:shadow-2xl hover:scale-105 group relative overflow-hidden glow-cta btn-shine">
                       <span className="relative z-10">Join Now - KES 1,000</span>
                       <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 relative z-10" />
                       <span className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
                     </Button>
                   </Link>
-                  <Link href="/how-it-works">
-                    <Button variant="outline" size="lg" className="border-2 border-lux-navy bg-lux-navy text-white hover:bg-transparent hover:text-lux-navy font-heading font-semibold text-lg px-8 h-14 rounded-full transition-all hover:border-lux-navy">
+                  <Link href="/how-it-works" className="w-full sm:w-auto">
+                    <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-lux-navy bg-lux-navy text-white hover:bg-transparent hover:text-lux-navy font-heading font-semibold text-base sm:text-lg px-6 sm:px-8 h-14 rounded-full transition-all hover:border-lux-navy">
                       How It Works
                     </Button>
                   </Link>
                 </div>
-                <div className="mt-4 flex flex-col gap-2 justify-center lg:justify-start">
-                  <p className="text-sm font-bold text-lux-navy flex items-center gap-2 justify-center lg:justify-start bg-lux-gold-pale border border-lux-gold/20 rounded-full px-4 py-2 w-fit">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-lux-gold text-white text-xs">🎁</span>
-                    KES 500 Bonus Instantly + 3 Referrals = KES 1,050 (Already Profitable!)
+                <div className="mt-4 flex flex-col gap-2 justify-center lg:justify-start max-w-full">
+                  <p className="text-xs sm:text-sm font-bold text-lux-navy flex items-center gap-2 justify-center lg:justify-start bg-lux-gold-pale border border-lux-gold/20 rounded-full px-3 sm:px-4 py-2 max-w-full whitespace-normal text-center leading-tight break-words">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-lux-gold text-white text-xs flex-shrink-0">🎁</span>
+                    <span className="break-words">KES 500 Bonus Instantly + 3 Referrals = KES 1,050 (Already Profitable!)</span>
                   </p>
-                  <p className="text-xs text-lux-text-light flex items-center gap-1.5 justify-center lg:justify-start">
-                    <Clock className="h-3 w-3" /> Paystack & M-Pesa instant. No monthly fees. Cancel anytime.
+                  <p className="text-xs text-lux-text-light flex items-center gap-1.5 justify-center lg:justify-start flex-wrap text-center">
+                    <Clock className="h-3 w-3 flex-shrink-0" /> Paystack & M-Pesa instant. No monthly fees. Cancel anytime.
                   </p>
                 </div>
               </FadeIn>
 
               <FadeIn delay={400}>
-                <div className="mt-10 flex items-center gap-6 sm:gap-8 justify-center lg:justify-start">
+                <div className="mt-10 flex flex-wrap items-center gap-4 sm:gap-6 lg:gap-8 justify-center lg:justify-start">
                   {[
                     { value: 5000, suffix: "+", label: "Active Members", icon: Users },
                     { value: 350, prefix: "KES ", label: "Per Referral", icon: DollarSign },
                     { value: 100, suffix: "%", label: "Kenyan", icon: Globe },
                   ].map((stat) => (
-                    <div key={stat.label} className="text-center">
-                      <p className="font-heading font-bold text-2xl text-lux-navy">
+                    <div key={stat.label} className="text-center flex-1 sm:flex-none min-w-[80px]">
+                      <p className="font-heading font-bold text-xl sm:text-2xl text-lux-navy">
                         <AnimatedCounter target={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
                       </p>
                       <p className="text-xs text-lux-text-light mt-1">{stat.label}</p>
@@ -102,15 +105,15 @@ export default function HomePage() {
               </FadeIn>
             </div>
 
-            <FadeIn delay={200} className="relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img src="/images/heror.jpg" alt="Zuri Agency - Premium Referral Platform" className="w-full h-auto object-cover" />
+            <FadeIn delay={200} className="relative w-full max-w-full overflow-visible">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-full">
+                <img src="/images/heror.jpg" alt="Zuri Agency - Premium Referral Platform" className="w-full h-auto object-cover max-w-full" />
                 <div className="absolute inset-0 bg-gradient-to-t from-lux-navy-dark/30 via-transparent to-transparent" />
               </div>
-              <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 glass rounded-xl shadow-xl p-4 animate-float">
+              <div className="absolute -bottom-4 left-4 right-4 sm:left-auto sm:right-auto sm:-bottom-6 sm:left-6 glass rounded-xl shadow-xl p-4 animate-float max-w-[calc(100%-2rem)] sm:max-w-none">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-lux-gold-pale"><DollarSign className="h-5 w-5 text-lux-gold-dark" /></div>
-                  <div>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-lux-gold-pale flex-shrink-0"><DollarSign className="h-5 w-5 text-lux-gold-dark" /></div>
+                  <div className="min-w-0">
                     <p className="text-xs text-lux-text-light">You Earned</p>
                     <p className="font-heading font-bold text-lux-navy text-shadow-gold">KES 3,500</p>
                   </div>
