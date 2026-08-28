@@ -205,6 +205,7 @@ export default function EarningsPage() {
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-semibold text-lux-text-light">KES</span>
                   <Input id="amount" type="number" placeholder="0" className="pl-12 input-glow" value={amount} onChange={(e) => setAmount(e.target.value)} />
                 </div>
+                <p className="text-xs text-lux-text-light">Minimum withdraw KES 1,000</p>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="payout-phone" className="text-lux-text">M-Pesa Phone Number</Label>
@@ -214,7 +215,7 @@ export default function EarningsPage() {
                 <ArrowUpRight className="h-4 w-4 mr-2" />
                 Request Payout
               </Button>
-              <p className="text-xs text-lux-text-light text-center">Payouts are processed within 24 hours</p>
+              <p className="text-xs text-lux-text-light text-center">Minimum KES 1,000 • Payouts processed within 24 hours</p>
             </form>
           </CardContent>
         </Card>

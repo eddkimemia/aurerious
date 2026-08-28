@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
       where: { key: "minimum_payout" },
     })
 
-    const minPayout = minPayoutSetting ? parseFloat(minPayoutSetting.value) : 100
+    const minPayout = minPayoutSetting ? parseFloat(minPayoutSetting.value) : 1000
 
     if (amount < minPayout) {
       return NextResponse.json(

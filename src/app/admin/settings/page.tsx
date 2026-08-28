@@ -15,7 +15,7 @@ export default function AdminSettingsPage() {
   const [membershipFee, setMembershipFee] = useState("1000")
   const [directCommission, setDirectCommission] = useState("35")
   const [uplineOverride, setUplineOverride] = useState("15")
-  const [minPayout, setMinPayout] = useState("100")
+  const [minPayout, setMinPayout] = useState("1000")
 
   useEffect(() => {
     fetch("/api/admin/settings")
@@ -25,7 +25,7 @@ export default function AdminSettingsPage() {
           setMembershipFee(d.settings.membership_fee || "1000")
           setDirectCommission(d.settings.direct_commission || "35")
           setUplineOverride(d.settings.upline_override || "15")
-          setMinPayout(d.settings.min_payout || "100")
+          setMinPayout(d.settings.min_payout || "1000")
         }
         setLoading(false)
       })
