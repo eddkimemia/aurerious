@@ -20,12 +20,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://zuriagency.co.ke"),
   title: {
     default: "Zuri Agency - Refer. Earn. Grow. | Premium Referral Platform",
     template: "%s | Zuri Agency",
   },
   description:
-    "A premium referral-based income platform where members earn KES 350 commissions by bringing others into the opportunity. Join for KES 1,000 one-time.",
+    "A premium referral-based income platform where members earn KES 350 commissions by bringing others into the opportunity. Join for KES 1,000 one-time. Get KES 500 bonus instantly.",
   keywords: [
     "Zuri Agency", "referral income", "Kenya", "M-Pesa",
     "earn money online", "referral commission", "KES", "passive income",
@@ -34,16 +35,25 @@ export const metadata: Metadata = {
   icons: { icon: "/images/logo.svg" },
   openGraph: {
     title: "Zuri Agency - Turn Your Network Into Monthly Income",
-    description: "Earn 35% commission on every person you refer. No products to sell. Join for KES 1,000.",
+    description: "Invest KES 1,000 once → Get KES 500 bonus instantly + Earn KES 350 per referral for life. 50% payout. 5,000+ Kenyans earning. Join now.",
     url: "https://zuriagency.co.ke",
     siteName: "Zuri Agency",
     type: "website",
     locale: "en_KE",
+    images: [
+      {
+        url: "/images/heror.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Zuri Agency - Premium Referral Platform - Earn KES 350 Per Referral + KES 500 Bonus",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Zuri Agency - Turn Your Network Into Monthly Income",
-    description: "Earn KES 350 per referral. Join thousands of Kenyans building referral income.",
+    description: "Invest KES 1,000 → Get KES 500 bonus + Earn KES 350 per referral for life. 5,000+ earning. Instant Paystack & M-Pesa.",
+    images: ["/images/heror.jpg"],
   },
   robots: { index: true, follow: true },
 };
