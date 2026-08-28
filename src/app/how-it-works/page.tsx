@@ -11,24 +11,24 @@ import { FadeIn, FadeInScale, SectionHeading } from "@/components/landing/shared
 const steps = [
   {
     num: "1",
-    title: "Join",
-    desc: "Pay a one-time membership of KES 1,000 to activate your referral link and dashboard.",
+    title: "Join & Get 500 Bonus",
+    desc: "Pay KES 1,000 once → get KES 500 bonus instantly + activate your link. 50% back on day one!",
     icon: Users,
-    detail: "KES 1,000",
+    detail: "KES 1,000 → 500 Bonus",
   },
   {
     num: "2",
-    title: "Share",
-    desc: "Share your unique referral link via WhatsApp, social media, SMS, or word of mouth.",
+    title: "Share Freely",
+    desc: "Share your link on WhatsApp, TikTok, Telegram, SMS. We give you copy-paste messages. 15 mins/day is enough.",
     icon: Share2,
-    detail: "Your Link",
+    detail: "Your Link = ATM",
   },
   {
     num: "3",
-    title: "Earn",
-    desc: "Earn KES 350 per direct referral + KES 150 per override from your team's referrals.",
+    title: "Earn Forever",
+    desc: "KES 350 direct + KES 150 team override for life. 50% payout. 3 referrals = profit. 10 = KES 11,000.",
     icon: DollarSign,
-    detail: "KES 350+",
+    detail: "KES 500 Bonus + 350",
   },
 ]
 
@@ -110,21 +110,21 @@ export default function HowItWorksPage() {
       <section className="relative pt-24 pb-16 lg:pt-32 lg:pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <FadeIn>
-            <Badge className="mb-6 px-4 py-2 bg-lux-gold-pale text-lux-gold-dark border border-lux-gold/20 font-medium text-sm inline-flex items-center gap-2">
-              <span className="w-2 h-2 bg-lux-gold-dark rounded-full animate-pulse" />
-              Simple 3-Step Process
+            <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-lux-gold to-lux-gold-light text-white border-0 font-bold text-sm inline-flex items-center gap-2 shadow-md">
+              <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
+              3 Steps → KES 500 Bonus + KES 350 For Life
             </Badge>
           </FadeIn>
 
           <FadeIn delay={100}>
-            <h1 className="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight text-lux-navy heading-underline">
-              How It Works
+            <h1 className="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight text-lux-navy">
+              Pay <span className="text-lux-gold">1,000</span>. Get <span className="text-lux-gold">500</span>. Earn <span className="text-gradient">Forever.</span>
             </h1>
           </FadeIn>
 
           <FadeIn delay={200}>
-            <p className="mt-8 text-lg sm:text-xl text-lux-text-light max-w-3xl mx-auto leading-relaxed">
-              Three simple steps to start earning from your network.
+            <p className="mt-8 text-lg sm:text-xl text-lux-navy max-w-3xl mx-auto leading-relaxed font-semibold">
+              No CV. No capital. No 8-hour shift. <span className="bg-lux-gold text-white px-2 py-1 rounded-full text-sm">KES 1,000 once</span> → <span className="bg-lux-gold-pale text-lux-gold-dark px-2 py-1 rounded-full border border-lux-gold/20">KES 500 bonus instantly</span> + <strong>KES 350 direct + KES 150 override for life.</strong>
             </p>
           </FadeIn>
 

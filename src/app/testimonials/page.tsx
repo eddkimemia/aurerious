@@ -95,7 +95,7 @@ export default function TestimonialsPage() {
           <SectionHeading
             badge="Real People, Real Results"
             title="What Our Members Say"
-            subtitle="Hear from real Kenyans who are earning with Zuri Agency."
+            subtitle="Hear from real Kenyans earning KES 350 per referral + KES 500 bonus instantly — 5,000+ members, 2M+ paid."
           />
           <FadeIn delay={200}>
             <p className="mt-8 text-lg text-lux-text-light max-w-3xl mx-auto leading-relaxed">

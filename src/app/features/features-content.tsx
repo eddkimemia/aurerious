@@ -17,9 +17,9 @@ import { cn } from "@/lib/utils"
 const features = [
   {
     icon: Gift,
-    title: "No Products",
-    short: "Earn purely from referrals — nothing to sell or ship",
-    long: "This means you never have to worry about stock, deliveries, or customer complaints. Your only job is to share your link. We handle everything else. No inventory to manage, no suppliers to chase, no refunds to process. You simply refer people to join the platform, and when they do, you earn. It is the purest form of digital income available in Kenya today.",
+    title: "KES 500 Bonus Instantly",
+    short: "Get KES 500 back the second you pay KES 1,000 — 50% instant return",
+    long: "No other platform pays you to join. We do. Pay KES 1,000, get KES 500 bonus instantly credited. You’re already halfway to profit before you even share your link. Refer 3 people (KES 1,050) and you’re KES 550 profit. That’s not a promise — that’s math. And it’s why 5,000+ Kenyans chose us over every other hustle.",
   },
   {
     icon: Zap,
@@ -143,23 +143,23 @@ export default function FeaturesPageContent() {
         </div>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <FadeIn>
-            <Badge className="mb-6 px-4 py-2 bg-lux-gold-pale text-lux-gold-dark border border-lux-gold/20 font-medium text-sm">
-              Why Choose Zuri Agency
+            <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-lux-gold to-lux-gold-light text-white border-0 font-bold shadow-md">
+              🎁 KES 500 Bonus Instantly • 50% Payout • No Monthly Fees
             </Badge>
           </FadeIn>
           <FadeIn delay={100}>
-            <h1 className="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl text-lux-navy heading-underline leading-tight">
-              Why Choose <span className="text-gradient">Zuri Agency</span>?
+            <h1 className="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl text-lux-navy leading-tight">
+              Features That <span className="text-gradient">Pay You, Not Us.</span>
             </h1>
           </FadeIn>
           <FadeIn delay={200}>
-            <p className="mt-6 text-lg sm:text-xl text-lux-text-light max-w-3xl mx-auto leading-relaxed">
-              Most online income opportunities promise the world but deliver nothing. Zuri Agency is different because we stripped away everything that makes other platforms complicated. No products. No inventory. No monthly fees. No sales targets. Just a simple, proven system that works for ordinary Kenyans who want to earn extra income without the usual headaches.
+            <p className="mt-6 text-lg sm:text-xl text-lux-navy max-w-3xl mx-auto leading-relaxed font-semibold">
+              Pay <strong>KES 1,000 once</strong> → Get <span className="bg-lux-gold text-white px-2 py-1 rounded-full text-sm">KES 500 Bonus Instantly</span> + <strong>KES 350</strong> per referral + <strong>KES 150</strong> team override forever. No products. No monthly fees. Just the highest payout in Kenya.
             </p>
           </FadeIn>
           <FadeIn delay={300}>
             <p className="mt-4 text-base text-lux-text-light max-w-2xl mx-auto leading-relaxed">
-              Whether you are a student looking for pocket money, a parent wanting to supplement the family income, or someone who simply wants to work from home, Zuri Agency gives you a genuine opportunity. There is no catch, no fine print, and no hidden agenda. We succeed when you succeed, and we have built every feature with that philosophy in mind.
+              While others charge monthly, sell you stock, or pay 20%, we pay <strong className="text-lux-gold-dark">50% back to you</strong>. 5,000+ Kenyans, 2M+ paid, Paystack & M-Pesa instant. Built by Kenyans, for Kenyans — and it shows in your M-Pesa.
             </p>
           </FadeIn>
         </div>

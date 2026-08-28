@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils"
 const faqs = [
   {
     q: "How much does it cost to join?",
-    a: "A one-time membership fee of KES 1,000. No recurring charges, no hidden fees, no monthly subscriptions, no annual renewals, no maintenance costs — just a single payment that gives you lifetime access to the referral platform. You pay once and earn forever. Many people ask if there are any other costs down the line, and the answer is always no. Whether you refer one person or one thousand, you never pay another shilling. This is what makes Zuri Agency different from every other opportunity out there. When you see platforms charging monthly fees or requiring minimum purchases, you know they are not built for your success. We are different because we only win when you win.",
+    a: "A one-time membership fee of KES 1,000 — and you get KES 500 bonus instantly credited. That’s 50% back on day one. No recurring charges, no hidden fees, no monthly subscriptions, no annual renewals, no maintenance costs — just a single payment that gives you lifetime access to the referral platform. You pay once and earn forever. Many people ask if there are any other costs down the line, and the answer is always no. Whether you refer one person or one thousand, you never pay another shilling. This is what makes Zuri Agency different from every other opportunity out there. When you see platforms charging monthly fees or requiring minimum purchases, you know they are not built for your success. We are different because we only win when you win.",
   },
   {
     q: "How do I earn?",

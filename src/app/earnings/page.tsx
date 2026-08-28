@@ -16,8 +16,9 @@ const breakdownData = [
 ]
 
 const earningRoles = [
-  { title: "Direct Referrer", amount: "KES 350", desc: "You earn 35% commission on every person you directly refer to Zuri Agency. When you share your referral link and someone joins using it, KES 350 is instantly paid to your M-Pesa account. No delays, no minimum thresholds, no hidden conditions.", color: "text-lux-navy", bg: "bg-lux-navy/10", icon: Users },
-  { title: "Upline", amount: "KES 150", desc: "You earn 15% override commission on every referral made by someone in your team. If you refer Grace, and Grace refers Peter, you earn KES 150 from Peter's membership too. This is how passive, recurring income is built over time.", color: "text-lux-gold-dark", bg: "bg-lux-gold-pale", icon: TrendingUp },
+  { title: "Signup Bonus", amount: "KES 500", desc: "Get KES 500 airtime bonus credited instantly after you pay KES 1,000. You’re already 50% back on day one. No waiting. No risk. Just house money to start.", color: "text-lux-gold-dark", bg: "bg-lux-gold-pale", icon: Sparkles },
+  { title: "Direct Referrer", amount: "KES 350", desc: "You earn 35% commission on every person you directly refer. KES 350 hits your M-Pesa in 60 seconds. No delays, no thresholds, no forms. Just share your link and get paid.", color: "text-lux-navy", bg: "bg-lux-navy/10", icon: Users },
+  { title: "Team Override", amount: "KES 150", desc: "Earn KES 150 for every person your team refers — forever. This is passive income. Your team works, you earn. 10 direct who each refer 5 = KES 7,500 team bonus.", color: "text-green-700", bg: "bg-green-50", icon: TrendingUp },
 ]
 
 const quickRefData = [
@@ -96,18 +97,29 @@ export default function EarningsPage() {
         <div className="absolute inset-0 opacity-[0.015]" style={{ backgroundImage: "radial-gradient(circle, #0F2847 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
       </div>
 
-      {/* Hero */}
+      {/* Hero - HARD MARKETING */}
       <section className="relative pt-24 pb-16 lg:pt-32 lg:pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <SectionHeading
-            badge="Transparent Earnings"
-            title="Your Earning Structure"
-            subtitle="Every KES 1,000 membership is distributed fairly. Here is exactly how it breaks down and how you benefit."
-          />
+          <FadeIn>
+            <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-lux-gold to-lux-gold-light text-white border-0 font-bold shadow-md">KES 500 Bonus Instantly • 50% Payout • No Cap</Badge>
+          </FadeIn>
+          <FadeIn delay={100}>
+            <h1 className="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight text-lux-navy">
+              Invest <span className="text-lux-gold">1,000</span>. Get <span className="text-lux-gold">500</span> Back. Earn <span className="text-gradient">Unlimited.</span>
+            </h1>
+          </FadeIn>
           <FadeIn delay={200}>
-            <p className="mt-8 text-lg text-lux-text-light max-w-3xl mx-auto leading-relaxed">
-              At Zuri Agency, we believe in radical transparency. Unlike other platforms that hide their commission structures in fine print, we show you exactly where every single shilling goes. When someone pays KES 1,000 to join, KES 500 is yours to earn — that is a 50% payout ratio, among the highest in the referral industry worldwide. KES 350 goes directly to you as the person who referred them, and KES 150 goes to the person who referred you. The remaining KES 500 covers platform operations, M-Pesa transaction fees, customer support, and continuous development. No hidden fees, no surprise deductions, no fine print.
+            <p className="mt-8 text-lg sm:text-xl text-lux-navy max-w-3xl mx-auto leading-relaxed font-semibold">
+              Pay <strong>KES 1,000 once</strong> → <span className="bg-lux-gold text-white px-2 py-1 rounded-full text-sm">KES 500 bonus instantly</span> + <strong>KES 350</strong> per referral + <strong>KES 150</strong> team override forever. <span className="text-lux-gold-dark">3 referrals = KES 1,050 profit.</span> No cap. No monthly fees. Paystack & M-Pesa instant.
             </p>
+          </FadeIn>
+          <FadeIn delay={300}>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <div className="bg-lux-navy text-white rounded-full px-6 py-3 font-bold">KES 350 Direct</div>
+              <div className="bg-lux-gold text-white rounded-full px-6 py-3 font-bold">KES 500 Bonus</div>
+              <div className="bg-lux-navy-light text-white rounded-full px-6 py-3 font-bold">KES 150 Team</div>
+              <div className="bg-green-600 text-white rounded-full px-6 py-3 font-bold">50% Payout</div>
+            </div>
           </FadeIn>
         </div>
       </section>
@@ -560,20 +572,22 @@ export default function EarningsPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA - HARD SELL */}
       <section className="py-20 bg-lux-navy relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 right-0 w-96 h-96 bg-lux-gold/10 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-lux-gold/5 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-lux-gold/5 rounded-full blur-3xl" />
         </div>
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <FadeIn>
-            <h2 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight">Start Building Your Income Today</h2>
-            <p className="mt-6 text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
-              Join for KES 1,000 and start earning KES 350 per referral immediately. Three referrals and you are in profit. Everything after that is pure earnings.
+            <Badge className="mb-6 px-4 py-2 bg-lux-gold text-white border-0 font-bold animate-pulse">KES 500 Bonus Ends Soon — 5,000+ Already In</Badge>
+            <h2 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight">Your First <span className="text-lux-gold">KES 1,050 Profit</span> Is 3 Shares Away</h2>
+            <p className="mt-6 text-lg sm:text-xl text-white max-w-2xl mx-auto font-semibold">
+              Pay <span className="text-lux-gold">KES 1,000</span> → Get <span className="bg-lux-gold text-lux-navy px-2 py-1 rounded-full text-sm">KES 500 Bonus Instantly</span> + <span className="text-lux-gold">KES 350</span> per referral. 3 people = profit. 10 = KES 4,000 first month.
             </p>
-            <p className="mt-4 text-gray-400 max-w-xl mx-auto text-sm">
-              Over 5,000 Kenyans have already joined. Your first commission is waiting. The only question is whether you will take the first step today or keep wondering what if.
+            <p className="mt-4 text-lux-gold-light max-w-xl mx-auto text-sm font-medium">
+              2M+ paid. Instant Paystack & M-Pesa. No monthly fees. No boss. Just your phone. What are you waiting for?
             </p>
           </FadeIn>
           <FadeIn delay={200}>
