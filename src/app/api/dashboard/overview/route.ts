@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
 
     const userId = session.user.id
 
-    const [user, earningsAgg, pendingAgg, lockedAgg, bonusAgg, directAgg, overrideAgg, referrals, recentCommissions] = await Promise.all([
+    const [user, earningsAgg, pendingAgg, lockedAgg, bonusAgg, directAgg, overrideAgg, referrals, recentCommissions, pendingPayoutAgg] = await Promise.all([
       db.user.findUnique({
         where: { id: userId },
         select: { id: true, name: true, email: true, phone: true, referralCode: true, mpesaNumber: true, createdAt: true },
@@ -24,6 +24,7 @@ export async function GET(request: NextRequest) {
       db.commission.aggregate({ where: { userId, type: "override" }, _sum: { amount: true } }),
       db.referral.findMany({ where: { referrerId: userId }, include: { referee: { select: { id: true, name: true, phone: true, createdAt: true } } }, orderBy: { createdAt: "desc" } }),
       db.commission.findMany({ where: { userId }, orderBy: { createdAt: "desc" }, take: 5 }),
+      db.payout.aggregate({ where: { userId, status: "pending" }, _sum: { amount: true } }),
     ])
 
     if (!user) {
@@ -57,11 +58,17 @@ export async function GET(request: NextRequest) {
       await checkAndUnlockSignupBonus(userId)
     }
 
+    const grossPending = pendingAgg._sum.amount || 0
+    const pendingPayouts = pendingPayoutAgg._sum.amount || 0
+    const netPending = Math.max(0, grossPending - pendingPayouts)
+
     return NextResponse.json({
       user: { name: user.name, email: user.email, phone: user.phone, referralCode: user.referralCode, mpesaNumber: user.mpesaNumber },
       stats: {
         totalEarnings: earningsAgg._sum.amount || 0,
-        pendingCommissions: pendingAgg._sum.amount || 0,
+        pendingCommissions: netPending,
+        grossPending,
+        pendingPayouts,
         lockedBonus: lockedAgg._sum.amount || 0,
         signupBonus: bonusAgg ? { amount: bonusAgg.amount, status: bonusAgg.status } : null,
         activeReferrals: activeReferrals.length,

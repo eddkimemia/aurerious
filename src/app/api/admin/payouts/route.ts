@@ -72,29 +72,84 @@ export async function POST(request: NextRequest) {
     }
 
     if (action === "approve") {
-      const updated = await db.payout.update({
-        where: { id: payoutId },
-        data: {
-          status: "approved",
-          approvedBy: approvedBy || "admin",
-          approvedAt: new Date(),
-        },
-      })
+      if (payout.status !== "pending") {
+        return NextResponse.json({ error: `Payout already ${payout.status}` }, { status: 400 })
+      }
 
-      await db.transaction.create({
-        data: {
-          userId: payout.userId,
-          type: "payout",
-          amount: payout.amount,
-          status: "completed",
-          reference: `POUT-${payout.id}`,
-          description: `Payout approved - KES ${payout.amount.toFixed(2)} to ${payout.phone}`,
-        },
-      })
-
-      await db.commission.updateMany({
+      // Re-validate available balance at approve time to avoid overdraw
+      const pendingAgg = await db.commission.aggregate({
         where: { userId: payout.userId, status: "pending" },
-        data: { status: "paid" },
+        _sum: { amount: true },
+      })
+      const availableAtApprove = pendingAgg._sum.amount || 0
+      if (payout.amount > availableAtApprove + 0.001) {
+        return NextResponse.json(
+          { error: `Insufficient balance. Available KES ${availableAtApprove.toFixed(2)}, requested KES ${payout.amount.toFixed(2)}` },
+          { status: 400 }
+        )
+      }
+
+      const updated = await db.$transaction(async (tx) => {
+        let remaining = payout.amount
+        const pendingCommissions = await tx.commission.findMany({
+          where: { userId: payout.userId, status: "pending" },
+          orderBy: { createdAt: "asc" },
+        })
+
+        for (const c of pendingCommissions) {
+          if (remaining <= 0.001) break
+          if (c.amount <= remaining + 0.001) {
+            await tx.commission.update({
+              where: { id: c.id },
+              data: { status: "paid" },
+            })
+            remaining -= c.amount
+          } else {
+            // Split commission: keep remainder as pending, create paid slice
+            await tx.commission.update({
+              where: { id: c.id },
+              data: { amount: c.amount - remaining },
+            })
+            await tx.commission.create({
+              data: {
+                userId: c.userId,
+                referralId: c.referralId,
+                amount: remaining,
+                type: c.type,
+                status: "paid",
+                description: `${c.description} (partial payout KES ${remaining.toFixed(2)})`,
+              },
+            })
+            remaining = 0
+            break
+          }
+        }
+
+        if (remaining > 0.01) {
+          throw new Error("Insufficient commissions to cover payout")
+        }
+
+        const upd = await tx.payout.update({
+          where: { id: payoutId },
+          data: {
+            status: "approved",
+            approvedBy: approvedBy || "admin",
+            approvedAt: new Date(),
+          },
+        })
+
+        await tx.transaction.create({
+          data: {
+            userId: payout.userId,
+            type: "payout",
+            amount: payout.amount,
+            status: "completed",
+            reference: `POUT-${payout.id}`,
+            description: `Payout approved - KES ${payout.amount.toFixed(2)} to ${payout.phone}`,
+          },
+        })
+
+        return upd
       })
 
       return NextResponse.json({ payout: updated })

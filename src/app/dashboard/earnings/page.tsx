@@ -14,8 +14,11 @@ import { cn } from "@/lib/utils"
 interface EarningsData {
   totalEarned: number
   pending: number
+  grossPending?: number
+  pendingPayouts?: number
   paidOut: number
   locked: number
+  minPayout?: number
   signupBonus: { amount: number; status: string; type: string } | null
   referralCount: number
   requiredForBonus: number
@@ -29,12 +32,14 @@ export default function EarningsPage() {
   const [loading, setLoading] = useState(true)
   const [amount, setAmount] = useState("")
   const [phone, setPhone] = useState("")
+  const [payouts, setPayouts] = useState<{ id: string; amount: number; status: string; phone: string; createdAt: string }[]>([])
 
   const fetchEarnings = () => {
     setLoading(true)
     fetch("/api/earnings")
       .then(async (r) => { const d = await r.json(); if (!r.ok) throw new Error(d.error); setData(d); setLoading(false) })
       .catch(() => setLoading(false))
+    fetch("/api/payout/request").then(async (r) => { if (r.ok) { const d = await r.json(); setPayouts(d.payouts || []) } }).catch(() => {})
   }
 
   useEffect(() => { fetchEarnings() }, [])
@@ -69,9 +74,10 @@ export default function EarningsPage() {
     return <div className="flex items-center justify-center min-h-[60vh]"><Loader2 className="h-8 w-8 animate-spin text-lux-gold" /></div>
   }
 
+  const minPayout = data?.minPayout || 1000
   const summaryCards = [
     { label: "Total Earned", value: `KES ${(data?.totalEarned || 0).toLocaleString()}`, icon: DollarSign, change: `+KES ${(data?.thisPeriod || 0).toLocaleString()} this ${data?.period || "period"}`, color: "text-lux-gold", bg: "bg-lux-gold/10" },
-    { label: "Withdrawable", value: `KES ${(data?.pending || 0).toLocaleString()}`, icon: Clock, change: data?.locked ? `KES ${data.locked.toLocaleString()} locked` : "Available for payout", color: "text-lux-gold-dark", bg: "bg-lux-gold/10" },
+    { label: "Withdrawable", value: `KES ${(data?.pending || 0).toLocaleString()}`, icon: Clock, change: data?.pendingPayouts ? `KES ${data.pendingPayouts.toLocaleString()} pending payout` : (data?.locked ? `KES ${data.locked.toLocaleString()} locked` : "Available for payout"), color: "text-lux-gold-dark", bg: "bg-lux-gold/10" },
     { label: "Paid Out", value: `KES ${(data?.paidOut || 0).toLocaleString()}`, icon: CheckCircle, change: `Last payout: ${data?.recentCommissions?.find(c => c.status === "paid") ? new Date(data.recentCommissions.find(c => c.status === "paid")!.createdAt).toLocaleDateString() : "N/A"}`, color: "text-green-600", bg: "bg-green-100" },
   ]
 
@@ -193,33 +199,69 @@ export default function EarningsPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-lux-gold/10 shadow-sm">
+          <Card className="border-lux-gold/10 shadow-sm">
           <CardHeader>
             <CardTitle className="font-heading text-lg text-lux-navy">Request Payout</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handlePayout} className="space-y-4">
+              <div className="rounded-lg bg-lux-navy/5 p-3 text-xs space-y-1">
+                <div className="flex justify-between"><span className="text-lux-text-light">Withdrawable Balance:</span><span className="font-semibold text-lux-navy">KES {(data?.pending || 0).toLocaleString()}</span></div>
+                {data?.pendingPayouts ? <div className="flex justify-between text-amber-700"><span>Pending Payouts:</span><span className="font-semibold">-KES {data.pendingPayouts.toLocaleString()}</span></div> : null}
+                {data?.locked ? <div className="flex justify-between text-orange-600"><span>Locked Bonus:</span><span>KES {data.locked.toLocaleString()}</span></div> : null}
+              </div>
               <div className="space-y-2">
-                <Label htmlFor="amount" className="text-lux-text">Amount</Label>
+                <Label htmlFor="amount" className="text-lux-text">Amount (Min KES {minPayout.toLocaleString()})</Label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-semibold text-lux-text-light">KES</span>
-                  <Input id="amount" type="number" placeholder="0" className="pl-12 input-glow" value={amount} onChange={(e) => setAmount(e.target.value)} />
+                  <Input id="amount" type="number" placeholder="0" min={minPayout} max={data?.pending || 0} className="pl-12 input-glow" value={amount} onChange={(e) => setAmount(e.target.value)} />
                 </div>
-                <p className="text-xs text-lux-text-light">Minimum withdraw KES 1,000</p>
+                {amount && parseFloat(amount) > (data?.pending || 0) && <p className="text-xs text-red-600">Amount exceeds withdrawable balance</p>}
+                {amount && parseFloat(amount) < minPayout && parseFloat(amount) > 0 && <p className="text-xs text-amber-600">Minimum is KES {minPayout.toLocaleString()}</p>}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="payout-phone" className="text-lux-text">M-Pesa Phone Number</Label>
                 <Input id="payout-phone" type="tel" placeholder="0753728292" className="input-glow" value={phone} onChange={(e) => setPhone(e.target.value)} />
               </div>
-              <Button type="submit" className="w-full bg-lux-gold hover:bg-lux-gold-dark text-lux-navy font-heading font-bold">
+              <Button type="submit" disabled={!amount || parseFloat(amount) < minPayout || parseFloat(amount) > (data?.pending || 0)} className="w-full bg-lux-gold hover:bg-lux-gold-dark text-lux-navy font-heading font-bold disabled:opacity-50">
                 <ArrowUpRight className="h-4 w-4 mr-2" />
                 Request Payout
               </Button>
-              <p className="text-xs text-lux-text-light text-center">Minimum KES 1,000 • Payouts processed within 24 hours</p>
+              <p className="text-xs text-lux-text-light text-center">Minimum KES {minPayout.toLocaleString()} • Payouts processed within 24 hours • Remainder stays withdrawable</p>
             </form>
           </CardContent>
         </Card>
       </div>
+
+      {payouts.length > 0 && (
+        <Card className="border-lux-gold/10 shadow-sm">
+          <CardHeader>
+            <CardTitle className="font-heading text-lg text-lux-navy">Payout History</CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-lux-navy/5">
+                  <TableHead className="text-lux-text font-semibold">Date</TableHead>
+                  <TableHead className="text-lux-text font-semibold text-right">Amount</TableHead>
+                  <TableHead className="text-lux-text font-semibold">Phone</TableHead>
+                  <TableHead className="text-lux-text font-semibold text-right">Status</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {payouts.map((p) => (
+                  <TableRow key={p.id} className="table-row-hover">
+                    <TableCell className="text-xs text-lux-text">{new Date(p.createdAt).toLocaleDateString()}</TableCell>
+                    <TableCell className="text-sm font-heading font-semibold text-lux-navy text-right">KES {p.amount.toLocaleString()}</TableCell>
+                    <TableCell className="text-xs text-lux-text">{p.phone}</TableCell>
+                    <TableCell className="text-right">{statusBadge(p.status)}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )}
     </div>
   )
 }

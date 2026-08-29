@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useCallback } from "react"
-import { Search, Shield, ShieldOff, Loader2, Trash2, CheckCircle, XCircle, Eye, ChevronLeft, ChevronRight } from "lucide-react"
+import { Search, Shield, ShieldOff, Loader2, Trash2, CheckCircle, XCircle, Eye, ChevronLeft, ChevronRight, KeyRound, Save } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -50,6 +50,15 @@ export default function AdminUsersPage() {
   const [detailUser, setDetailUser] = useState<UserDetail | null>(null)
   const [detailLoading, setDetailLoading] = useState(false)
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null)
+  const [resetPassword, setResetPassword] = useState("")
+  const [resetConfirm, setResetConfirm] = useState("")
+  const [resetError, setResetError] = useState("")
+  const [resetMsg, setResetMsg] = useState("")
+  const [resetSaving, setResetSaving] = useState(false)
+  const [editMode, setEditMode] = useState(false)
+  const [editName, setEditName] = useState("")
+  const [editEmail, setEditEmail] = useState("")
+  const [editPhone, setEditPhone] = useState("")
 
   const fetchUsers = useCallback(() => {
     setLoading(true)
@@ -95,10 +104,47 @@ export default function AdminUsersPage() {
 
   const fetchUserDetail = async (userId: string) => {
     setDetailLoading(true)
+    setResetError("")
+    setResetMsg("")
+    setResetPassword("")
+    setResetConfirm("")
+    setEditMode(false)
     try {
       const res = await fetch(`/api/admin/users/${userId}`)
-      if (res.ok) { const d = await res.json(); setDetailUser(d) }
+      if (res.ok) { const d = await res.json(); setDetailUser(d); setEditName(d.name || ""); setEditEmail(d.email || ""); setEditPhone(d.phone || "") }
     } finally { setDetailLoading(false) }
+  }
+
+  const handleResetPassword = async () => {
+    setResetError(""); setResetMsg("")
+    if (!detailUser) return
+    if (!resetPassword || resetPassword.length < 6) { setResetError("Password must be at least 6 characters"); return }
+    if (resetPassword !== resetConfirm) { setResetError("Passwords do not match"); return }
+    setResetSaving(true)
+    try {
+      const res = await fetch("/api/admin/users", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: detailUser.id, password: resetPassword }),
+      })
+      const d = await res.json()
+      if (!res.ok) throw new Error(d.error || "Failed")
+      setResetMsg("Password reset successfully")
+      setResetPassword(""); setResetConfirm("")
+    } catch (e: any) { setResetError(e.message || "Failed to reset") }
+    finally { setResetSaving(false) }
+  }
+
+  const handleEditSave = async () => {
+    if (!detailUser) return
+    const res = await fetch("/api/admin/users", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: detailUser.id, name: editName, email: editEmail || null, phone: editPhone }),
+    })
+    const d = await res.json()
+    if (res.ok) { fetchUserDetail(detailUser.id); fetchUsers(); setEditMode(false) }
+    else alert(d.error || "Failed to update")
   }
 
   const tabs = [
@@ -300,6 +346,39 @@ export default function AdminUsersPage() {
                     <Trash2 className="h-4 w-4 mr-1" /> Delete User
                   </Button>
                 </div>
+              </div>
+
+              <div className="space-y-3 border rounded-lg p-4 bg-white">
+                <div className="flex items-center justify-between">
+                  <h4 className="font-semibold text-sm text-lux-navy flex items-center gap-2"><KeyRound className="h-4 w-4 text-lux-gold" /> Edit Profile</h4>
+                  {!editMode ? <Button size="sm" variant="ghost" onClick={() => setEditMode(true)} className="text-xs">Edit</Button> : <Button size="sm" variant="ghost" onClick={() => setEditMode(false)} className="text-xs">Cancel</Button>}
+                </div>
+                {editMode ? (
+                  <div className="space-y-3">
+                    <Input placeholder="Name" value={editName} onChange={(e) => setEditName(e.target.value)} />
+                    <Input placeholder="Email" value={editEmail} onChange={(e) => setEditEmail(e.target.value)} />
+                    <Input placeholder="Phone" value={editPhone} onChange={(e) => setEditPhone(e.target.value)} />
+                    <Button size="sm" onClick={handleEditSave} className="bg-lux-gold hover:bg-lux-gold-dark text-lux-navy"><Save className="h-4 w-4 mr-1" /> Save Changes</Button>
+                  </div>
+                ) : (
+                  <div className="text-sm text-lux-text-light">
+                    <p>Name: <span className="font-medium text-lux-navy">{detailUser.name || "—"}</span></p>
+                    <p>Email: <span className="font-medium text-lux-navy">{detailUser.email || "—"}</span></p>
+                    <p>Phone: <span className="font-medium text-lux-navy">{detailUser.phone}</span></p>
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-3 border rounded-lg p-4 bg-amber-50/50 border-amber-200">
+                <h4 className="font-semibold text-sm text-lux-navy flex items-center gap-2"><KeyRound className="h-4 w-4 text-amber-600" /> Reset User Password</h4>
+                {resetMsg && <div className="text-sm text-green-700 bg-green-50 border border-green-200 rounded px-3 py-2">{resetMsg}</div>}
+                {resetError && <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded px-3 py-2">{resetError}</div>}
+                <Input type="password" placeholder="New password (min 6 chars)" value={resetPassword} onChange={(e) => setResetPassword(e.target.value)} />
+                <Input type="password" placeholder="Confirm new password" value={resetConfirm} onChange={(e) => setResetConfirm(e.target.value)} />
+                <Button size="sm" onClick={handleResetPassword} disabled={resetSaving} className="bg-amber-600 hover:bg-amber-700 text-white">
+                  {resetSaving ? <Loader2 className="h-4 w-4 mr-1 animate-spin" /> : <KeyRound className="h-4 w-4 mr-1" />} Set New Password
+                </Button>
+                <p className="text-xs text-lux-text-light">Admin can set any user password without knowing old password.</p>
               </div>
 
               {detailUser.referrals.length > 0 && (

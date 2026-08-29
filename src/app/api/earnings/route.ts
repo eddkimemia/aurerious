@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
       commissionFilter.createdAt = { gte: dateFilter }
     }
 
-    const [totalAgg, pendingAgg, paidAgg, lockedAgg, bonusAgg, referralCount, periodAgg, recentCommissions] = await Promise.all([
+    const [totalAgg, pendingAgg, paidAgg, lockedAgg, bonusAgg, referralCount, periodAgg, recentCommissions, pendingPayoutAgg, minPayoutSetting] = await Promise.all([
       db.commission.aggregate({
         where: { userId: session.user.id },
         _sum: { amount: true },
@@ -58,13 +58,26 @@ export async function GET(request: NextRequest) {
         orderBy: { createdAt: "desc" },
         take: 10,
       }),
+      db.payout.aggregate({
+        where: { userId: session.user.id, status: "pending" },
+        _sum: { amount: true },
+      }),
+      db.setting.findFirst({ where: { key: { in: ["minimum_payout", "min_payout"] } } }),
     ])
+
+    const grossPending = pendingAgg._sum.amount || 0
+    const pendingPayouts = pendingPayoutAgg._sum.amount || 0
+    const available = Math.max(0, grossPending - pendingPayouts)
+    const minPayout = minPayoutSetting ? parseFloat(minPayoutSetting.value) : 1000
 
     return NextResponse.json({
       totalEarned: totalAgg._sum.amount || 0,
-      pending: pendingAgg._sum.amount || 0,
+      pending: available,
+      grossPending,
+      pendingPayouts,
       paidOut: paidAgg._sum.amount || 0,
       locked: lockedAgg._sum.amount || 0,
+      minPayout,
       signupBonus: bonusAgg ? { amount: bonusAgg.amount, status: bonusAgg.status, type: bonusAgg.type } : null,
       referralCount,
       requiredForBonus: 5,

@@ -1,10 +1,41 @@
 import { db } from "@/lib/db"
 
-const REFERRAL_FEE = 1000
-const DIRECT_COMMISSION_RATE = 0.35
-const UPLINE_COMMISSION_RATE = 0.15
+const DEFAULT_REFERRAL_FEE = 1000
+const DEFAULT_DIRECT_RATE = 0.35
+const DEFAULT_UPLINE_RATE = 0.15
 export const SIGNUP_BONUS_AMOUNT = 500
 export const SIGNUP_BONUS_REQUIRED_REFERRALS = 5
+
+async function getCommissionSettings() {
+  try {
+    const settings = await db.setting.findMany({
+      where: { key: { in: ["membership_fee", "direct_commission", "upline_override", "signup_bonus", "signup_bonus_required", "bonus_required_referrals"] } },
+    })
+    const map: Record<string, string> = {}
+    for (const s of settings) map[s.key] = s.value
+    const referralFee = map.membership_fee ? parseFloat(map.membership_fee) : DEFAULT_REFERRAL_FEE
+    const directRate = map.direct_commission ? parseFloat(map.direct_commission) / 100 : DEFAULT_DIRECT_RATE
+    const uplineRate = map.upline_override ? parseFloat(map.upline_override) / 100 : DEFAULT_UPLINE_RATE
+    const signupBonus = map.signup_bonus ? parseFloat(map.signup_bonus) : SIGNUP_BONUS_AMOUNT
+    const bonusRequiredRaw = map.signup_bonus_required || map.bonus_required_referrals
+    const bonusRequired = bonusRequiredRaw ? parseInt(bonusRequiredRaw) : SIGNUP_BONUS_REQUIRED_REFERRALS
+    return {
+      referralFee: isNaN(referralFee) ? DEFAULT_REFERRAL_FEE : referralFee,
+      directRate: isNaN(directRate) ? DEFAULT_DIRECT_RATE : directRate,
+      uplineRate: isNaN(uplineRate) ? DEFAULT_UPLINE_RATE : uplineRate,
+      signupBonus: isNaN(signupBonus) ? SIGNUP_BONUS_AMOUNT : signupBonus,
+      bonusRequired: isNaN(bonusRequired) ? SIGNUP_BONUS_REQUIRED_REFERRALS : bonusRequired,
+    }
+  } catch {
+    return {
+      referralFee: DEFAULT_REFERRAL_FEE,
+      directRate: DEFAULT_DIRECT_RATE,
+      uplineRate: DEFAULT_UPLINE_RATE,
+      signupBonus: SIGNUP_BONUS_AMOUNT,
+      bonusRequired: SIGNUP_BONUS_REQUIRED_REFERRALS,
+    }
+  }
+}
 
 export async function createSignupBonus(userId: string) {
   try {
@@ -13,13 +44,15 @@ export async function createSignupBonus(userId: string) {
     })
     if (existing) return existing
 
+    const { signupBonus, bonusRequired } = await getCommissionSettings()
+
     const bonus = await db.commission.create({
       data: {
         userId,
-        amount: SIGNUP_BONUS_AMOUNT,
+        amount: signupBonus,
         type: "signup_bonus",
         status: "locked",
-        description: `Signup airtime bonus - KES ${SIGNUP_BONUS_AMOUNT} (unlock after ${SIGNUP_BONUS_REQUIRED_REFERRALS} referrals)`,
+        description: `Signup airtime bonus - KES ${signupBonus} (unlock after ${bonusRequired} referrals)`,
       },
     })
 
@@ -27,10 +60,10 @@ export async function createSignupBonus(userId: string) {
       data: {
         userId,
         type: "bonus",
-        amount: SIGNUP_BONUS_AMOUNT,
+        amount: signupBonus,
         status: "locked",
         reference: `BONUS-${bonus.id}`,
-        description: `Signup bonus KES ${SIGNUP_BONUS_AMOUNT} - locked until ${SIGNUP_BONUS_REQUIRED_REFERRALS} referrals`,
+        description: `Signup bonus KES ${signupBonus} - locked until ${bonusRequired} referrals`,
       },
     })
 
@@ -51,15 +84,16 @@ export async function checkAndUnlockSignupBonus(userId: string) {
       where: { referrerId: userId, status: "completed" },
     })
 
-    if (referralCount >= SIGNUP_BONUS_REQUIRED_REFERRALS) {
+    const { signupBonus, bonusRequired } = await getCommissionSettings()
+    if (referralCount >= bonusRequired) {
       await db.commission.update({
         where: { id: lockedBonus.id },
-        data: { status: "pending", description: `Signup airtime bonus - KES ${SIGNUP_BONUS_AMOUNT} (unlocked after ${referralCount} referrals)` },
+        data: { status: "pending", description: `Signup airtime bonus - KES ${signupBonus} (unlocked after ${referralCount} referrals)` },
       })
 
       await db.transaction.updateMany({
         where: { userId, type: "bonus", status: "locked" },
-        data: { status: "pending", description: `Signup bonus KES ${SIGNUP_BONUS_AMOUNT} - unlocked! Available for withdrawal` },
+        data: { status: "pending", description: `Signup bonus KES ${signupBonus} - unlocked! Available for withdrawal` },
       })
     }
   } catch (error) {
@@ -81,7 +115,8 @@ export async function processReferralCommission(refereeId: string) {
 
     if (!referral) return
 
-    const directAmount = REFERRAL_FEE * DIRECT_COMMISSION_RATE
+    const settings = await getCommissionSettings()
+    const directAmount = settings.referralFee * settings.directRate
 
     const directCommission = await db.commission.create({
       data: {
@@ -116,7 +151,7 @@ export async function processReferralCommission(refereeId: string) {
     })
 
     if (uplineReferral) {
-      const overrideAmount = REFERRAL_FEE * UPLINE_COMMISSION_RATE
+      const overrideAmount = settings.referralFee * settings.uplineRate
 
       const overrideCommission = await db.commission.create({
         data: {

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/db"
 import { requireAdmin } from "@/lib/auth-helpers"
 import { createSignupBonus, processReferralCommission } from "@/lib/commission-engine"
+import bcrypt from "bcryptjs"
 
 export async function GET(request: NextRequest) {
   const forbidden = await requireAdmin()
@@ -78,17 +79,10 @@ export async function PATCH(request: NextRequest) {
 
   try {
     const body = await request.json()
-    const { userId, status } = body
+    const { userId, status, password, name, email, phone, role } = body
 
     if (!userId) {
       return NextResponse.json({ error: "User ID is required" }, { status: 400 })
-    }
-
-    if (!status || !["active", "pending", "suspended"].includes(status)) {
-      return NextResponse.json(
-        { error: "Status must be 'active', 'pending', or 'suspended'" },
-        { status: 400 }
-      )
     }
 
     const user = await db.user.findUnique({ where: { id: userId } })
@@ -96,14 +90,62 @@ export async function PATCH(request: NextRequest) {
       return NextResponse.json({ error: "User not found" }, { status: 404 })
     }
 
+    const updateData: any = {}
+
+    if (status !== undefined) {
+      if (!["active", "pending", "suspended"].includes(status)) {
+        return NextResponse.json(
+          { error: "Status must be 'active', 'pending', or 'suspended'" },
+          { status: 400 }
+        )
+      }
+      updateData.status = status
+    }
+
+    if (password !== undefined) {
+      if (typeof password !== "string" || password.length < 6) {
+        return NextResponse.json({ error: "Password must be at least 6 characters" }, { status: 400 })
+      }
+      updateData.password = await bcrypt.hash(password, 10)
+    }
+
+    if (name !== undefined) updateData.name = name
+    if (email !== undefined) {
+      if (email) {
+        const existing = await db.user.findFirst({ where: { email, NOT: { id: userId } } })
+        if (existing) return NextResponse.json({ error: "Email already in use" }, { status: 409 })
+      }
+      updateData.email = email || null
+    }
+    if (phone !== undefined) {
+      if (phone) {
+        const existing = await db.user.findFirst({ where: { phone, NOT: { id: userId } } })
+        if (existing) return NextResponse.json({ error: "Phone already in use" }, { status: 409 })
+      }
+      updateData.phone = phone
+    }
+    if (role !== undefined) {
+      if (!["member", "admin"].includes(role)) {
+        return NextResponse.json({ error: "Role must be member or admin" }, { status: 400 })
+      }
+      updateData.role = role
+    }
+
+    if (Object.keys(updateData).length === 0) {
+      return NextResponse.json({ error: "No fields to update" }, { status: 400 })
+    }
+
     const updated = await db.user.update({
       where: { id: userId },
-      data: { status },
+      data: updateData,
       select: {
         id: true,
         name: true,
+        email: true,
         phone: true,
         status: true,
+        role: true,
+        referralCode: true,
         referredBy: true,
       },
     })
