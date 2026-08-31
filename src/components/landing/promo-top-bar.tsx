@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ArrowRight, Flame, Clock } from "lucide-react"
+import { Flame, Clock } from "lucide-react"
 
 function CountdownInline() {
   const [t, setT] = useState(14 * 3600 + 27 * 60 + 43)
@@ -54,8 +54,8 @@ export function PromoTopBar() {
       {/* subtle gold accent line at very top */}
       <div className="h-[2px] w-full bg-gradient-to-r from-lux-gold via-lux-gold-light to-lux-gold" />
       <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-center sm:justify-between gap-2 sm:gap-4 py-2 sm:py-2.5 text-xs sm:text-sm">
-          {/* left / center */}
+        <div className="flex items-center justify-center gap-2 sm:gap-4 py-2 sm:py-2.5 text-xs sm:text-sm">
+          {/* center */}
           <div className="flex items-center gap-2 sm:gap-3 text-center flex-wrap justify-center">
             <span className="hidden sm:inline-flex items-center gap-1.5 bg-red-500 text-white text-[11px] font-extrabold px-2 py-0.5 rounded-full animate-pulse">
               <span className="h-1.5 w-1.5 bg-white rounded-full animate-pulse" /> LIVE
@@ -74,12 +74,7 @@ export function PromoTopBar() {
             </span>
           </div>
 
-          {/* CTA button - visible on sm+ */}
-          <div className="hidden sm:inline-flex items-center gap-2 bg-lux-gold group-hover:bg-lux-gold-light text-white font-extrabold px-4 py-1.5 rounded-full text-xs sm:text-sm shadow-md shadow-lux-gold/20 group-hover:shadow-lg transition-all group-hover:scale-105 whitespace-nowrap">
-            Claim Now <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-          </div>
-          {/* mobile arrow */}
-          <ArrowRight className="sm:hidden h-4 w-4 text-lux-gold flex-shrink-0 animate-pulse" />
+
         </div>
       </div>
       {/* shimmer effect */}

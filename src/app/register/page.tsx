@@ -46,6 +46,18 @@ function RegisterForm() {
     setError("")
     setSuccess("")
 
+    if (!form.name.trim()) {
+      setError("Full name is required")
+      return
+    }
+    if (!form.email.trim()) {
+      setError("Email is required")
+      return
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      setError("Enter a valid email address")
+      return
+    }
     if (!form.phone || !form.password) {
       setError("Phone and password are required")
       return
@@ -67,8 +79,8 @@ function RegisterForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: form.name || undefined,
-          email: form.email || undefined,
+          name: form.name.trim(),
+          email: form.email.trim(),
           phone: phoneClean,
           password: form.password,
           referralCode: referralCode || undefined,
@@ -227,22 +239,22 @@ function RegisterForm() {
 
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-lux-text">Full Name</Label>
-                <Input id="name" placeholder="John Doe" className="border-lux-gold/20 input-glow" value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} />
+                <Label htmlFor="name" className="text-lux-text">Full Name <span className="text-red-500">*</span></Label>
+                <Input id="name" placeholder="John Doe" required className="border-lux-gold/20 input-glow" value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="phone" className="text-lux-text">Phone Number</Label>
-                <Input id="phone" type="tel" placeholder="0712345678" className="border-lux-gold/20 input-glow" value={form.phone} onChange={(e) => setForm((p) => ({ ...p, phone: e.target.value }))} />
+                <Label htmlFor="phone" className="text-lux-text">Phone Number <span className="text-red-500">*</span></Label>
+                <Input id="phone" type="tel" placeholder="0712345678" required className="border-lux-gold/20 input-glow" value={form.phone} onChange={(e) => setForm((p) => ({ ...p, phone: e.target.value }))} />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-lux-text">Email Address</Label>
-              <Input id="email" type="email" placeholder="you@example.com" className="border-lux-gold/20 input-glow" value={form.email} onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))} />
+              <Label htmlFor="email" className="text-lux-text">Email Address <span className="text-red-500">*</span></Label>
+              <Input id="email" type="email" placeholder="you@example.com" required className="border-lux-gold/20 input-glow" value={form.email} onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))} />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-lux-text">Password</Label>
+              <Label htmlFor="password" className="text-lux-text">Password <span className="text-red-500">*</span></Label>
               <div className="relative">
                 <Input
                   id="password"

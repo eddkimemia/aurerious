@@ -11,6 +11,15 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { name, email, phone, password, referralCode: incomingReferralCode } = body
 
+    if (!name || !name.trim()) {
+      return NextResponse.json({ error: "Full name is required" }, { status: 400 })
+    }
+    if (!email || !email.trim()) {
+      return NextResponse.json({ error: "Email is required" }, { status: 400 })
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json({ error: "Invalid email address" }, { status: 400 })
+    }
     if (!phone || !password) {
       return NextResponse.json(
         { error: "Phone and password are required" },
@@ -70,8 +79,8 @@ export async function POST(request: NextRequest) {
 
     const user = await db.user.create({
       data: {
-        name: name || null,
-        email: email || null,
+        name: name.trim(),
+        email: email.trim().toLowerCase(),
         phone,
         password: hashedPassword,
         referralCode,
@@ -93,8 +102,7 @@ export async function POST(request: NextRequest) {
     }
 
     const reference = `ZUR${Date.now()}${Math.random().toString(36).substring(2, 7).toUpperCase()}`
-    // Paystack requires email - use provided email or fallback to phone-based email
-    const customerEmail = email || `${phone}@zuriagency.local`
+    const customerEmail = email
     const callbackUrl = process.env.PAYSTACK_CALLBACK_URL || `${process.env.NEXT_PUBLIC_APP_URL || "https://zuriweb.vercel.app"}/api/paystack/callback`
 
     const paystackResult = await initializeTransaction({

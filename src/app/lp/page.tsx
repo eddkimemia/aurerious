@@ -58,7 +58,7 @@ export default function OfferPage() {
   const [referrals, setReferrals] = useState(10)
   const [showExit, setShowExit] = useState(false)
   const [calcReferrals, setCalcReferrals] = useState(10)
-  const [form, setForm] = useState({ name: "", phone: "", password: "", referral: "" })
+  const [form, setForm] = useState({ name: "", email: "", phone: "", password: "", referral: "" })
   const [showPw, setShowPw] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
@@ -95,6 +95,9 @@ export default function OfferPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setError("")
+    if (!form.name.trim()) { setError("Full name is required"); return }
+    if (!form.email.trim()) { setError("Email is required"); return }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) { setError("Enter a valid email address"); return }
     const phoneClean = form.phone.replace(/[\s\-]/g, "")
     if (!phoneClean || !form.password) { setError("Phone and password are required"); return }
     if (form.password.length < 6) { setError("Password must be at least 6 characters"); return }
@@ -105,7 +108,8 @@ export default function OfferPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: form.name || undefined,
+          name: form.name.trim(),
+          email: form.email.trim(),
           phone: phoneClean,
           password: form.password,
           referralCode: refCode || form.referral || undefined,
@@ -269,8 +273,13 @@ export default function OfferPage() {
 
                   <div className="space-y-3">
                     <div>
-                      <Label htmlFor="name" className="text-xs font-semibold text-gray-700">Full Name</Label>
-                      <Input id="name" placeholder="e.g. Brian Kamau" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} className="mt-1 h-11 rounded-xl border-gray-200 focus-visible:ring-[#D4AF37] focus-visible:border-[#D4AF37]" />
+                      <Label htmlFor="name" className="text-xs font-semibold text-gray-700">Full Name <span className="text-red-500">*</span></Label>
+                      <Input id="name" required placeholder="e.g. Brian Kamau" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} className="mt-1 h-11 rounded-xl border-gray-200 focus-visible:ring-[#D4AF37] focus-visible:border-[#D4AF37]" />
+                    </div>
+                    <div>
+                      <Label htmlFor="email" className="text-xs font-semibold text-gray-700">Email Address <span className="text-red-500">*</span></Label>
+                      <Input id="email" required type="email" placeholder="you@example.com" value={form.email} onChange={e => setForm(p => ({ ...p, email: e.target.value }))} className="mt-1 h-11 rounded-xl border-gray-200 focus-visible:ring-[#D4AF37] focus-visible:border-[#D4AF37]" />
+                      <p className="text-[11px] text-gray-500 mt-1">For Paystack receipt & M-Pesa confirmation</p>
                     </div>
                     <div>
                       <Label htmlFor="phone" className="text-xs font-semibold text-gray-700">M-Pesa Number <span className="text-red-500">*</span></Label>
