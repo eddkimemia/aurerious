@@ -20,6 +20,7 @@ export function NavWrapper() {
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
   const isDashboard = pathname.startsWith("/dashboard") || pathname.startsWith("/admin")
+  const isLandingPage = pathname.startsWith("/offer") || pathname.startsWith("/go") || pathname.startsWith("/lp")
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20)
@@ -27,7 +28,7 @@ export function NavWrapper() {
     return () => window.removeEventListener("scroll", fn)
   }, [])
 
-  if (isDashboard) return null
+  if (isDashboard || isLandingPage) return null
 
   return (
     <>

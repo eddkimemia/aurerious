@@ -27,10 +27,11 @@ const footerNav = [
 export function SiteFooter() {
   const pathname = usePathname()
   const isDashboard = pathname.startsWith("/dashboard") || pathname.startsWith("/admin")
+  const isLandingPage = pathname.startsWith("/offer") || pathname.startsWith("/go") || pathname.startsWith("/lp")
   const [email, setEmail] = useState("")
   const [subscribed, setSubscribed] = useState(false)
 
-  if (isDashboard) return null
+  if (isDashboard || isLandingPage) return null
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault()
