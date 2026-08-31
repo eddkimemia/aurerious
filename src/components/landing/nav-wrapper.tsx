@@ -32,7 +32,7 @@ export function NavWrapper() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100" : "bg-white"}`}>
+      <header className={`fixed top-[34px] sm:top-[38px] left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100" : "bg-white"}`}>
         <div className="h-1 w-full bg-gradient-to-r from-lux-navy-dark via-lux-gold to-lux-navy" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">

@@ -17,7 +17,7 @@ const channels = [
     title: "WhatsApp",
     detail: "Chat with us instantly",
     description: "This is the fastest way to reach us. Typical response time is under 5 minutes during business hours. Send us a message and we will get back to you before you know it. Best for quick questions, registration help, and urgent support.",
-    href: "https://wa.me/254753728292",
+    href: "https://wa.me/254753728292?text=Hello%20Zuri%20Agency%2C%20I%20need%20help%20please",
     color: "#25D366",
     bg: "bg-[#25D366]/10",
     cta: "Chat on WhatsApp",
@@ -290,7 +290,7 @@ export default function ContactPageContent() {
                 </Button>
               </Link>
               <a
-                href="https://wa.me/254753728292"
+                href="https://wa.me/254753728292?text=Hello%20Zuri%20Agency%2C%20I%20need%20help%20please"
                 target="_blank"
                 rel="noopener noreferrer"
               >

@@ -158,7 +158,7 @@ export default function OfferPage() {
           </div>
           <div className="flex items-center gap-3">
             <span className="hidden md:inline-flex items-center gap-1.5 text-xs text-gray-500"><Shield className="h-3.5 w-3.5 text-green-600" /> Paystack Secured</span>
-            <a href="https://wa.me/254753728292" target="_blank" rel="noopener noreferrer" className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-[#0F2847] hover:text-[#D4AF37]">
+            <a href="https://wa.me/254753728292?text=Hello%20Zuri%20Agency%2C%20I%20saw%20your%20ad%20and%20want%20to%20join%20please%20help" target="_blank" rel="noopener noreferrer" className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-[#0F2847] hover:text-[#D4AF37]">
               <MessageCircle className="h-4 w-4" /> WhatsApp Help
             </a>
           </div>
@@ -331,7 +331,7 @@ export default function OfferPage() {
                   </div>
 
                   <p className="text-center text-[11px] text-gray-500 leading-relaxed">
-                    By joining, you agree to <Link href="/terms" className="underline hover:text-[#0F2847]">Terms</Link> &amp; <Link href="/privacy" className="underline hover:text-[#0F2847]">Privacy</Link>. Need help? <a href="https://wa.me/254753728292" target="_blank" rel="noopener noreferrer" className="text-[#25D366] font-bold">WhatsApp us</a>
+                    By joining, you agree to <Link href="/terms" className="underline hover:text-[#0F2847]">Terms</Link> &amp; <Link href="/privacy" className="underline hover:text-[#0F2847]">Privacy</Link>. Need help? <a href="https://wa.me/254753728292?text=Hello%20Zuri%20Agency%2C%20I%20saw%20your%20ad%20and%20want%20to%20join%20please%20help" target="_blank" rel="noopener noreferrer" className="text-[#25D366] font-bold">WhatsApp us</a>
                   </p>
                 </form>
               </div>
@@ -722,7 +722,7 @@ export default function OfferPage() {
             <Button onClick={scrollToForm} size="lg" className="h-14 px-10 rounded-full bg-[#D4AF37] hover:bg-[#C4A030] text-white font-extrabold text-lg shadow-2xl shadow-[#D4AF37]/20 hover:scale-105 transition-all gap-2">
               Claim My KES 500 Bonus Now <ArrowRight className="h-5 w-5" />
             </Button>
-            <a href="https://wa.me/254753728292" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/254753728292?text=Hello%20Zuri%20Agency%2C%20I%20saw%20your%20ad%20and%20want%20to%20join%20please%20help" target="_blank" rel="noopener noreferrer">
               <Button size="lg" variant="outline" className="h-14 px-8 rounded-full border-white/20 bg-white/5 text-white hover:bg-white hover:text-[#0F2847] font-bold w-full sm:w-auto gap-2">
                 <MessageCircle className="h-5 w-5" /> Ask on WhatsApp
               </Button>
@@ -751,7 +751,7 @@ export default function OfferPage() {
               <Link href="/privacy" className="hover:text-[#0F2847] underline">Privacy</Link>
               <Link href="/refund" className="hover:text-[#0F2847] underline">Refund</Link>
               <Link href="/contact" className="hover:text-[#0F2847] underline">Contact</Link>
-              <a href="https://wa.me/254753728292" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-[#25D366] font-bold hover:underline"><MessageCircle className="h-3 w-3" /> WhatsApp</a>
+              <a href="https://wa.me/254753728292?text=Hello%20Zuri%20Agency%2C%20I%20saw%20your%20ad%20and%20want%20to%20join%20please%20help" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-[#25D366] font-bold hover:underline"><MessageCircle className="h-3 w-3" /> WhatsApp</a>
             </div>
           </div>
           <p className="mt-4 text-[11px] text-gray-400 leading-relaxed text-center max-w-3xl mx-auto">

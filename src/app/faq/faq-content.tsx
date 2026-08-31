@@ -338,7 +338,7 @@ export default function FaqPageContent() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                   <a
-                    href="https://wa.me/254753728292"
+                    href="https://wa.me/254753728292?text=Hello%20Zuri%20Agency%2C%20I%20need%20help%20please"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold transition-all hover:scale-105"

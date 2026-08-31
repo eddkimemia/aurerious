@@ -60,7 +60,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="font-heading text-xl font-bold text-lux-navy mb-3">6. Contact</h2>
             <p>
-              For any privacy-related inquiries, data requests, or concerns, please contact us at info@zuriagency.co.ke or via WhatsApp at 0753728292. We aim to respond within 48 hours.
+              For any privacy-related inquiries, data requests, or concerns, please contact us at info@zuriagency.co.ke or via WhatsApp at <a href="https://wa.me/254753728292" className="text-lux-gold font-semibold hover:underline">+254 753 728292</a>. We aim to respond within 48 hours.
             </p>
           </section>
         </div>

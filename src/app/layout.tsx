@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { NavWrapper } from "@/components/landing/nav-wrapper";
+import { PromoTopBar } from "@/components/landing/promo-top-bar";
 import { SiteFooter } from "@/components/landing/footer-section";
 import { CookieBanner } from "@/components/landing/cookie-banner";
 import { SocialProofToast } from "@/components/landing/social-proof";
@@ -68,6 +69,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground flex min-h-screen flex-col`}
       >
+        <PromoTopBar />
         <NavWrapper />
         <DashboardWrapper>
           <main className="flex-1">{children}</main>

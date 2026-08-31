@@ -60,7 +60,7 @@ export default function RefundPage() {
           <section>
             <h2 className="font-heading text-xl font-bold text-lux-navy mb-3">6. Contact Us</h2>
             <p>
-              For any questions regarding this refund policy, please reach out to us at info@zuriagency.co.ke or via WhatsApp at 0753728292.
+              For any questions regarding this refund policy, please reach out to us at info@zuriagency.co.ke or via WhatsApp at <a href="https://wa.me/254753728292" className="text-lux-gold font-semibold hover:underline">+254 753 728292</a>.
             </p>
           </section>
         </div>

@@ -93,8 +93,8 @@ export function SiteFooter() {
             <h4 className="font-heading font-bold text-white mb-4">Contact</h4>
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-sm text-gray-400"><Mail className="h-4 w-4 flex-shrink-0" /> info@zuriagency.co.ke</li>
-              <li className="flex items-center gap-2 text-sm text-gray-400"><Phone className="h-4 w-4 flex-shrink-0" /> 0753728292</li>
-              <li className="flex items-center gap-2 text-sm text-gray-400"><WhatsAppIcon className="h-4 w-4 flex-shrink-0" /> 0753728292</li>
+              <li className="flex items-center gap-2 text-sm text-gray-400"><Phone className="h-4 w-4 flex-shrink-0" /> <a href="tel:+254753728292" className="hover:text-lux-gold transition-colors">+254 753 728292</a></li>
+              <li className="flex items-center gap-2 text-sm text-gray-400"><WhatsAppIcon className="h-4 w-4 flex-shrink-0" /> <a href="https://wa.me/254753728292?text=Hello%20Zuri%20Agency%2C%20I%27m%20interested%20in%20joining" target="_blank" rel="noopener noreferrer" className="hover:text-lux-gold transition-colors">+254 753 728292</a></li>
             </ul>
           </div>
 
